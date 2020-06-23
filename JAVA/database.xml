@@ -10,7 +10,7 @@
 	<Product>
 		<ID>2</ID>
 		<Name>Testprodukt_2</Name>
-		<Amount>1234567890</Amount>
+		<Amount></Amount>
 		<Category>testprodukte</Category>
 		<BestBefore>1.1.2999</BestBefore>
 	</Product>

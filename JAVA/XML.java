@@ -49,7 +49,7 @@ public class XML {
                 bestbefore[tmp] = document.getElementsByTagName("BestBefore").item(tmp).getTextContent();
             }
             return 0;
-        } catch(Exception exception) {return 1;} //process failed
+        } catch(Exception exception) {return 1;}
     }
 
     public int printOut() {
@@ -63,11 +63,11 @@ public class XML {
                 System.out.println();
             }
             return 0;
-        } catch(Exception exception) {return 1;} //process failed
+        } catch(Exception exception) {return 1;}
     }
 
     public static void main(String args[]) {
         XML main = new XML();
-        main.printOut();
+        System.out.println(main.printOut());
     }
 }
