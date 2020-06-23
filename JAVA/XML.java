@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 
 import java.io.File;
 
-public class XML {
+public class XML { //temporary code - switch from arrays to objects planned
     public String[] id;
     public String[] name;
     public String[] amount;
@@ -39,35 +39,64 @@ public class XML {
         readOut();
     }
 
-    public int readOut() {
-        try {
-            for(int tmp = 0; tmp<length; tmp++) {
-                id[tmp] = document.getElementsByTagName("ID").item(tmp).getTextContent();
-                name[tmp] = document.getElementsByTagName("Name").item(tmp).getTextContent();
-                amount[tmp] = document.getElementsByTagName("Amount").item(tmp).getTextContent();
-                category[tmp] = document.getElementsByTagName("Category").item(tmp).getTextContent();
-                bestbefore[tmp] = document.getElementsByTagName("BestBefore").item(tmp).getTextContent();
-            }
-            return 0;
-        } catch(Exception exception) {return 1;}
+    public void readOut() {
+        for(int tmp = 0; tmp<length; tmp++) {
+            id[tmp] = document.getElementsByTagName("ID").item(tmp).getTextContent();
+            name[tmp] = document.getElementsByTagName("Name").item(tmp).getTextContent();
+            amount[tmp] = document.getElementsByTagName("Amount").item(tmp).getTextContent();
+            category[tmp] = document.getElementsByTagName("Category").item(tmp).getTextContent();
+            bestbefore[tmp] = document.getElementsByTagName("BestBefore").item(tmp).getTextContent();
+        }
     }
 
-    public int printOut() {
-        try {
-            for(int tmp = 0; tmp<length; tmp++) {
-                System.out.println("ID: " + id[tmp]);
-                System.out.println("Name: " + name[tmp]);
-                System.out.println("Amount: " + amount[tmp]);
-                System.out.println("Category: " + category[tmp]);
-                System.out.println("BestBefore: " + bestbefore[tmp]);
-                System.out.println();
-            }
-            return 0;
-        } catch(Exception exception) {return 1;}
+    public void printOut() {
+        for(int tmp = 0; tmp<length; tmp++) {
+            System.out.println("ID: " + id[tmp]);
+            System.out.println("Name: " + name[tmp]);
+            System.out.println("Amount: " + amount[tmp]);
+            System.out.println("Category: " + category[tmp]);
+            System.out.println("BestBefore: " + bestbefore[tmp]);
+            System.out.println();
+        }
     }
 
-    public static void main(String args[]) {
+    public int overWrite(int tag, int item, String content) { //placeholder function - supposed to write files instead
+        int recall = 1;
+        try {
+            switch(tag){
+                case 0:
+                    id[item] = content;
+                    recall = 0;
+                    break;
+                case 1:
+                    name[item] = content;
+                    recall = 0;
+                    break;
+                case 2:
+                    amount[item] = content;
+                    recall = 0;
+                    break;
+                case 3:
+                    category[item] = content;
+                    recall = 0;
+                    break;
+                case 4:
+                    bestbefore[item] = content;
+                    recall = 0;
+                    break;
+            }
+        } catch(Exception exception) {}
+        return recall;
+    }
+
+    public static void main(String args[]) throws InterruptedException { //temporary code - will be removed after implementation
         XML main = new XML();
-        System.out.println(main.printOut());
+        main.printOut();
+        System.out.println("...");
+        Thread.sleep(3000);
+        System.out.println();
+        System.out.println("Return: " + main.overWrite(1, 0, "Änderungstest_1"));
+        System.out.println();
+        main.printOut();
     }
 }
