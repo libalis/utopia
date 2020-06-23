@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Databas>
 	<Product>
+		<ID> 1 </ID>
 		<Name> Testprodukt_1 </Name>
 		<Amount> 1234567890 </Amount>
 		<Category> testprodukte </Category>
