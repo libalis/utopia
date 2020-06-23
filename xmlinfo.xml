@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Databas>
+	<Product>
+		<Name> Testprodukt_1 </Name>
+		<Amount> 1234567890 </Amount>
+		<Category> testprodukte </Category>
+		<BestBefore> 23.2.3456 </BestBefore>
+	</Product>
+</Databas>
