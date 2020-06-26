@@ -7,11 +7,18 @@
 		<Category>testprodukte</Category>
 		<BestBefore>31.12.2998</BestBefore>
 	</Product>
-	<Product>
+    <Product>
 		<ID>2</ID>
 		<Name>Testprodukt_2</Name>
 		<Amount>1234567890</Amount>
-		<Category>testprodukte</Category>
+		<Category>kategorietest</Category>
 		<BestBefore>1.1.2999</BestBefore>
+	</Product>
+    <Product>
+		<ID>3</ID>
+		<Name>Testprodukt_3</Name>
+		<Amount>1234567890</Amount>
+		<Category>testprodukte</Category>
+		<BestBefore>31.12.2999</BestBefore>
 	</Product>
 </Database>
