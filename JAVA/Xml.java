@@ -25,7 +25,7 @@ public class Xml { //temporary code - switch from arrays to objects planned
 
     public Xml() {
         try {
-            file = new File("database.xml");
+            file = new File("Database.xml");
             documentBuilderFactory = DocumentBuilderFactory.newInstance();
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.parse(file);
