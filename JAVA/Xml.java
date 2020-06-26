@@ -57,10 +57,10 @@ public class Xml { //temporary code - switch from arrays to objects planned
     public void sortOut() {
         String[] bid = new String[length];
         for(int tmp = 0; tmp<length; tmp++) {
-            if(Arrays.asList(bid).contains(category[tmp])) {} else {
+            if(!Arrays.asList(bid).contains(category[tmp])) {
                 bid[num] = category[tmp];
                 num++;
-            }
+            } else {}
         }
         categories = new String[num];
         for(int tmp = 0; tmp<num; tmp++) {
