@@ -1,5 +1,3 @@
-//Aktuell nur Müll
-
 package ibims1programmira;
 
 import javax.swing.*;
@@ -39,5 +37,3 @@ public class ActionListenerTest {
             textArea.setText(textArea.getText().concat("You have clicked the button\n"));
         }
 }
-
-
