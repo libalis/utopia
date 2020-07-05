@@ -42,7 +42,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
         } catch(Exception exception) {}
 
         try {
-            printWriter = new PrintWriter("Database.xml", "UTF-8");
+            printWriter = new PrintWriter(file, "UTF-8");
         } catch(Exception exception) {}
 
         length = document.getElementsByTagName("ID").getLength();
@@ -137,6 +137,34 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
+    public void removeProduct(String i) {
+        try {
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            printWriter.println("<Database>");
+            for(int tmp = 0; tmp<Integer.parseInt(i)-1; tmp++) {
+                printWriter.println("\t<Product>");
+                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
+                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
+                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
+                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
+                printWriter.println("\t</Product>");
+            }
+            for(int tmp = Integer.parseInt(i); tmp<length; tmp++) {
+                printWriter.println("\t<Product>");
+                printWriter.println("\t\t<ID>" + String.valueOf(Integer.parseInt(id[tmp])-1) + "</ID>");
+                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
+                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
+                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
+                printWriter.println("\t</Product>");
+            }
+            printWriter.println("</Database>");
+            printWriter.close();
+        } catch(Exception exception) {}
+        reset();
+    }
+
     public static void main(String args[]) { //temporary code - will be removed after implementation
         Xml main = new Xml();
         System.out.println("Categories: " + Arrays.toString(main.categories) + "\n");
@@ -145,8 +173,13 @@ public class Xml { //temporary code - switch from arrays to lists planned
         try {
             main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
         } catch(Exception exception) {}
+        main.printOut();
+        System.out.println("...\n");
         main.addProduct("Neues_Testprodukt", "1234567890", "kategorietest", "1.1.2021");
         main.printOut();
-        main.overWrite();
+        System.out.println("...\n");
+        main.removeProduct("2");
+        main.printOut();
+        main.overWrite(); //mandatory line to execute when application shuts down
     }
 }
