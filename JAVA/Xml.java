@@ -24,9 +24,10 @@ public class Xml { //temporary code - switch from arrays to objects planned
     public int num;
 
     public Xml() {
-        try {
             file = new File("Database.xml");
             documentBuilderFactory = DocumentBuilderFactory.newInstance();
+
+        try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.parse(file);
         } catch(Exception exception) {}
