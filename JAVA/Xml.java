@@ -34,10 +34,8 @@ public class Xml { //temporary code - switch from arrays to lists planned
 
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            printWriter = new PrintWriter("Database.xml", "UTF-8");
             document = documentBuilder.parse(file);
-
-            file = new File("Output.xml");
-            printWriter = new PrintWriter("Output.xml", "UTF-8");
         } catch(Exception exception) {}
 
         length = document.getElementsByTagName("ID").getLength();
