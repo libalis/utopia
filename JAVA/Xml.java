@@ -29,8 +29,12 @@ public class Xml { //temporary code - switch from arrays to lists planned
     public int num;
 
     public Xml() {
-            file = new File("Database.xml");
-            documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        reset();
+    }
+
+    public void reset() {
+        file = new File("Database.xml");
+        documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -51,7 +55,6 @@ public class Xml { //temporary code - switch from arrays to lists planned
         bestbefore = new String[length];
 
         readOut();
-        sortOut();
     }
 
     public void readOut() {
@@ -62,6 +65,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             category[tmp] = document.getElementsByTagName("Category").item(tmp).getTextContent();
             bestbefore[tmp] = document.getElementsByTagName("BestBefore").item(tmp).getTextContent();
         }
+        sortOut();
     }
 
     public void sortOut() {
@@ -107,15 +111,41 @@ public class Xml { //temporary code - switch from arrays to lists planned
         } catch(Exception exception) {}
     }
 
+    public void addProduct(String n, String a, String c, String b) {
+        try {
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            printWriter.println("<Database>");
+            for(int tmp = 0; tmp<length; tmp++) {
+                printWriter.println("\t<Product>");
+                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
+                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
+                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
+                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
+                printWriter.println("\t</Product>");
+            }
+            printWriter.println("\t<Product>");
+            printWriter.println("\t\t<ID>" + String.valueOf(length+1) + "</ID>");
+            printWriter.println("\t\t<Name>" + n + "</Name>");
+            printWriter.println("\t\t<Amount>" + a + "</Amount>");
+            printWriter.println("\t\t<Category>" + c + "</Category>");
+            printWriter.println("\t\t<BestBefore>" + b + "</BestBefore>");
+            printWriter.println("\t</Product>");
+            printWriter.println("</Database>");
+            printWriter.close();
+        } catch(Exception exception) {}
+        reset();
+    }
+
     public static void main(String args[]) { //temporary code - will be removed after implementation
         Xml main = new Xml();
-        System.out.println("Categories: " + Arrays.toString(main.categories));
-        System.out.println();
+        System.out.println("Categories: " + Arrays.toString(main.categories) + "\n");
         main.printOut();
+        System.out.println("...\n");
         try {
             main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
         } catch(Exception exception) {}
-        System.out.println("...\n");
+        main.addProduct("Neues_Testprodukt", "1234567890", "kategorietest", "1.1.2021");
         main.printOut();
         main.overWrite();
     }
