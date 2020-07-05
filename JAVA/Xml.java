@@ -4,11 +4,10 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 
-import java.util.Arrays;
+import java.io.PrintWriter;
 import java.io.File;
 
-import java.io.PrintWriter;
-import java.io.IOException;
+import java.util.Arrays;
 
 public class Xml { //temporary code - switch from arrays to lists planned
     public String[] id;
@@ -93,18 +92,22 @@ public class Xml { //temporary code - switch from arrays to lists planned
         }
     }
 
+    public void forProduct(int tmp) {
+        printWriter.println("\t<Product>");
+        printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
+        printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
+        printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+        printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
+        printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
+        printWriter.println("\t</Product>");
+    }
+
     public void overWrite() {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
             for(int tmp = 0; tmp<length; tmp++) {
-                printWriter.println("\t<Product>");
-                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
-                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
-                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
-                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
-                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
-                printWriter.println("\t</Product>");
+                forProduct(tmp);
             }
             printWriter.println("</Database>");
             printWriter.close();
@@ -116,13 +119,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
             for(int tmp = 0; tmp<length; tmp++) {
-                printWriter.println("\t<Product>");
-                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
-                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
-                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
-                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
-                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
-                printWriter.println("\t</Product>");
+                forProduct(tmp);
             }
             printWriter.println("\t<Product>");
             printWriter.println("\t\t<ID>" + String.valueOf(length+1) + "</ID>");
@@ -142,13 +139,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
             for(int tmp = 0; tmp<Integer.parseInt(i)-1; tmp++) {
-                printWriter.println("\t<Product>");
-                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
-                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
-                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
-                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
-                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
-                printWriter.println("\t</Product>");
+                forProduct(tmp);
             }
             for(int tmp = Integer.parseInt(i); tmp<length; tmp++) {
                 printWriter.println("\t<Product>");
