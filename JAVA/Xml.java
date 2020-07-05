@@ -7,14 +7,19 @@ import org.w3c.dom.Document;
 import java.util.Arrays;
 import java.io.File;
 
-public class Xml { //temporary code - switch from arrays to objects planned
+import java.io.PrintWriter;
+import java.io.IOException;
+
+public class Xml { //temporary code - switch from arrays to lists planned
     public String[] id;
     public String[] name;
     public String[] amount;
     public String[] category;
     public String[] bestbefore;
 
+    private PrintWriter printWriter;
     private File file;
+
     private DocumentBuilderFactory documentBuilderFactory;
     private DocumentBuilder documentBuilder;
     private Document document;
@@ -30,6 +35,9 @@ public class Xml { //temporary code - switch from arrays to objects planned
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.parse(file);
+
+            file = new File("Output.xml");
+            printWriter = new PrintWriter("Output.xml", "UTF-8");
         } catch(Exception exception) {}
 
         length = document.getElementsByTagName("ID").getLength();
@@ -80,33 +88,22 @@ public class Xml { //temporary code - switch from arrays to objects planned
         }
     }
 
-    public int overWrite(int tag, int item, String content) { //placeholder function - supposed to write files instead
-        int recall = 1;
+    public void overWrite() {
         try {
-            switch(tag){
-                case 0:
-                    id[item] = content;
-                    recall = 0;
-                    break;
-                case 1:
-                    name[item] = content;
-                    recall = 0;
-                    break;
-                case 2:
-                    amount[item] = content;
-                    recall = 0;
-                    break;
-                case 3:
-                    category[item] = content;
-                    recall = 0;
-                    break;
-                case 4:
-                    bestbefore[item] = content;
-                    recall = 0;
-                    break;
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            printWriter.println("<Database>");
+            for(int tmp = 0; tmp<length; tmp++) {
+                printWriter.println("\t<Product>");
+                printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
+                printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
+                printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+                printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
+                printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
+                printWriter.println("\t</Product>");
             }
+            printWriter.println("</Database>");
+            printWriter.close();
         } catch(Exception exception) {}
-        return recall;
     }
 
     public static void main(String args[]) throws InterruptedException { //temporary code - will be removed after implementation
@@ -120,8 +117,12 @@ public class Xml { //temporary code - switch from arrays to objects planned
         System.out.println("...");
         Thread.sleep(3000);
         System.out.println();
-        System.out.println("Return: " + main.overWrite(1, 0, "Schreibtest_1"));
+        try {
+            main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
+        } catch(Exception exception) {}
+        main.overWrite();
         System.out.println();
         main.printOut();
+        main.overWrite();
     }
 }
