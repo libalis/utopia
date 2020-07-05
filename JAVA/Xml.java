@@ -107,20 +107,15 @@ public class Xml { //temporary code - switch from arrays to lists planned
         } catch(Exception exception) {}
     }
 
-    public static void main(String args[]) throws InterruptedException { //temporary code - will be removed after implementation
+    public static void main(String args[]) { //temporary code - will be removed after implementation
         Xml main = new Xml();
-        main.printOut();
-        System.out.println("...");
-        Thread.sleep(3000);
-        System.out.println();
         System.out.println("Categories: " + Arrays.toString(main.categories));
         System.out.println();
-        System.out.println("...");
-        Thread.sleep(3000);
-        System.out.println();
+        main.printOut();
         try {
             main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
         } catch(Exception exception) {}
+        System.out.println("...\n");
         main.printOut();
         main.overWrite();
     }
