@@ -34,8 +34,11 @@ public class Xml { //temporary code - switch from arrays to lists planned
 
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            printWriter = new PrintWriter("Database.xml", "UTF-8");
             document = documentBuilder.parse(file);
+        } catch(Exception exception) {}
+
+        try {
+            printWriter = new PrintWriter("Database.xml", "UTF-8");
         } catch(Exception exception) {}
 
         length = document.getElementsByTagName("ID").getLength();
@@ -118,8 +121,6 @@ public class Xml { //temporary code - switch from arrays to lists planned
         try {
             main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
         } catch(Exception exception) {}
-        main.overWrite();
-        System.out.println();
         main.printOut();
         main.overWrite();
     }
