@@ -23,7 +23,7 @@ public class Gui {
         ContentPane.setBackground(Color.WHITE);
         JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanegement");
         JButton Create_New = new JButton("Produkte hinzufügen");
-
+        Create_New.setBackground(Color.WHITE);
 
         ImageIcon image = new ImageIcon("C:\\Users\\Meneer\\Pictures\\image.png");
         JLabel imageLabel = new JLabel(image);
@@ -119,6 +119,9 @@ public class Gui {
         f3.setPreferredSize(new Dimension(100, 20));
         f4.setPreferredSize(new Dimension(100, 20));
 
+        b1.setBackground(Color.green);
+        b2.setBackground(Color.red);
+
         j.add(p1);
         p1.setVisible(true);
         j.setSize(500, 500);
@@ -126,7 +129,7 @@ public class Gui {
 
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                xml.addProduct(f1.getText(),f2.getText(),f3.getText(),f4.getText());
+                //xml.addProduct(f1.getText(),f2.getText(),f3.getText(),f4.getText());
             }
         });
 
