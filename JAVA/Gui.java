@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.ImageIcon;
 import java.awt.Graphics;
 import java.awt.Image;
+import javax.swing.JComboBox;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ public class Gui {
 
         Create_New.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Wurde gedrückt");
+                //System.out.println("Wurde gedrückt");
                 add_product();
             }
         });
@@ -55,7 +56,6 @@ public class Gui {
     }
     public static void add_product() {
 
-
         JFrame j = new JFrame("Produkt hinzufügen");
         JPanel p1 = new JPanel();
         JLabel l1 = new JLabel("Name");
@@ -65,9 +65,20 @@ public class Gui {
         JTextField f1 = new JTextField();
         JTextField f2 = new JTextField();
         JTextField f3 = new JTextField();
-        JTextField f4 = new JTextField();
+        //JTextField f4 = new JTextField();
+
+        String[] choices = new String[10];
+        int amountOfChoices = choices.length;
+        System.out.println(amountOfChoices);
+        choices[0]="Verbandsmaterial";
+        choices[1]="Sauerstoff";
+        JComboBox f4 = new JComboBox(choices);
+
+
+
         JButton b1 = new JButton("Fertig");
         JButton b2 = new JButton("Abbrechen");
+        JButton b3 = new JButton("Add");
 
         p1.setLayout(new GridBagLayout());
 
@@ -114,13 +125,21 @@ public class Gui {
         c.gridy=4;
         p1.add(b2, c);
 
-        f1.setPreferredSize(new Dimension(100, 20));
-        f2.setPreferredSize(new Dimension(100, 20));
-        f3.setPreferredSize(new Dimension(100, 20));
-        f4.setPreferredSize(new Dimension(100, 20));
+        c.gridx=2;
+        c.gridy=3;
+        p1.add(b3, c);
+
+        f1.setPreferredSize(new Dimension(130, 20));
+        f2.setPreferredSize(new Dimension(130, 20));
+        f3.setPreferredSize(new Dimension(130, 20));
+        f4.setPreferredSize(new Dimension(130, 20));
+        f4.setBackground(Color.white);
 
         b1.setBackground(Color.green);
+        b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
+        b2.setPreferredSize(new Dimension(130, 25));
+        b3.setBackground(Color.white);
 
         j.add(p1);
         p1.setVisible(true);
@@ -129,16 +148,32 @@ public class Gui {
 
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                //xml.addProduct(f1.getText(),f2.getText(),f3.getText(),f4.getText());
+                //xml.addProduct(f1.getText(),f2.getText(),f3.getText(),f4.getSelectedItem());
+                System.out.println(f4.getSelectedItem());
+                p1.setVisible(false);
+                j.setSize(0, 0);
+                j.setVisible(false);
             }
         });
 
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                System.out.println("Abbrechen");
+                //System.out.println("Abbrechen");
                 p1.setVisible(false);
                 j.setSize(0, 0);
                 j.setVisible(false);
+            }
+        });
+
+        b3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String newCategory;
+                newCategory = JOptionPane.showInputDialog("Please input new Category: ");
+                for(int i=0;i<amountOfChoices;i++) {
+                    if (choices[i]!=""&&choices[i]!=null){
+                      choices[i]=newCategory;
+                    }
+                }
             }
         });
     }
