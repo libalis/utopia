@@ -126,18 +126,6 @@ public class Xml { //temporary code - switch from arrays to lists planned
         printWriter.println("\t</Product>");
     }
 
-    public void overWrite() {
-        try {
-            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-            printWriter.println("<Database>");
-            for(int tmp = 0; tmp<length; tmp++) {
-                forProduct(tmp);
-            }
-            printWriter.println("</Database>");
-            printWriter.close();
-        } catch(Exception exception) {}
-    }
-
     public void addProduct(String n, String a, String c, String b) {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
@@ -155,6 +143,25 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.println("</Database>");
             printWriter.close();
         } catch(Exception exception) {}
+        overWrite();
+        reset();
+    }
+
+    public void changeOut(String i, String c, String r) {
+        switch(c) {
+            case "name":
+                name[Integer.parseInt(i)] = r;
+                break;
+            case "amount":
+                amount[Integer.parseInt(i)] = r;
+                break;
+            case "category":
+                category[Integer.parseInt(i)] = r;
+                break;
+            case "bestbefore":
+                bestbefore[Integer.parseInt(i)] = r;
+                break;
+        }
         overWrite();
         reset();
     }
@@ -182,43 +189,17 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
-    public void changeOut(String i, String c, String r) {
-        switch(c) {
-            case "name":
-                name[Integer.parseInt(i)] = r;
-                break;
-            case "amount":
-                amount[Integer.parseInt(i)] = r;
-                break;
-            case "category":
-                category[Integer.parseInt(i)] = r;
-                break;
-            case "bestbefore":
-                bestbefore[Integer.parseInt(i)] = r;
-                break;
-        }
-        overWrite();
-        reset();
+    public void overWrite() {
+        try {
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            printWriter.println("<Database>");
+            for(int tmp = 0; tmp<length; tmp++) {
+                forProduct(tmp);
+            }
+            printWriter.println("</Database>");
+            printWriter.close();
+        } catch(Exception exception) {}
     }
 
-    public static void main(String args[]) { //temporary code - will be removed after implementation
-        Xml main = new Xml();
-        System.out.println("Categories: " + Arrays.toString(main.categories) + "\n");
-        main.printOut();
-        System.out.println("...\n");
-        try {
-            main.amount[1] = String.valueOf(Integer.parseInt(main.amount[1]) - 1);
-        } catch(Exception exception) {}
-        main.printOut();
-        System.out.println("...\n");
-        main.addProduct("Neues_Testprodukt", "1234567890", "kategorietest", "1.1.2021");
-        main.printOut();
-        System.out.println("...\n");
-        main.removeProduct("2");
-        main.printOut();
-        System.out.println("...\n");
-        main.changeOut("0", "category", "neuer_test");
-        main.printOut();
-        main.overWrite(); //mandatory line to execute when application shuts down
-    }
+    public static void main(String args[]) {}
 }
