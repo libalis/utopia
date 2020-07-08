@@ -30,13 +30,13 @@
 ## 1. Test functions:
 
 |Function|Parameter(s)|
-|--|--|--|
+|--|--|
 |printOut()|No Parameters|
 
 ## 2. Edit functions:
 
 |Function|Parameter(s)|
-|--|--|--|
+|--|--|
 |addProduct()|String name, String amount, String category|
 |changeOut()|String id, String column, String row|
 |*&rarr; Comment*|*1. column: "name", "amount", "category", "bestbefore"*|
@@ -46,7 +46,7 @@
 ## 3. Mandatory function to execute when application shuts down:
 
 |Function|Parameter(s)|
-|--|--|--|
+|--|--|
 |overWrite()|No parameters|
 
 # Excursus: Direct variable change:
