@@ -371,7 +371,16 @@ public class Gui {
 
                 String[] column = {"ID", "NAME", "AMOUNT", "Category", "Bestbefore"};
 
-                JTable table = new JTable(data, column);
+                
+                DefaultTableModel tableModel = new DefaultTableModel(data, column) {
+
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        //all cells false
+                        return false;
+                    }
+                };
+                JTable table = new JTable(tableModel);
 
                 table.setBounds(30, 40, 200, 300);
 
