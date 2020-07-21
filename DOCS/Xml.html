@@ -1,0 +1,162 @@
+<blockquote>
+<p>Xml documentation</p>
+</blockquote>
+<h1 id="public-variables-">Public variables:</h1>
+<h2 id="1-database-items-">1. Database items:</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id[]</td>
+<td>String array</td>
+</tr>
+<tr>
+<td>name[]</td>
+<td>String array</td>
+</tr>
+<tr>
+<td>amount[]</td>
+<td>String array</td>
+</tr>
+<tr>
+<td>category[]</td>
+<td>String array</td>
+</tr>
+<tr>
+<td>bestbefore[]</td>
+<td>String array</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-database-groups-">2. Database groups:</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>categories[]</td>
+<td>String array</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-other-variables-">3. Other variables:</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>length</td>
+<td>int</td>
+<td>Amount of items</td>
+</tr>
+<tr>
+<td>num</td>
+<td>int</td>
+<td>Amount of categories</td>
+</tr>
+</tbody>
+</table>
+<h1 id="public-functions-">Public functions:</h1>
+<h2 id="1-test-functions-">1. Test functions:</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Parameter(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>printOut()</td>
+<td>No Parameters</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-edit-functions-">2. Edit functions:</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Parameter(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>addProduct()</td>
+<td>String name, String amount, String category, String bestbefore</td>
+</tr>
+<tr>
+<td>changeOut()</td>
+<td>String id, String column, String row</td>
+</tr>
+<tr>
+<td><em>&rarr; Comment</em></td>
+<td><em>1. column: &quot;name&quot;, &quot;amount&quot;, &quot;category&quot;, &quot;bestbefore&quot;</em></td>
+</tr>
+<tr>
+<td></td>
+<td><em>2. row: personal input</em></td>
+</tr>
+<tr>
+<td>removeProduct()</td>
+<td>String id</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-mandatory-function-to-execute-when-application-shuts-down-">3. Mandatory function to execute when application shuts down:</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Parameter(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>overWrite()</td>
+<td>No parameters</td>
+</tr>
+</tbody>
+</table>
+<h1 id="excursus-direct-variable-change-">Excursus: Direct variable change:</h1>
+<p>Example:</p>
+<pre><code><span class="hljs-keyword">try</span> {
+        amount[<span class="hljs-number">0</span>] = <span class="hljs-built_in">String</span>.valueOf(<span class="hljs-built_in">Integer</span>.parseInt(amount[<span class="hljs-number">0</span>]) - <span class="hljs-number">1</span>);
+    } <span class="hljs-keyword">catch</span>(<span class="hljs-built_in">Exception</span> exception) {}
+</code></pre><h1 id="license">License</h1>
+<pre><code>MIT License
+
+Copyright (c) 2020 Robert Kagan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to <span class="hljs-keyword">use</span>, copy, <span class="hljs-keyword">modify</span>, <span class="hljs-keyword">merge</span>, publish, <span class="hljs-keyword">distribute</span>, sublicense, <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> sell
+copies <span class="hljs-keyword">of</span> the Software, <span class="hljs-keyword">and</span> <span class="hljs-keyword">to</span> permit persons <span class="hljs-keyword">to</span> whom the Software <span class="hljs-keyword">is</span>
+furnished <span class="hljs-keyword">to</span> <span class="hljs-keyword">do</span> so, subject <span class="hljs-keyword">to</span> the <span class="hljs-keyword">following</span> conditions:
+
+The above copyright <span class="hljs-keyword">notice</span> <span class="hljs-keyword">and</span> this permission <span class="hljs-keyword">notice</span> shall be included <span class="hljs-keyword">in</span> all
+copies <span class="hljs-keyword">or</span> substantial portions <span class="hljs-keyword">of</span> the Software.
+
+THE SOFTWARE <span class="hljs-keyword">IS</span> PROVIDED <span class="hljs-string">"AS IS"</span>, <span class="hljs-keyword">WITHOUT</span> WARRANTY <span class="hljs-keyword">OF</span> <span class="hljs-keyword">ANY</span> KIND, EXPRESS <span class="hljs-keyword">OR</span>
+IMPLIED, <span class="hljs-keyword">INCLUDING</span> BUT <span class="hljs-keyword">NOT</span> LIMITED <span class="hljs-keyword">TO</span> THE WARRANTIES <span class="hljs-keyword">OF</span> MERCHANTABILITY,
+FITNESS <span class="hljs-keyword">FOR</span> A PARTICULAR PURPOSE <span class="hljs-keyword">AND</span> NONINFRINGEMENT. <span class="hljs-keyword">IN</span> <span class="hljs-keyword">NO</span> <span class="hljs-keyword">EVENT</span> SHALL THE
+<span class="hljs-keyword">AUTHORS</span> <span class="hljs-keyword">OR</span> COPYRIGHT HOLDERS BE LIABLE <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">ANY</span> CLAIM, DAMAGES <span class="hljs-keyword">OR</span> OTHER
+LIABILITY, WHETHER <span class="hljs-keyword">IN</span> AN <span class="hljs-keyword">ACTION</span> <span class="hljs-keyword">OF</span> CONTRACT, TORT <span class="hljs-keyword">OR</span> OTHERWISE, ARISING <span class="hljs-keyword">FROM</span>,
+<span class="hljs-keyword">OUT</span> <span class="hljs-keyword">OF</span> <span class="hljs-keyword">OR</span> <span class="hljs-keyword">IN</span> <span class="hljs-keyword">CONNECTION</span> <span class="hljs-keyword">WITH</span> THE SOFTWARE <span class="hljs-keyword">OR</span> THE <span class="hljs-keyword">USE</span> <span class="hljs-keyword">OR</span> OTHER DEALINGS <span class="hljs-keyword">IN</span> THE
+SOFTWARE.
+</code></pre>
