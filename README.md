@@ -7,7 +7,23 @@ Developed with Java and uses an easy-to-manage XML database
 #### Documentation
 
  - [Xml Java class](https://github.com/libalis/utopia/blob/master/DOCS/Xml.md)
- - Gui Java class
+
+#### Export JAR
+
+> Only tested with OpenJDK 16
+```sh
+$ git clone https://www.github.com/libalis/utopia
+$ cd utopia/JAVA
+$ javac Xml.java Gui.java Main.java
+$ jar cfe Utopia.jar main Xml.class Gui.class Main.class
+```
+
+#### Execution
+
+> Only tested with OpenJDK 16
+```sh
+$ java -jar Utopia.jar
+```
 
 #### License
 
