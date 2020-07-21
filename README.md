@@ -15,7 +15,7 @@ Developed with Java and uses an easy-to-manage XML database
 $ git clone https://www.github.com/libalis/utopia
 $ cd utopia/JAVA
 $ javac Xml.java Gui.java Main.java
-$ jar cfe Utopia.jar main Xml.class Gui.class Main.class
+$ jar cfe Utopia.jar Main Xml.class Gui.class Main.class
 ```
 
 #### Execution
