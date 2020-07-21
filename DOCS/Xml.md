@@ -37,7 +37,7 @@
 
 |Function|Parameter(s)|
 |--|--|
-|addProduct()|String name, String amount, String category|
+|addProduct()|String name, String amount, String category, String bestbefore|
 |changeOut()|String id, String column, String row|
 |*&rarr; Comment*|*1. column: "name", "amount", "category", "bestbefore"*|
 ||*2. row: personal input*|
