@@ -1,7 +1,7 @@
 TODO Liste
-
-Bugfixes:
-- ID beginnt bei 5???
+                                                                                                                              Status
+Bugfixes:                                                       
+- ID beginnt bei 5???                                                                                                         ~Fixed
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)
 
 Änderungen:
