@@ -1,18 +1,14 @@
 /*
 MIT License
-
 Copyright (c) 2020 Robert Kagan
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -126,7 +122,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
         printWriter.println("\t</Product>");
     }
 
-    public void addProduct(String n, String a, String c, String b) {
+    public void addProduct(String n, String a, String b, String c) {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
@@ -134,7 +130,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
                 forProduct(tmp);
             }
             printWriter.println("\t<Product>");
-            printWriter.println("\t\t<ID>" + String.valueOf(length+1) + "</ID>");
+            printWriter.println("\t\t<ID>" + String.valueOf(length-1) + "</ID>");
             printWriter.println("\t\t<Name>" + n + "</Name>");
             printWriter.println("\t\t<Amount>" + a + "</Amount>");
             printWriter.println("\t\t<Category>" + c + "</Category>");
