@@ -37,9 +37,11 @@ public class Gui {
     JFrame f = new JFrame();
     SpringLayout Layout = new SpringLayout();
     JPanel ContentPane = new JPanel();
-    JPanel panel = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JButton Create_New = new JButton("Produkt hinzufügen");
+
+    ImageIcon image = new ImageIcon("image.png");
+    JLabel bild = new JLabel (image);
 
     Xml xml = new Xml();
 
@@ -217,8 +219,6 @@ public class Gui {
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
         xml.overWrite();
-        ImageIcon image = new ImageIcon("C:\\Users\\Meneer\\Pictures\\image.png");
-        JLabel imageLabel = new JLabel(image);
 
         Create_New.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -232,6 +232,7 @@ public class Gui {
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
         ContentPane.add(Create_New);
+        ContentPane.add(bild);
         ContentPane.add(Headerlabel);
 
         f.setSize(1280, 720);
@@ -239,6 +240,8 @@ public class Gui {
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
         Layout.putConstraint(SpringLayout.WEST, Create_New, 100, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, Create_New, 50, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, bild, 50, SpringLayout.NORTH, ContentPane);
 
         f.add(ContentPane);
         f.setVisible(true);
