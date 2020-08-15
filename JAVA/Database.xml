@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Database>
 	<Product>
+		<ID>Nr</ID>
+		<Name>Name</Name>
+		<Amount>Anzahl</Amount>
+		<Category>Kategorie</Category>
+		<BestBefore>Ablauf</BestBefore>
+	</Product>
+	<Product>
 		<ID>1</ID>
 		<Name>Testprodukt_1</Name>
 		<Amount></Amount>
 		<Category>testprodukte</Category>
 		<BestBefore>31.12.2998</BestBefore>
 	</Product>
-    <Product>
+    	<Product>
 		<ID>2</ID>
 		<Name>Testprodukt_2</Name>
 		<Amount>1234567890</Amount>
 		<Category>kategorietest</Category>
 		<BestBefore>1.1.2999</BestBefore>
 	</Product>
-    <Product>
+   	 <Product>
 		<ID>3</ID>
 		<Name>Testprodukt_3</Name>
 		<Amount>1234567890</Amount>
