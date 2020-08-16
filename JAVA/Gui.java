@@ -191,11 +191,12 @@ public class Gui {
             Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
             ContentPane.add(table);
 
-            for (int y = 1; y < (xml.length); y++) {
+            /*for (int y = 1; y < (xml.length); y++) {
                 if (data[y][1]!=""&&data[y][1]!=null) {
                     System.out.println(y);
+                    JButton b2 = new JButton("+");
                 }
-            }
+            }*/
 
 
         } catch (Exception e) {
@@ -216,6 +217,42 @@ public class Gui {
         choices[7] = "Kategorie 8";
         choices[8] = "Kategorie 9";
         choices[9] = "Kategorie 10";
+
+        //Testing area for Buttons: add, sub, change and delete - nr is row of data
+        ImageIcon pls1 = new ImageIcon("plus.png");
+        JButton plus1 = new JButton(pls1);
+        plus1.setBackground(Color.green);
+        ContentPane.add(plus1);
+        Layout.putConstraint(SpringLayout.EAST, plus1, -80, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, plus1, 100, SpringLayout.NORTH, ContentPane);
+        plus1.setPreferredSize(new Dimension(20,20));
+
+        ImageIcon mis1 = new ImageIcon("minus.png");
+        JButton minus1 = new JButton(mis1);
+        minus1.setBackground(Color.red);
+        ContentPane.add(minus1);
+        Layout.putConstraint(SpringLayout.EAST, minus1, -55, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, minus1, 100, SpringLayout.NORTH, ContentPane);
+        minus1.setPreferredSize(new Dimension(20,20));
+
+        ImageIcon repair1 = new ImageIcon("change.png");
+        JButton change1 = new JButton(repair1);
+        change1.setBackground(Color.orange);
+        ContentPane.add(change1);
+        Layout.putConstraint(SpringLayout.EAST, change1, -30, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, change1, 100, SpringLayout.NORTH, ContentPane);
+        change1.setPreferredSize(new Dimension(20,20));
+
+        ImageIcon trash1 = new ImageIcon("trash.png");
+        JButton delete1 = new JButton(trash1);
+        delete1.setBackground(Color.red);
+        ContentPane.add(delete1);
+        Layout.putConstraint(SpringLayout.EAST, delete1, -5, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, delete1, 100, SpringLayout.NORTH, ContentPane);
+        delete1.setPreferredSize(new Dimension(20,20));
+
+
+        //Normal Code
 
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
