@@ -32,8 +32,8 @@ public class Gui {
     SpringLayout Layout = new SpringLayout();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
-    JButton Create_New = new JButton("New Product");
-    //JButton new_category = new JButton("New Category");
+    JButton Create_New = new JButton("Neues Product");
+    //JButton new_category = new JButton("Neue Kategorie");
     JButton renew = new JButton("Aktualisieren");
 
     String[] choices = new String[10];
@@ -193,7 +193,7 @@ public class Gui {
 
             for (int y = 1; y < (xml.length); y++) {
                 if (data[y][1]!=""&&data[y][1]!=null) {
-                    //System.out.println(y);
+                    System.out.println(y);
                 }
             }
 
@@ -257,11 +257,11 @@ public class Gui {
         f.setSize(1280, 720);
 
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, Create_New, 200, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, Create_New, 180, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, Create_New, 100, SpringLayout.NORTH, ContentPane);
-        //Layout.putConstraint(SpringLayout.WEST, new_category, 200, SpringLayout.WEST, ContentPane);
+        //Layout.putConstraint(SpringLayout.WEST, new_category, 180, SpringLayout.WEST, ContentPane);
         //Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, renew, 200, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, renew, 180, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, renew, 130, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
