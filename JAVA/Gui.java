@@ -324,14 +324,14 @@ public class Gui {
         ContentPane.add(bild);
         ContentPane.add(Headerlabel);
 
-        f.setSize(1280, 720);
+        f.setSize(1150, 720);
 
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, Create_New, 180, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, Create_New, 50, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, Create_New, 100, SpringLayout.NORTH, ContentPane);
         //Layout.putConstraint(SpringLayout.WEST, new_category, 180, SpringLayout.WEST, ContentPane);
         //Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, renew, 180, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, renew, 50, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, renew, 130, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
