@@ -28,17 +28,12 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Gui {
-    static String name;
-    static String amount;
-    static String bestbefore;
-    static String category;
-
     JFrame f = new JFrame();
     SpringLayout Layout = new SpringLayout();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JButton Create_New = new JButton("New Product");
-    JButton new_category = new JButton("New Category");
+    //JButton new_category = new JButton("New Category");
     JButton renew = new JButton("Aktualisieren");
 
     String[] choices = new String[10];
@@ -190,15 +185,15 @@ public class Gui {
                 }
             };
             JTable table = new JTable(tableModel);
-            table.setBounds(30, 40, 400, 600);
-            table.setPreferredSize(new Dimension(600,10000));
-            Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
+            table.setBounds(40, 40, 400, 600);
+            table.setPreferredSize(new Dimension(800,10000));
+            Layout.putConstraint(SpringLayout.EAST, table, -150, SpringLayout.EAST, ContentPane);
             Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
             ContentPane.add(table);
 
             for (int y = 1; y < (xml.length); y++) {
                 if (data[y][1]!=""&&data[y][1]!=null) {
-                    System.out.println(y);
+                    //System.out.println(y);
                 }
             }
 
@@ -210,8 +205,17 @@ public class Gui {
     }
 
     public void Gui() {
-        choices[0] = "Verbandsmaterial";
-        choices[1] = "Sauerstoff";
+        //Auswahl muss per Hand festgelegt werden
+        choices[0] = "Kategorie 1";
+        choices[1] = "Kategorie 2";
+        choices[2] = "Kategorie 3";
+        choices[3] = "Kategorie 4";
+        choices[4] = "Kategorie 5";
+        choices[5] = "Kategorie 6";
+        choices[6] = "Kategorie 7";
+        choices[7] = "Kategorie 8";
+        choices[8] = "Kategorie 9";
+        choices[9] = "Kategorie 10";
 
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
@@ -229,23 +233,23 @@ public class Gui {
             }
         });
 
-        new_category.addActionListener(new ActionListener() {
+        /*new_category.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ToDo
             }
-        });
+        });*/
 
         TableExample();
 
         Create_New.setBackground(Color.orange);
         renew.setBackground(Color.green);
-        new_category.setBackground(Color.orange);
+        //new_category.setBackground(Color.orange);
 
         Headerlabel.setBackground(Color.red);
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
         ContentPane.add(Create_New);
-        ContentPane.add(new_category);
+        //ContentPane.add(new_category);
         ContentPane.add(renew);
         ContentPane.add(bild);
         ContentPane.add(Headerlabel);
@@ -255,10 +259,10 @@ public class Gui {
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
         Layout.putConstraint(SpringLayout.WEST, Create_New, 200, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, Create_New, 100, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, new_category, 200, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
+        //Layout.putConstraint(SpringLayout.WEST, new_category, 200, SpringLayout.WEST, ContentPane);
+        //Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.WEST, renew, 200, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, renew, 160, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, renew, 130, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
 
