@@ -8,24 +8,31 @@
 		<BestBefore>Ablauf</BestBefore>
 	</Product>
 	<Product>
-		<ID>1</ID>
-		<Name>Testprodukt_1</Name>
+		<ID></ID>
+		<Name></Name>
 		<Amount></Amount>
-		<Category>testprodukte</Category>
-		<BestBefore>31.12.2998</BestBefore>
+		<Category></Category>
+		<BestBefore></BestBefore>
 	</Product>
-    	<Product>
+	<Product>
+		<ID>1</ID>
+		<Name>Verbandspäckchen 30m</Name>
+		<Amount>300</Amount>
+		<Category>kategorie 1</Category>
+		<BestBefore>28.01.2020</BestBefore>
+	</Product>
+	<Product>
 		<ID>2</ID>
-		<Name>Testprodukt_2</Name>
-		<Amount>1234567890</Amount>
-		<Category>kategorietest</Category>
-		<BestBefore>1.1.2999</BestBefore>
+		<Name>Mullbinde 300km</Name>
+		<Amount>2,5</Amount>
+		<Category>Kategorie 6</Category>
+		<BestBefore>24.6.2801</BestBefore>
 	</Product>
-   	 <Product>
+	<Product>
 		<ID>3</ID>
-		<Name>Testprodukt_3</Name>
-		<Amount>1234567890</Amount>
-		<Category>testprodukte</Category>
-		<BestBefore>31.12.2999</BestBefore>
+		<Name>Larynxtubus, Größe Marcel</Name>
+		<Amount>0</Amount>
+		<Category>Kategorie 4</Category>
+		<BestBefore>30.09.2000</BestBefore>
 	</Product>
 </Database>
