@@ -225,6 +225,8 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeAmountPlus;
                 changeAmountPlus = JOptionPane.showInputDialog("How much do you want to add:");
+                int changeRowInt = Integer.parseInt(changeRowNR);
+                int changeAmountPlusInt = Integer.parseInt(changeAmountPlus);
             }
         });
 
@@ -242,6 +244,8 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeAmountMinus;
                 changeAmountMinus = JOptionPane.showInputDialog("How much do you want to sub:");
+                int changeRowInt = Integer.parseInt(changeRowNR);
+                int changeAmountMinusInt = Integer.parseInt(changeAmountMinus);
             }
         });
 
@@ -259,6 +263,8 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeBestbeforeTo;
                 changeBestbeforeTo = JOptionPane.showInputDialog("To what Date you want to change:");
+                int changeRowInt = Integer.parseInt(changeRowNR);
+                int changeBestbeforeInt = Integer.parseInt(changeBestbeforeTo);
             }
         });
 
@@ -274,6 +280,7 @@ public class Gui {
             public void actionPerformed(ActionEvent e) {
                 String deletRowNr;
                 deletRowNr = JOptionPane.showInputDialog("Type in Row to delete:");
+                int changeRowInt = Integer.parseInt(deletRowNr);
             }
         });
 
