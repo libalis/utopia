@@ -28,7 +28,6 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Gui {
-
     static String name;
     static String amount;
     static String bestbefore;
@@ -38,7 +37,11 @@ public class Gui {
     SpringLayout Layout = new SpringLayout();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
-    JButton Create_New = new JButton("Produkt hinzufügen");
+    JButton Create_New = new JButton("New Product");
+    JButton new_category = new JButton("New Category");
+    JButton renew = new JButton("Aktualisieren");
+
+    String[] choices = new String[10];
 
     ImageIcon image = new ImageIcon("image.png");
     JLabel bild = new JLabel (image);
@@ -50,25 +53,15 @@ public class Gui {
         JPanel p1 = new JPanel();
         JLabel l1 = new JLabel("Name");
         JLabel l2 = new JLabel("Amount");
-        JLabel l3 = new JLabel("Bestbefore");
         JLabel l4 = new JLabel("Category");
+        JLabel l3 = new JLabel("Bestbefore");
         JTextField f1 = new JTextField();
         JTextField f2 = new JTextField();
         JTextField f3 = new JTextField();
-        //JTextField f4 = new JTextField();
-
-        String[] choices = new String[10];
-        int amountOfChoices = choices.length;
-
-        System.out.println(amountOfChoices);
-
-        choices[0] = "Verbandsmaterial";
-        choices[1] = "Sauerstoff";
 
         JComboBox f4 = new JComboBox(choices);
         JButton b1 = new JButton("Aktualisieren");
         JButton b2 = new JButton("Abbrechen");
-        //JButton b3 = new JButton("Add");
 
         p1.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -93,20 +86,20 @@ public class Gui {
 
         c.gridx = 0;
         c.gridy = 2;
-        p1.add(l3, c);
+        p1.add(l4, c);
 
         c.gridx = 1;
         c.gridy = 2;
-        p1.add(f3, c);
+        p1.add(f4, c);
 
         c.gridx = 0;
         c.gridy = 3;
-        p1.add(l4, c);
+        p1.add(l3, c);
 
 
         c.gridx = 1;
         c.gridy = 3;
-        p1.add(f4, c);
+        p1.add(f3, c);
 
         c.gridx = 0;
         c.gridy = 4;
@@ -115,10 +108,6 @@ public class Gui {
         c.gridx = 1;
         c.gridy = 4;
         p1.add(b2, c);
-
-        c.gridx = 2;
-        c.gridy = 3;
-        //p1.add(b3, c);
 
         f1.setPreferredSize(new Dimension(130, 20));
         f2.setPreferredSize(new Dimension(130, 20));
@@ -129,7 +118,6 @@ public class Gui {
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
         b2.setPreferredSize(new Dimension(130, 25));
-        //b3.setBackground(Color.white);
 
         j.add(p1);
         p1.setVisible(true);
@@ -137,7 +125,6 @@ public class Gui {
         j.setVisible(true);
 
         b1.addActionListener(new ActionListener() {
-
 
             public void actionPerformed(ActionEvent e) {
                 Xml xml=new Xml();
@@ -203,10 +190,18 @@ public class Gui {
                 }
             };
             JTable table = new JTable(tableModel);
-            table.setBounds(30, 40, 200, 300);
+            table.setBounds(30, 40, 400, 600);
+            table.setPreferredSize(new Dimension(600,10000));
             Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, table, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
             Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
             ContentPane.add(table);
+
+            for (int y = 1; y < (xml.length); y++) {
+                if (data[y][1]!=""&&data[y][1]!=null) {
+                    System.out.println(y);
+                }
+            }
+
 
         } catch (Exception e) {
             System.out.println(e);
@@ -214,8 +209,10 @@ public class Gui {
 
     }
 
-
     public void Gui() {
+        choices[0] = "Verbandsmaterial";
+        choices[1] = "Sauerstoff";
+
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
         xml.overWrite();
@@ -226,22 +223,44 @@ public class Gui {
             }
         });
 
+        renew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                restartProgram();
+            }
+        });
+
+        new_category.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //ToDo
+            }
+        });
+
         TableExample();
+
+        Create_New.setBackground(Color.orange);
+        renew.setBackground(Color.green);
+        new_category.setBackground(Color.orange);
 
         Headerlabel.setBackground(Color.red);
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
         ContentPane.add(Create_New);
+        ContentPane.add(new_category);
+        ContentPane.add(renew);
         ContentPane.add(bild);
         ContentPane.add(Headerlabel);
 
         f.setSize(1280, 720);
 
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, Create_New, 100, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, Create_New, 50, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, Create_New, 200, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, Create_New, 100, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, new_category, 200, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, renew, 200, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, renew, 160, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, bild, 50, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
 
         f.add(ContentPane);
         f.setVisible(true);
