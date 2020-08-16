@@ -162,6 +162,12 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
+    /*public void changeAmount() {
+        try {
+            amount[0] = String.valueOf(Integer.parseInt(amount[0]) - 1);
+        } catch(Exception exception) {}
+    }*/
+
     public void removeProduct(String i) {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
@@ -196,6 +202,4 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.close();
         } catch(Exception exception) {}
     }
-
-    public static void main(String args[]) {}
 }
