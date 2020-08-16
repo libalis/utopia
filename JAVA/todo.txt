@@ -15,4 +15,4 @@ Neues:
 - Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          -
 - Löschbutton für Prdukt implementieren                                                                                       -
 
-letzter Patch 15.08.2020 ~ JF
+letzter Patch 16.08.2020 ~ JF
