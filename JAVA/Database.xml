@@ -18,7 +18,7 @@
 		<ID>1</ID>
 		<Name>Verbandspäckchen 30m</Name>
 		<Amount>300</Amount>
-		<Category>kategorie 1</Category>
+		<Category>Kategorie 1</Category>
 		<BestBefore>28.01.2020</BestBefore>
 	</Product>
 	<Product>
@@ -34,5 +34,12 @@
 		<Amount>0</Amount>
 		<Category>Kategorie 4</Category>
 		<BestBefore>30.09.2000</BestBefore>
+	</Product>
+	<Product>
+		<ID>4</ID>
+		<Name>Whiteboard</Name>
+		<Amount>2</Amount>
+		<Category>Kategorie 3</Category>
+		<BestBefore>nie</BestBefore>
 	</Product>
 </Database>
