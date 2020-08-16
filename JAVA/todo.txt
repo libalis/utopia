@@ -5,14 +5,14 @@ Bugfixes:
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)                        -
 
 Änderungen:
-- Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 -
-- Produkte nach Kategorien sortieren                                                                                          -
+- Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 In Bearbeitung (mehrmals angepasst)
+- Produkte nach Kategorien sortieren                                                                                          Umsetzbar?
 
 Neues:
 - Add-Button für Kategorien implementieren                                                                                    Erledigt
-   - Button funktion einfügen - neue xml-datei???                                                                             -
+   - Button funktion einfügen - neue xml-datei???                                                                             Abgebrochen
 - Add-Button für Anzahl eines Produktes implementieren                                                                        -
 - Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          -
-- Löschbutton für Prdukt implementieren                                                                                       -
+- Löschbutton für Produkt implementieren                                                                                      -
 
 letzter Patch 16.08.2020 ~ JF
