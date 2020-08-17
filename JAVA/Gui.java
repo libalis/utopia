@@ -680,16 +680,6 @@ public class Gui {
         f1.setVisible(true);
         f1.setContentPane(ContentPane1);
 
-        f1.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-        f1.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                xml.overWrite();
-                f1.dispose();
-                System.exit(0);
-            }
-        });
-
         f1.setLayout(null);
         f1.setVisible(true);
     }
