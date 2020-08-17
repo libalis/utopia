@@ -34,6 +34,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
     public String[] id;
     public String[] name;
     public String[] amount;
+    public String[] amountNeeded;
     public String[] category;
     public String[] bestbefore;
 
@@ -71,6 +72,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
         id = new String[length];
         name = new String[length];
         amount = new String[length];
+        amountNeeded = new String[length];
         category = new String[length];
         bestbefore = new String[length];
 
@@ -82,6 +84,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             id[tmp] = document.getElementsByTagName("ID").item(tmp).getTextContent();
             name[tmp] = document.getElementsByTagName("Name").item(tmp).getTextContent();
             amount[tmp] = document.getElementsByTagName("Amount").item(tmp).getTextContent();
+            amountNeeded [tmp] = document.getElementsByTagName("AmountNeeded").item(tmp).getTextContent();
             category[tmp] = document.getElementsByTagName("Category").item(tmp).getTextContent();
             bestbefore[tmp] = document.getElementsByTagName("BestBefore").item(tmp).getTextContent();
         }
@@ -106,6 +109,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             System.out.println("ID: " + id[tmp]);
             System.out.println("Name: " + name[tmp]);
             System.out.println("Amount: " + amount[tmp]);
+            System.out.println("AmountNeeded: " + amountNeeded[tmp]);
             System.out.println("Category: " + category[tmp]);
             System.out.println("BestBefore: " + bestbefore[tmp]);
             System.out.println();
@@ -116,12 +120,13 @@ public class Xml { //temporary code - switch from arrays to lists planned
         printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
         printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
         printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+        printWriter.println("\t\t<AmountNeeded>" + amountNeeded[tmp] + "</AmountNeeded>");
         printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
         printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
         printWriter.println("\t</Product>");
     }
 
-    public void addProduct(String n, String a, String b, String c) {
+    public void addProduct(String n, String a, String a2, String b, String c) {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
@@ -132,6 +137,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.println("\t\t<ID>" + String.valueOf(length-1) + "</ID>");
             printWriter.println("\t\t<Name>" + n + "</Name>");
             printWriter.println("\t\t<Amount>" + a + "</Amount>");
+            printWriter.println("\t\t<AmountNeeded>" + a2 + "</AmountNeeded>");
             printWriter.println("\t\t<Category>" + c + "</Category>");
             printWriter.println("\t\t<BestBefore>" + b + "</BestBefore>");
             printWriter.println("\t</Product>");
@@ -142,10 +148,11 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
-    public void changeProduct (String idNew, String nameNew, String amountNew, String bestbeforeNew) {
+    public void changeProduct (String idNew, String nameNew, String amountNew, String amountNeededNew, String bestbeforeNew) {
         testPrintOut(Integer.parseInt(idNew)+1);
         name[Integer.parseInt(idNew)+1] = nameNew;
         amount[Integer.parseInt(idNew)+1] = amountNew;
+        amountNeeded[Integer.parseInt(idNew)+1] = amountNeededNew;
         bestbefore[Integer.parseInt(idNew)+1] = bestbeforeNew;
         testPrintOut(Integer.parseInt(idNew));
     }
@@ -161,6 +168,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
                 printWriter.println("\t\t<ID>" + String.valueOf(Integer.parseInt(id[tmp])-1) + "</ID>");
                 printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
                 printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
+                printWriter.println("\t\t<AmountNeeded>" + amountNeeded[tmp] + "</AmountNeeded>");
                 printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
                 printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
                 printWriter.println("\t</Product>");
