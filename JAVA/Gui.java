@@ -87,11 +87,11 @@ public class Gui {
 
     public void Gui() {
         //Auswahl muss per Hand festgelegt werden
-        choices[0] = "Kategorie 1";
-        choices[1] = "Kategorie 2";
-        choices[2] = "Kategorie 3";
-        choices[3] = "Kategorie 4";
-        choices[4] = "Kategorie 5";
+        choices[0] = "Verbandsmaterial";
+        choices[1] = "Sauerstoff";
+        choices[2] = "Injektion";
+        choices[3] = "Hygiene";
+        choices[4] = "Sonstiges";
         choices[5] = "Kategorie 6";
         choices[6] = "Kategorie 7";
         choices[7] = "Kategorie 8";
