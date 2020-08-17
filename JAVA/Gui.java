@@ -34,7 +34,8 @@ public class Gui {
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JTextField searchbar = new JTextField();
     JButton search = new JButton("Search");
-    JLabel space = new JLabel("   ");
+    JButton printTable = new JButton("Table to pdf");
+    JButton printMissing = new JButton("Missing to pdf");
 
     boolean hookPressed = false;
     JFrame frame = new JFrame();
@@ -61,7 +62,7 @@ public class Gui {
                 data[i][4] = xml.bestbefore[i];
             }
 
-            String[] column = {"ID", "NAME", "AMOUNT", "Category", "Bestbefore"};
+            String[] column = {"ID", "Name", "Amount", "Category", "Bestbefore"};
 
             DefaultTableModel tableModel = new DefaultTableModel(data, column) {
 
@@ -131,7 +132,7 @@ public class Gui {
         JButton change = new JButton(repair);
         change.setBackground(Color.orange);
         ContentPane.add(change);
-        Layout.putConstraint(SpringLayout.EAST, change, -30, SpringLayout.EAST, ContentPane); //-30 zu -55 zu -80 geändert
+        Layout.putConstraint(SpringLayout.EAST, change, -30, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, change, 100, SpringLayout.NORTH, ContentPane);
         change.setPreferredSize(new Dimension(20,20));
         change.setToolTipText("Click this button to change the data of a product");
@@ -159,7 +160,7 @@ public class Gui {
                 int deleteRowNrInt = Integer.parseInt(deleteRowNr)+1;
 
                 //xml.removeProduct(deleteRowNr);
-                JOptionPane.showMessageDialog(frame , "Error - Funktioniert noch nicht!");
+                JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
 
                 xml.testPrintOut(deleteRowNrInt);
                 restartProgram();
@@ -177,9 +178,9 @@ public class Gui {
             public void actionPerformed(ActionEvent e) {
                 searched = searchbar.getText();
                 if (searched == "" || searched == null || searched == " ") {
-                    JOptionPane.showMessageDialog(frame, "Error - Du hast nichts eingegeben!"); //Doesn't work
+                    JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Info - Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched);
+                    JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
                     for (int i = 0; i < (xml.length); i++) {
                         if (xml.id[i]==searched||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched) {
                             rowToMark = i;
@@ -193,15 +194,33 @@ public class Gui {
 
         TableExample();
 
+        printTable.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Tabelle ausdrucken
+                //f.print();
+                JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        printMissing.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Fehlendes Material ausdrucken
+                JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         search.setBackground(Color.white);
         search.setToolTipText("Search for Product Name");
+        printTable.setBackground(Color.YELLOW);
+        printMissing.setBackground(Color.YELLOW);
 
         Headerlabel.setBackground(Color.red);
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
         ContentPane.add(searchbar);
         ContentPane.add(search);
-        ContentPane.add(space);
+        ContentPane.add(printTable);
+        ContentPane.add(printMissing);
         ContentPane.add(bild);
         ContentPane.add(Headerlabel);
 
@@ -213,8 +232,10 @@ public class Gui {
         searchbar.setPreferredSize(new Dimension(130, 20));
         Layout.putConstraint(SpringLayout.WEST, search, 84, SpringLayout.WEST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, search, 120, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, space, 50, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, space, 130, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, printTable, 30, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, printTable, 160, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, printMissing, 30, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, printMissing, 185, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
 
@@ -479,7 +500,7 @@ public class Gui {
 
                     restartProgram();
                 } else {
-                    JOptionPane.showMessageDialog(frame , "You have to press the hook button first");
+                    JOptionPane.showMessageDialog(frame , "You have to press the hook button first","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -505,7 +526,7 @@ public class Gui {
                 f4.setText(xml.bestbefore[guiID]);
                 hookPressed = true;
             } catch (Exception exception) {
-                JOptionPane.showMessageDialog(frame , "Error - Du musst eine gültige Id auswählen!");
+                JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
             }
             }
         });
