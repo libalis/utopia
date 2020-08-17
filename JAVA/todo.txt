@@ -11,11 +11,11 @@ Bugfixes:
 Neues:
 - Add-Button für Kategorien implementieren                                                                                    Erledigt - auskommentiert
   - Button funktion einfügen - neue xml-datei???                                                                              Abgebrochen
-- Add-Button für Anzahl eines Produktes implementieren                                                                        Erledigt - ohne Funktion
-  - Button funktion einfügen                                                                                                  -
-- Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          Erledigt - ohne Funktion
-  - Button funktion einfügen                                                                                                  -
+- Add-Button für Anzahl eines Produktes implementieren                                                                        Umgesetzt
+  - Button funktion einfügen                                                                                                  Umgesetzt
+- Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          Umgesetzt
+  - Button funktion einfügen                                                                                                  Umgesetzt
 - Löschbutton für Produkt implementieren                                                                                      Erledigt - ohne Funktion
   - Button funktion einfügen                                                                                                  -
 
-letzter Patch 16.08.2020 ~ JF
+letzter Patch 17.08.2020 ~ JF
