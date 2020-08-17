@@ -262,15 +262,17 @@ public class Gui {
         JPanel p1 = new JPanel();
         JLabel header = new JLabel("Add Product");
         JLabel sth = new JLabel("                     ");
+        JLabel l0 = new JLabel("ID");
         JLabel l1 = new JLabel("Name");
         JLabel l2 = new JLabel("Amount");
         JLabel l4 = new JLabel("Category");
         JLabel l3 = new JLabel("Bestbefore");
+        JLabel f0 = new JLabel("");
         JTextField f1 = new JTextField();
         JTextField f2 = new JTextField();
         JTextField f3 = new JTextField();
-
         JComboBox f4 = new JComboBox(choices);
+
         JButton b1 = new JButton("Add");
         JButton b2 = new JButton("Abbrechen");
 
@@ -289,46 +291,56 @@ public class Gui {
 
         c.gridx = 0;
         c.gridy = 2;
-        p1.add(l1, c);
+        p1.add(l0, c);
 
         c.gridx = 1;
         c.gridy = 2;
-        p1.add(f1, c);
+        p1.add(f0, c);
 
         c.gridx = 0;
         c.gridy = 3;
-        p1.add(l2, c);
+        p1.add(l1, c);
 
         c.gridx = 1;
         c.gridy = 3;
+        p1.add(f1, c);
+
+        c.gridx = 0;
+        c.gridy = 4;
+        p1.add(l2, c);
+
+        c.gridx = 1;
+        c.gridy = 4;
         p1.add(f2, c);
 
 
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 5;
         p1.add(l4, c);
 
         c.gridx = 1;
-        c.gridy = 4;
+        c.gridy = 5;
         p1.add(f4, c);
 
         c.gridx = 0;
-        c.gridy = 5;
+        c.gridy = 6;
         p1.add(l3, c);
 
 
         c.gridx = 1;
-        c.gridy = 5;
+        c.gridy = 6;
         p1.add(f3, c);
 
         c.gridx = 0;
-        c.gridy = 6;
+        c.gridy = 7;
         p1.add(b1, c);
 
         c.gridx = 1;
-        c.gridy = 6;
+        c.gridy = 7;
         p1.add(b2, c);
 
+        String s = String.valueOf(xml.length-1);
+        f0.setText("Nr. "+s);
         f1.setPreferredSize(new Dimension(130, 20));
         f2.setPreferredSize(new Dimension(130, 20));
         f3.setPreferredSize(new Dimension(130, 20));
@@ -395,11 +407,13 @@ public class Gui {
         JLabel l0 = new JLabel("ID");
         JLabel l1 = new JLabel("Name");
         JLabel l2 = new JLabel("Amount");
-        JLabel l3 = new JLabel("Bestbefore");
+        JLabel l3 = new JLabel("Category");
+        JLabel l4 = new JLabel("Bestbefore");
         JComboBox f1 = new JComboBox(xml.id);
         JTextField f2 = new JTextField();
         JTextField f3 = new JTextField();
-        JTextField f4 = new JTextField();
+        JLabel f4 = new JLabel("");
+        JTextField f5 = new JTextField();
 
         JButton b1 = new JButton("Change");
         JButton b2 = new JButton("Cancel");
@@ -455,10 +469,19 @@ public class Gui {
 
         c.gridx = 0;
         c.gridy = 6;
-        p1.add(b1, c);
+        p1.add(l4, c);
+
 
         c.gridx = 1;
         c.gridy = 6;
+        p1.add(f5, c);
+
+        c.gridx = 0;
+        c.gridy = 7;
+        p1.add(b1, c);
+
+        c.gridx = 1;
+        c.gridy = 7;
         p1.add(b2, c);
 
         c.gridx = 2;
@@ -473,7 +496,10 @@ public class Gui {
         f3.setText(xml.amount[2]);
         f4.setPreferredSize(new Dimension(130, 20));
         f4.setBackground(Color.white);
-        f4.setText(xml.bestbefore[2]);
+        f4.setText(xml.category[2]);
+        f5.setPreferredSize(new Dimension(130, 20));
+        f5.setBackground(Color.white);
+        f5.setText(xml.bestbefore[2]);
         b1.setBackground(Color.green);
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
@@ -523,7 +549,8 @@ public class Gui {
                 System.out.println(guiID);
                 f2.setText(xml.name[guiID]);
                 f3.setText(xml.amount[guiID]);
-                f4.setText(xml.bestbefore[guiID]);
+                f4.setText(xml.category[guiID]);
+                f5.setText(xml.bestbefore[guiID]);
                 hookPressed = true;
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
