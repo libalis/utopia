@@ -21,7 +21,10 @@ SOFTWARE.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import javax.swing.table.*;
+import javax.swing.text.*;
+import javax.swing.border.*;
 
 
 public class Gui {
@@ -29,20 +32,215 @@ public class Gui {
     SpringLayout Layout = new SpringLayout();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
-    JButton Create_New = new JButton("Neues Product");
-    //JButton new_category = new JButton("Neue Kategorie");
-    JButton renew = new JButton("Aktualisieren");
+    JTextField searchbar = new JTextField();
+    JButton search = new JButton("Search");
+    JLabel space = new JLabel("   ");
+
+    boolean hookPressed = false;
+    JFrame frame = new JFrame();
 
     String[] choices = new String[10];
+    String searched;
 
     ImageIcon image = new ImageIcon("image.png");
     JLabel bild = new JLabel (image);
 
     Xml xml = new Xml();
 
-    public void add_product() {
+
+    public void TableExample() {
+        try {
+            String[][] data = new String[xml.length][5];
+            for (int i = 0; i < (xml.length); i++) {
+                data[i][0] = xml.id[i];
+                data[i][1] = xml.name[i];
+                data[i][2] = xml.amount[i];
+                data[i][3] = xml.category[i];
+                data[i][4] = xml.bestbefore[i];
+            }
+
+            String[] column = {"ID", "NAME", "AMOUNT", "Category", "Bestbefore"};
+
+            DefaultTableModel tableModel = new DefaultTableModel(data, column) {
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
+            JTable table = new JTable(tableModel);
+            table.setBounds(40, 40, 400, 600);
+            table.setPreferredSize(new Dimension(800,10000));
+            Layout.putConstraint(SpringLayout.EAST, table, -150, SpringLayout.EAST, ContentPane);
+            Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
+            ContentPane.add(table);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void Gui() {
+        //Auswahl muss per Hand festgelegt werden
+        choices[0] = "Kategorie 1";
+        choices[1] = "Kategorie 2";
+        choices[2] = "Kategorie 3";
+        choices[3] = "Kategorie 4";
+        choices[4] = "Kategorie 5";
+        choices[5] = "Kategorie 6";
+        choices[6] = "Kategorie 7";
+        choices[7] = "Kategorie 8";
+        choices[8] = "Kategorie 9";
+        choices[9] = "Kategorie 10";
+
+        ImageIcon pls = new ImageIcon("plus.png");
+        JButton plus = new JButton(pls);
+        plus.setBackground(Color.green);
+        ContentPane.add(plus);
+        Layout.putConstraint(SpringLayout.EAST, plus, -80, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, plus, 100, SpringLayout.NORTH, ContentPane);
+        plus.setPreferredSize(new Dimension(20,20));
+        plus.setToolTipText("Click this button to add a new product");
+
+        plus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addProduct();
+            }
+        });
+
+        ImageIcon rew = new ImageIcon("renew.png");
+        JButton renew = new JButton(rew);
+        renew.setBackground(Color.green);
+        ContentPane.add(renew);
+        Layout.putConstraint(SpringLayout.EAST, renew, -55, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, renew, 100, SpringLayout.NORTH, ContentPane);
+        renew.setPreferredSize(new Dimension(20,20));
+        renew.setToolTipText("Click this button renew the table and data");
+
+        renew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                restartProgram();
+            }
+        });
+
+        ImageIcon repair= new ImageIcon("change.png");
+        JButton change = new JButton(repair);
+        change.setBackground(Color.orange);
+        ContentPane.add(change);
+        Layout.putConstraint(SpringLayout.EAST, change, -30, SpringLayout.EAST, ContentPane); //-30 zu -55 zu -80 geändert
+        Layout.putConstraint(SpringLayout.NORTH, change, 100, SpringLayout.NORTH, ContentPane);
+        change.setPreferredSize(new Dimension(20,20));
+        change.setToolTipText("Click this button to change the data of a product");
+
+        change.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                changeProduct();
+            }
+        });
+
+        ImageIcon trash = new ImageIcon("trash.png");
+        JButton delete = new JButton(trash);
+        delete.setBackground(Color.red);
+        ContentPane.add(delete);
+        Layout.putConstraint(SpringLayout.EAST, delete, -5, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, delete, 100, SpringLayout.NORTH, ContentPane);
+        delete.setPreferredSize(new Dimension(20,20));
+        delete.setToolTipText("Click this button to delete a product");
+
+        delete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String deleteRowNr;
+                deleteRowNr = JOptionPane.showInputDialog("Select - Type in Nr to delete:");
+                int deleteRowNrInt = Integer.parseInt(deleteRowNr)+1;
+
+                //xml.removeProduct(deleteRowNr);
+                JOptionPane.showMessageDialog(frame , "Error - Funktioniert noch nicht!");
+
+                xml.testPrintOut(deleteRowNrInt);
+                restartProgram();
+            }
+        });
+
+        //End of Testing area - Normal Code
+
+        ContentPane.setLayout(Layout);
+        ContentPane.setBackground(Color.WHITE);
+        xml.overWrite();
+
+        searchbar.setText(" ");
+        search.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searched = searchbar.getText();
+                if (searched==""||searched==null||searched==" ") {
+                    JOptionPane.showMessageDialog(frame , "Error - Du hast nichts eingegeben!"); //Doesn't work
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Info - Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched);
+                        /*for (int i = 0; i < (xml.length); i++) {
+                             if (searched==xml.id[i]) {}; break;
+                             if (searched==xml.name[i]) {}; break;
+                             if (searched==xml.amount[i]) {}; break;
+                             if (searched==xml.category[i]) {}; break;
+                             if (searched==xml.bestbefore[i]) {}; break;
+                        }*/
+
+                }
+                searchbar.setText(" ");
+            }
+        });
+
+        TableExample();
+
+        search.setBackground(Color.white);
+        search.setToolTipText("Search for Product Name");
+
+        Headerlabel.setBackground(Color.red);
+        Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
+
+        ContentPane.add(searchbar);
+        ContentPane.add(search);
+        ContentPane.add(space);
+        ContentPane.add(bild);
+        ContentPane.add(Headerlabel);
+
+        f.setSize(1150, 720);
+
+        Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, searchbar, 30, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, searchbar, 100, SpringLayout.NORTH, ContentPane);
+        searchbar.setPreferredSize(new Dimension(130, 20));
+        Layout.putConstraint(SpringLayout.WEST, search, 84, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, search, 120, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.WEST, space, 50, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, space, 130, SpringLayout.NORTH, ContentPane);
+        Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
+
+        f.add(ContentPane);
+        f.setVisible(true);
+        f.setContentPane(ContentPane);
+
+        f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                xml.overWrite();
+                f.dispose();
+                System.exit(0);
+            }
+        });
+
+        f.setLayout(null);
+        f.setVisible(true);
+    }
+
+    public void addProduct() {
         JFrame j = new JFrame("Produkt hinzufügen");
         JPanel p1 = new JPanel();
+        JLabel header = new JLabel("Add Product");
+        JLabel sth = new JLabel("                     ");
         JLabel l1 = new JLabel("Name");
         JLabel l2 = new JLabel("Amount");
         JLabel l4 = new JLabel("Category");
@@ -52,53 +250,62 @@ public class Gui {
         JTextField f3 = new JTextField();
 
         JComboBox f4 = new JComboBox(choices);
-        JButton b1 = new JButton("Aktualisieren");
+        JButton b1 = new JButton("Add");
         JButton b2 = new JButton("Abbrechen");
 
         p1.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.VERTICAL;
-        c.gridx = 0;
+
+        c.gridx = 1;
         c.gridy = 0;
+        p1.add(header, c);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        p1.add(sth, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
         p1.add(l1, c);
 
         c.gridx = 1;
-        c.gridy = 0;
+        c.gridy = 2;
         p1.add(f1, c);
 
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 3;
         p1.add(l2, c);
 
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 3;
         p1.add(f2, c);
 
 
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 4;
         p1.add(l4, c);
 
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 4;
         p1.add(f4, c);
 
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 5;
         p1.add(l3, c);
 
 
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 5;
         p1.add(f3, c);
 
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 6;
         p1.add(b1, c);
 
         c.gridx = 1;
-        c.gridy = 4;
+        c.gridy = 6;
         p1.add(b2, c);
 
         f1.setPreferredSize(new Dimension(130, 20));
@@ -117,7 +324,6 @@ public class Gui {
         j.setVisible(true);
 
         b1.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 Xml xml=new Xml();
 
@@ -160,209 +366,149 @@ public class Gui {
         });*/
     }
 
-    public void TableExample() {
-        try {
-            String[][] data = new String[xml.length][5];
-            for (int i = 0; i < (xml.length); i++) {
-                data[i][0] = xml.id[i];
-                data[i][1] = xml.name[i];
-                data[i][2] = xml.amount[i];
-                data[i][3] = xml.category[i];
-                data[i][4] = xml.bestbefore[i];
-            }
+    public void changeProduct() {
+        JFrame j = new JFrame("Produkt ändern");
+        JPanel p1 = new JPanel();
+        JLabel header = new JLabel("Change Product");
+        JLabel sth = new JLabel("                     ");
+        JLabel l0 = new JLabel("ID");
+        JLabel l1 = new JLabel("Name");
+        JLabel l2 = new JLabel("Amount");
+        JLabel l3 = new JLabel("Bestbefore");
+        JComboBox f1 = new JComboBox(xml.id);
+        JTextField f2 = new JTextField();
+        JTextField f3 = new JTextField();
+        JTextField f4 = new JTextField();
 
-            String[] column = {"ID", "NAME", "AMOUNT", "Category", "Bestbefore"};
+        JButton b1 = new JButton("Change");
+        JButton b2 = new JButton("Cancel");
+        ImageIcon hook = new ImageIcon("hook.png");
+        JButton b3 = new JButton(hook);
 
-            DefaultTableModel tableModel = new DefaultTableModel(data, column) {
+        p1.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    //all cells false
-                    return false;
+        c.fill = GridBagConstraints.VERTICAL;
+
+        c.gridx = 1;
+        c.gridy = 0;
+        p1.add(header, c);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        p1.add(sth, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        p1.add(l0, c);
+
+        c.gridx = 1;
+        c.gridy = 2;
+        p1.add(f1, c);
+
+        c.gridx = 0;
+        c.gridy = 3;
+        p1.add(l1, c);
+
+        c.gridx = 1;
+        c.gridy = 3;
+        p1.add(f2, c);
+
+
+        c.gridx = 0;
+        c.gridy = 4;
+        p1.add(l2, c);
+
+        c.gridx = 1;
+        c.gridy = 4;
+        p1.add(f3, c);
+
+        c.gridx = 0;
+        c.gridy = 5;
+        p1.add(l3, c);
+
+
+        c.gridx = 1;
+        c.gridy = 5;
+        p1.add(f4, c);
+
+        c.gridx = 0;
+        c.gridy = 6;
+        p1.add(b1, c);
+
+        c.gridx = 1;
+        c.gridy = 6;
+        p1.add(b2, c);
+
+        c.gridx = 2;
+        c.gridy = 2;
+        p1.add(b3, c);
+
+        f1.setPreferredSize(new Dimension(130, 20));
+        f1.setSelectedItem(xml.id[2]);
+        f2.setPreferredSize(new Dimension(130, 20));
+        f2.setText(xml.name[2]);
+        f3.setPreferredSize(new Dimension(130, 20));
+        f3.setText(xml.amount[2]);
+        f4.setPreferredSize(new Dimension(130, 20));
+        f4.setBackground(Color.white);
+        f4.setText(xml.bestbefore[2]);
+        b1.setBackground(Color.green);
+        b1.setPreferredSize(new Dimension(130, 25));
+        b2.setBackground(Color.red);
+        b2.setPreferredSize(new Dimension(130, 25));
+        b3.setBackground(Color.white);
+        b3.setPreferredSize(new Dimension(20, 20));
+
+        j.add(p1);
+        p1.setVisible(true);
+        j.setSize(500, 500);
+        j.setVisible(true);
+
+        b1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (hookPressed==true) {
+                    Xml xml = new Xml();
+
+                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f4.getText());
+                    xml.overWrite();
+
+                    p1.setVisible(false);
+                    j.setSize(0, 0);
+                    j.setVisible(false);
+
+                    restartProgram();
+                } else {
+                    JOptionPane.showMessageDialog(frame , "You have to press the hook button first");
                 }
-            };
-            JTable table = new JTable(tableModel);
-            table.setBounds(40, 40, 400, 600);
-            table.setPreferredSize(new Dimension(800,10000));
-            Layout.putConstraint(SpringLayout.EAST, table, -150, SpringLayout.EAST, ContentPane);
-            Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
-            ContentPane.add(table);
+            }
 
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+        });
 
-    public void Gui() {
-        //Auswahl muss per Hand festgelegt werden
-        choices[0] = "Kategorie 1";
-        choices[1] = "Kategorie 2";
-        choices[2] = "Kategorie 3";
-        choices[3] = "Kategorie 4";
-        choices[4] = "Kategorie 5";
-        choices[5] = "Kategorie 6";
-        choices[6] = "Kategorie 7";
-        choices[7] = "Kategorie 8";
-        choices[8] = "Kategorie 9";
-        choices[9] = "Kategorie 10";
 
-        //Testing area for Buttons: add, sub, change and delete - nr is row of data
-        /*ImageIcon pls = new ImageIcon("plus.png");
-        JButton plus = new JButton(pls);
-        plus.setBackground(Color.green);
-        ContentPane.add(plus);
-        Layout.putConstraint(SpringLayout.EAST, plus, -80, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, plus, 100, SpringLayout.NORTH, ContentPane);
-        plus.setPreferredSize(new Dimension(20,20));
-        plus.setToolTipText("Click this button to change the amount of a product");
-
-        plus.addActionListener(new ActionListener() {
+        b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String changeRowNR;
-                changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
-                String changeAmountPlus;
-                changeAmountPlus = JOptionPane.showInputDialog("How much do you want to add:");
-                //Änderungscode hier einfügen:
-                int changeRowNrInt = Integer.parseInt(changeRowNR);
-                //xml.changeAmount(changeRowNrInt, changeAmountPlus);
-                xml.changeAmount2(changeRowNrInt, changeAmountPlus);
-                //xml.changeOut(changeRowNR, "amount", "100");
-                //xml.changeAmount();
+                p1.setVisible(false);
+                j.setSize(0, 0);
+                j.setVisible(false);
                 restartProgram();
             }
         });
 
-        ImageIcon mis = new ImageIcon("minus.png");
-        JButton minus = new JButton(mis);
-        minus.setBackground(Color.red);
-        ContentPane.add(minus);
-        Layout.putConstraint(SpringLayout.EAST, minus, -55, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, minus, 100, SpringLayout.NORTH, ContentPane);
-        minus.setPreferredSize(new Dimension(20,20));
-
-        minus.addActionListener(new ActionListener() {
+        b3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String changeRowNR;
-                changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
-                String changeAmountMinus;
-                changeAmountMinus = JOptionPane.showInputDialog("How much do you want to sub:");
-                //Änderungscode hier einfügen:
-                restartProgram();
+            try {
+                int guiID = Integer.parseInt(""+f1.getSelectedItem())+1;
+                System.out.println(guiID);
+                f2.setText(xml.name[guiID]);
+                f3.setText(xml.amount[guiID]);
+                f4.setText(xml.bestbefore[guiID]);
+                hookPressed = true;
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(frame , "Error - Du musst eine gültige Id auswählen!");
             }
-        });*/
-
-        ImageIcon repair= new ImageIcon("change.png");
-        JButton change = new JButton(repair);
-        change.setBackground(Color.orange);
-        ContentPane.add(change);
-        Layout.putConstraint(SpringLayout.EAST, change, -105, SpringLayout.EAST, ContentPane); //-30 zu -55 zu -80 geändert
-        Layout.putConstraint(SpringLayout.NORTH, change, 100, SpringLayout.NORTH, ContentPane);
-        change.setPreferredSize(new Dimension(20,20));
-        change.setToolTipText("Click this button to change the data of a product");
-
-        change.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String changeRowNR;
-                changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
-                String changeBestbeforeTo;
-                changeBestbeforeTo = JOptionPane.showInputDialog("To what Date you want to change:");
-
-                //Änderungscode hier einfügen:
-                //changeProduct();
-
-                restartProgram();
             }
         });
-
-        ImageIcon trash = new ImageIcon("trash.png");
-        JButton delete = new JButton(trash);
-        delete.setBackground(Color.red);
-        ContentPane.add(delete);
-        Layout.putConstraint(SpringLayout.EAST, delete, -80, SpringLayout.EAST, ContentPane);   //-5 zu -30 geändert
-        Layout.putConstraint(SpringLayout.NORTH, delete, 100, SpringLayout.NORTH, ContentPane);
-        delete.setPreferredSize(new Dimension(20,20));
-        delete.setToolTipText("Click this button to delete a product");
-
-        delete.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //Verbuggt - Löscht die komplette XML
-                String deleteRowNr;
-                deleteRowNr = JOptionPane.showInputDialog("Type in Nr to delete:");
-                int deleteRowNrInt = Integer.parseInt(deleteRowNr);
-                //xml.removeProduct(deleteRowNr);
-                //xml.removeProduct2(deleteRowNr);
-                xml.testPrintOut(deleteRowNrInt);
-                restartProgram();
-            }
-        });
-
-        //End of Testing area - Normal Code
-
-        ContentPane.setLayout(Layout);
-        ContentPane.setBackground(Color.WHITE);
-        xml.overWrite();
-
-        Create_New.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                add_product();
-            }
-        });
-
-        renew.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                restartProgram();
-            }
-        });
-
-        /*new_category.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //ToDo
-            }
-        });*/
-
-        TableExample();
-
-        Create_New.setBackground(Color.orange);
-        renew.setBackground(Color.green);
-        //new_category.setBackground(Color.orange);
-
-        Headerlabel.setBackground(Color.red);
-        Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
-
-        ContentPane.add(Create_New);
-        //ContentPane.add(new_category);
-        ContentPane.add(renew);
-        ContentPane.add(bild);
-        ContentPane.add(Headerlabel);
-
-        f.setSize(1150, 720);
-
-        Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, Create_New, 50, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, Create_New, 100, SpringLayout.NORTH, ContentPane);
-        //Layout.putConstraint(SpringLayout.WEST, new_category, 180, SpringLayout.WEST, ContentPane);
-        //Layout.putConstraint(SpringLayout.NORTH, new_category, 130, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, renew, 50, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, renew, 130, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
-
-        f.add(ContentPane);
-        f.setVisible(true);
-        f.setContentPane(ContentPane);
-
-        f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-        f.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                xml.overWrite();
-                f.dispose();
-                System.exit(0);
-            }
-        });
-
-        f.setLayout(null);
-        f.setVisible(true);
     }
 
     public void restartProgram() {
