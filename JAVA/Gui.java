@@ -20,10 +20,7 @@ SOFTWARE.
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -194,7 +191,6 @@ public class Gui {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
     public void Gui() {
@@ -211,13 +207,14 @@ public class Gui {
         choices[9] = "Kategorie 10";
 
         //Testing area for Buttons: add, sub, change and delete - nr is row of data
-        ImageIcon pls = new ImageIcon("plus.png");
+        /*ImageIcon pls = new ImageIcon("plus.png");
         JButton plus = new JButton(pls);
         plus.setBackground(Color.green);
         ContentPane.add(plus);
         Layout.putConstraint(SpringLayout.EAST, plus, -80, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, plus, 100, SpringLayout.NORTH, ContentPane);
         plus.setPreferredSize(new Dimension(20,20));
+        plus.setToolTipText("Click this button to change the amount of a product");
 
         plus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -225,8 +222,13 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeAmountPlus;
                 changeAmountPlus = JOptionPane.showInputDialog("How much do you want to add:");
-                int changeRowInt = Integer.parseInt(changeRowNR);
-                int changeAmountPlusInt = Integer.parseInt(changeAmountPlus);
+                //Änderungscode hier einfügen:
+                int changeRowNrInt = Integer.parseInt(changeRowNR);
+                //xml.changeAmount(changeRowNrInt, changeAmountPlus);
+                xml.changeAmount2(changeRowNrInt, changeAmountPlus);
+                //xml.changeOut(changeRowNR, "amount", "100");
+                //xml.changeAmount();
+                restartProgram();
             }
         });
 
@@ -244,18 +246,19 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeAmountMinus;
                 changeAmountMinus = JOptionPane.showInputDialog("How much do you want to sub:");
-                int changeRowInt = Integer.parseInt(changeRowNR);
-                int changeAmountMinusInt = Integer.parseInt(changeAmountMinus);
+                //Änderungscode hier einfügen:
+                restartProgram();
             }
-        });
+        });*/
 
-        ImageIcon repair1= new ImageIcon("change.png");
-        JButton change = new JButton(repair1);
+        ImageIcon repair= new ImageIcon("change.png");
+        JButton change = new JButton(repair);
         change.setBackground(Color.orange);
         ContentPane.add(change);
-        Layout.putConstraint(SpringLayout.EAST, change, -30, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.EAST, change, -105, SpringLayout.EAST, ContentPane); //-30 zu -55 zu -80 geändert
         Layout.putConstraint(SpringLayout.NORTH, change, 100, SpringLayout.NORTH, ContentPane);
         change.setPreferredSize(new Dimension(20,20));
+        change.setToolTipText("Click this button to change the data of a product");
 
         change.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -263,8 +266,11 @@ public class Gui {
                 changeRowNR = JOptionPane.showInputDialog("Type in the Nr of the row to change:");
                 String changeBestbeforeTo;
                 changeBestbeforeTo = JOptionPane.showInputDialog("To what Date you want to change:");
-                int changeRowInt = Integer.parseInt(changeRowNR);
-                int changeBestbeforeInt = Integer.parseInt(changeBestbeforeTo);
+
+                //Änderungscode hier einfügen:
+                //changeProduct();
+
+                restartProgram();
             }
         });
 
@@ -272,20 +278,25 @@ public class Gui {
         JButton delete = new JButton(trash);
         delete.setBackground(Color.red);
         ContentPane.add(delete);
-        Layout.putConstraint(SpringLayout.EAST, delete, -5, SpringLayout.EAST, ContentPane);
+        Layout.putConstraint(SpringLayout.EAST, delete, -80, SpringLayout.EAST, ContentPane);   //-5 zu -30 geändert
         Layout.putConstraint(SpringLayout.NORTH, delete, 100, SpringLayout.NORTH, ContentPane);
         delete.setPreferredSize(new Dimension(20,20));
+        delete.setToolTipText("Click this button to delete a product");
 
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String deletRowNr;
-                deletRowNr = JOptionPane.showInputDialog("Type in Row to delete:");
-                int changeRowInt = Integer.parseInt(deletRowNr);
+                //Verbuggt - Löscht die komplette XML
+                String deleteRowNr;
+                deleteRowNr = JOptionPane.showInputDialog("Type in Nr to delete:");
+                int deleteRowNrInt = Integer.parseInt(deleteRowNr);
+                //xml.removeProduct(deleteRowNr);
+                //xml.removeProduct2(deleteRowNr);
+                xml.testPrintOut(deleteRowNrInt);
+                restartProgram();
             }
         });
 
-
-        //Normal Code
+        //End of Testing area - Normal Code
 
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
@@ -355,6 +366,8 @@ public class Gui {
     }
 
     public void restartProgram() {
+        xml.overWrite();
+
         f.setSize(0,0);
         f.setVisible(false);
 
