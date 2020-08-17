@@ -16,30 +16,37 @@
 	</Product>
 	<Product>
 		<ID>1</ID>
-		<Name>Verbandspäckchen 30m</Name>
-		<Amount>300</Amount>
-		<Category>Kategorie 1</Category>
-		<BestBefore>28.01.2020</BestBefore>
+		<Name>Verbandsmull 30cm</Name>
+		<Amount>69</Amount>
+		<Category>Verbandsmaterial</Category>
+		<BestBefore>20.01.2002</BestBefore>
 	</Product>
 	<Product>
 		<ID>2</ID>
-		<Name>Mullbinde 300km</Name>
-		<Amount>2,5</Amount>
-		<Category>Kategorie 6</Category>
-		<BestBefore>24.6.2801</BestBefore>
+		<Name>Verbandspäckchen rot</Name>
+		<Amount>2</Amount>
+		<Category>Verbandsmaterial</Category>
+		<BestBefore>20.01.2020</BestBefore>
 	</Product>
 	<Product>
 		<ID>3</ID>
-		<Name>Larynxtubus, Größe Marcel</Name>
+		<Name>Larynxtubus, Größe S</Name>
 		<Amount>0</Amount>
-		<Category>Kategorie 4</Category>
+		<Category>Sauerstoff</Category>
 		<BestBefore>30.09.2000</BestBefore>
 	</Product>
 	<Product>
 		<ID>4</ID>
 		<Name>Whiteboard</Name>
 		<Amount>2</Amount>
-		<Category>Kategorie 3</Category>
+		<Category>Sonstiges</Category>
 		<BestBefore>nie</BestBefore>
+	</Product>
+	<Product>
+		<ID>5</ID>
+		<Name>Einmalhandschuhe M</Name>
+		<Amount>99</Amount>
+		<Category>Hygiene</Category>
+		<BestBefore>01.01.2000</BestBefore>
 	</Product>
 </Database>
