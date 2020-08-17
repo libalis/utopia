@@ -40,7 +40,9 @@ public class Gui {
     JFrame frame = new JFrame();
 
     String[] choices = new String[10];
+
     String searched;
+    int rowToMark;
 
     ImageIcon image = new ImageIcon("image.png");
     JLabel bild = new JLabel (image);
@@ -174,20 +176,18 @@ public class Gui {
         search.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 searched = searchbar.getText();
-                if (searched==""||searched==null||searched==" ") {
-                    JOptionPane.showMessageDialog(frame , "Error - Du hast nichts eingegeben!"); //Doesn't work
+                if (searched == "" || searched == null || searched == " ") {
+                    JOptionPane.showMessageDialog(frame, "Error - Du hast nichts eingegeben!"); //Doesn't work
                 } else {
                     JOptionPane.showMessageDialog(frame, "Info - Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched);
-                        /*for (int i = 0; i < (xml.length); i++) {
-                             if (searched==xml.id[i]) {}; break;
-                             if (searched==xml.name[i]) {}; break;
-                             if (searched==xml.amount[i]) {}; break;
-                             if (searched==xml.category[i]) {}; break;
-                             if (searched==xml.bestbefore[i]) {}; break;
-                        }*/
-
+                    for (int i = 0; i < (xml.length); i++) {
+                        if (xml.id[i]==searched||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched) {
+                            rowToMark = i;
+                        }
+                        //System.out.println(rowToMark);
+                    }
+                    searchbar.setText(" ");
                 }
-                searchbar.setText(" ");
             }
         });
 
