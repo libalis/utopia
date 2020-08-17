@@ -102,17 +102,6 @@ public class Xml { //temporary code - switch from arrays to lists planned
         }
     }
 
-    public void printOut() {
-        for(int tmp = 0; tmp<length; tmp++) {
-            System.out.println("ID: " + id[tmp]);
-            System.out.println("Name: " + name[tmp]);
-            System.out.println("Amount: " + amount[tmp]);
-            System.out.println("Category: " + category[tmp]);
-            System.out.println("BestBefore: " + bestbefore[tmp]);
-            System.out.println();
-        }
-    }
-
     public void testPrintOut(int tmp) {
             System.out.println("ID: " + id[tmp]);
             System.out.println("Name: " + name[tmp]);
@@ -153,49 +142,13 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
-    public void changeOut(String i, String c, String r) {
-        switch(c) {
-            case "name":
-                name[Integer.parseInt(i)] = r;
-                break;
-            case "amount":
-                amount[Integer.parseInt(i)] = r;
-                break;
-            case "category":
-                category[Integer.parseInt(i)] = r;
-                break;
-            case "bestbefore":
-                bestbefore[Integer.parseInt(i)] = r;
-                break;
-        }
-        overWrite();
-        reset();
+    public void changeProduct (String idNew, String nameNew, String amountNew, String bestbeforeNew) {
+        testPrintOut(Integer.parseInt(idNew)+1);
+        name[Integer.parseInt(idNew)+1] = nameNew;
+        amount[Integer.parseInt(idNew)+1] = amountNew;
+        bestbefore[Integer.parseInt(idNew)+1] = bestbeforeNew;
+        testPrintOut(Integer.parseInt(idNew));
     }
-
-    public void changeAmount(int tmp, String i) {
-        amount[tmp] = i;
-        System.out.println("tmp: " + tmp);
-        System.out.println("i: " + i);
-        System.out.println("amount[tmp]: " + amount[tmp]);
-        testPrintOut(tmp);
-
-        //XML
-        printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-        printWriter.println("<Database>");
-        for(int tmp2 = 0; tmp2<(Integer.parseInt(i)-1); tmp2++) {
-            forProduct(tmp2);
-        }
-        printWriter.println("\t<Product>");
-        printWriter.println("\t\t<ID>" + tmp + "</ID>");
-        printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
-        printWriter.println("\t\t<Amount>" + amount[tmp] + "</Amount>");
-        printWriter.println("\t\t<Category>" + category[tmp] + "</Category>");
-        printWriter.println("\t\t<BestBefore>" + bestbefore[tmp] + "</BestBefore>");
-        printWriter.println("\t</Product>");
-        printWriter.println("</Database>");
-        printWriter.close();
-    }
-
     public void removeProduct(String i) {
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
