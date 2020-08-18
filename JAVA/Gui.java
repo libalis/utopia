@@ -26,8 +26,7 @@ import javax.swing.table.*;
 import javax.swing.text.*;
 import javax.swing.border.*;
 
-
-public class Gui {
+public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
     JFrame f = new JFrame();
     SpringLayout Layout = new SpringLayout();
@@ -44,12 +43,14 @@ public class Gui {
     String[] choices = new String[10];
 
     String searched;
-    int rowToMark;
+    int[] markX = new int[2];
+    int[] markY = new int[2];
 
     ImageIcon image = new ImageIcon("image.png");
     JLabel bild = new JLabel (image);
 
     Xml xml = new Xml();
+
 
     //Tabelle wird erstellt
     public void TableExample() {
@@ -75,20 +76,46 @@ public class Gui {
                 }
             };
 
+            //Test1
+            class MyRenderer extends DefaultTableCellRenderer
+            {
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column)
+                {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    if (! table.isRowSelected(row))
+                    {
+                        if (markX[1]!=0&&markY[1]!=0&&markX[1]!=1&&markY[1]!=1) {
+                            if (row == markY[1] && column == markX[1])
+                                c.setBackground(Color.yellow);
+                            else
+                                c.setBackground(Color.white);
+                        }
+                    }
+                    return c;
+                }
+
+            }
+
             JTable table = new JTable(tableModel);
+            MyRenderer myRenderer = new MyRenderer();
+            table.setDefaultRenderer(Object.class, myRenderer);
+
+            //Test1 - Ende
+
+
             table.setBounds(40, 40, 400, 600);
             table.setPreferredSize(new Dimension(800,10000));
             Layout.putConstraint(SpringLayout.EAST, table, -150, SpringLayout.EAST, ContentPane);
             Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
             ContentPane.add(table);
-
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     //GUI wird erstellt
-    public void Gui() {
+    public void GuiInit() {
         //Auswahl der Kategorien - wird per Hand bearbeitet
         choices[0] = "Verbandsmaterial";
         choices[1] = "Sauerstoff";
@@ -128,6 +155,7 @@ public class Gui {
 
         renew.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //resetColors();
                 restartProgram();
             }
         });
@@ -180,14 +208,27 @@ public class Gui {
                 if (searched == "" || searched == null || searched == " ") {
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
-                    for (int i = 0; i < (xml.length); i++) {
-                        if (xml.id[i]==searched||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched) {
-                            rowToMark = i;
+                    System.out.println("Checkpoint 1: "+markX + " "+ markY);
+                    //JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = 2; i < (xml.length); i++) {
+                        int tmp1 = Integer.parseInt(xml.id[i].trim());
+                        int tmp2 = Integer.parseInt(searched.trim());
+                        if (tmp1==tmp2) {
+                            System.out.println("Ja");
+                            markX[1]=3;
+                            markY[1]=3;
+                        } else {
+                            System.out.println("Nö");
                         }
+                        System.out.println(tmp1);
+                        System.out.println(tmp2);
+                        System.out.println("Checkpoint 2: "+markX + " "+ markY);
+                        //||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched
                         //System.out.println(rowToMark);
                     }
+                    restartProgram();
                     searchbar.setText(" ");
+                    System.out.println("Checkpoint 3: "+markX + " "+ markY);
                 }
             }
         });
@@ -605,12 +646,25 @@ public class Gui {
         f.setVisible(false);
 
         Gui g1 = new Gui();
-        g1.Gui();
+        g1.GuiInit();
+    }
+
+    public void resetColors() {
+        xml.overWrite();
+
+        f.setSize(0,0);
+        f.setVisible(false);
+
+        markY[1] = 1;
+        markX[1] = 1;
+
+        Gui g1 = new Gui();
+        g1.GuiInit();
     }
 
     //Extra Stuff - in Bearbeitung
     public void missingProducts () {
-        JFrame f1 = new JFrame();
+        /*JFrame f1 = new JFrame();
         SpringLayout Layout1 = new SpringLayout();
         JPanel ContentPane1 = new JPanel();
         JLabel Headerlabel1 = new JLabel("Benötigtes Material");
@@ -681,6 +735,7 @@ public class Gui {
         f1.setContentPane(ContentPane1);
 
         f1.setLayout(null);
-        f1.setVisible(true);
+        f1.setVisible(true);*/
+        System.out.println("Checkpoint 4: "+markX[1] + " "+ markY[1]);
     }
 }
