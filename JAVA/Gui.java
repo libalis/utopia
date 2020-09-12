@@ -186,15 +186,14 @@ public class Gui{
 
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Xml xml=new Xml();
 
                 String deleteRowNr;
                 deleteRowNr = JOptionPane.showInputDialog("Select - Type in Nr to delete:");
-                int deleteRowNrInt = Integer.parseInt(deleteRowNr)+1;
 
                 xml.removeProduct(deleteRowNr);
-                JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
 
-                xml.testPrintOut(deleteRowNrInt);
+                xml.overWrite();
                 restartProgram();
             }
         });
@@ -597,7 +596,7 @@ public class Gui{
                 if (hookPressed==true) {
                     Xml xml = new Xml();
 
-                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f21.getText(), f3.getText(), f5.getText());
+                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
                     xml.overWrite();
 
                     p1.setVisible(false);
