@@ -676,7 +676,18 @@ public class Gui{
         JLabel Headerlabel1 = new JLabel("Benötigtes Material");
         JButton print = new JButton("Print");
 
-        String[][] missing = new String[xml.length][3];
+
+        int AnzahlZuwenig=0;
+        for (int tmp = 2; tmp < xml.length; tmp++) {
+            int x = Integer.parseInt(xml.amount[tmp]);
+            int y = Integer.parseInt(xml.amountNeeded[tmp]);
+            if (x > y) {
+                AnzahlZuwenig++;
+            }
+        }
+
+        String[][] missing = new String[xml.length-AnzahlZuwenig][3];
+        int geloeschtCounter=0;
         for (int tmp = 2; tmp < xml.length; tmp++) {
             int x = Integer.parseInt(xml.amount[tmp]);
             int y = Integer.parseInt(xml.amountNeeded[tmp]);
@@ -685,43 +696,47 @@ public class Gui{
                 diff = x - y;
                 String diffConv = String.valueOf(diff);
                 System.out.println(diff);
-                missing[tmp][0] = xml.id[tmp];
-                missing[tmp][1] = xml.name[tmp];
-                missing[tmp][2] = diffConv;
+                missing[tmp-geloeschtCounter][0] = xml.id[tmp];
+                missing[tmp-geloeschtCounter][1] = xml.name[tmp];
+                missing[tmp-geloeschtCounter][2] = diffConv;
+            }
+            else
+            {
+                geloeschtCounter++;
             }
         }
-        try {
-            String[][] data = new String[xml.length][3];
-            for (int i = 2; i < (xml.length); i++) {
-                data[i][0] = missing[i][0];
-                data[i][1] = missing[i][1];
-                data[i][2] = missing[i][2];
-            }
-            data[0][0]="ID";
-            data[0][1]="Name";
-            data[0][2]="Benötigte Anzahl";
-
-            String[] column = {"ID", "Name", "Differenz"};
-
-            DefaultTableModel tableModel = new DefaultTableModel(data, column) {
-
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    //all cells false
-                    return false;
+            try {
+                String[][] data = new String[xml.length-AnzahlZuwenig][3];
+                for (int i = 2; i < (xml.length-AnzahlZuwenig); i++) {
+                    data[i][0] = missing[i][0];
+                    data[i][1] = missing[i][1];
+                    data[i][2] = missing[i][2];
                 }
-            };
+                data[0][0] = "ID";
+                data[0][1] = "Name";
+                data[0][2] = "Benötigte Anzahl";
 
-            JTable table1 = new JTable(tableModel);
-            table1.setBounds(40, 40, 400, 600);
-            table1.setPreferredSize(new Dimension(800,10000));
-            Layout1.putConstraint(SpringLayout.EAST, table1, 150, SpringLayout.EAST, ContentPane1);
-            Layout1.putConstraint(SpringLayout.NORTH, table1, 150, SpringLayout.NORTH, ContentPane1);
-            ContentPane1.add(table1);
+                String[] column = {"ID", "Name", "Differenz"};
 
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+                DefaultTableModel tableModel = new DefaultTableModel(data, column) {
+
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        //all cells false
+                        return false;
+                    }
+                };
+
+                JTable table1 = new JTable(tableModel);
+                table1.setBounds(40, 40, 400, 600);
+                table1.setPreferredSize(new Dimension(800, 10000));
+                Layout1.putConstraint(SpringLayout.EAST, table1, 150, SpringLayout.EAST, ContentPane1);
+                Layout1.putConstraint(SpringLayout.NORTH, table1, 150, SpringLayout.NORTH, ContentPane1);
+                ContentPane1.add(table1);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
         Headerlabel1.setBackground(Color.red);
         Headerlabel1.setFont(new Font("Sans", Font.BOLD, 30));
