@@ -204,6 +204,7 @@ public class Gui{
         searchbar.setText(" ");
         search.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //try {
                 searched = searchbar.getText();
                 if (searched == "" || searched == null || searched == " ") {
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
@@ -217,6 +218,7 @@ public class Gui{
                             System.out.println("Ja");
                             markX[1]=3;
                             markY[1]=3;
+
                         } else {
                             System.out.println("Nö");
                         }
@@ -595,7 +597,7 @@ public class Gui{
                 if (hookPressed==true) {
                     Xml xml = new Xml();
 
-                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f21.getText(), f3.getText(), f4.getText());
+                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f21.getText(), f3.getText(), f5.getText());
                     xml.overWrite();
 
                     p1.setVisible(false);
@@ -664,13 +666,13 @@ public class Gui{
 
     //Extra Stuff - in Bearbeitung
     public void missingProducts () {
-        /*JFrame f1 = new JFrame();
+        JFrame f1 = new JFrame();
         SpringLayout Layout1 = new SpringLayout();
         JPanel ContentPane1 = new JPanel();
         JLabel Headerlabel1 = new JLabel("Benötigtes Material");
         JButton print = new JButton("Print");
 
-        String[][] missing = new String[3][xml.length];
+        String[][] missing = new String[xml.length][3];
         for (int tmp = 2; tmp < xml.length; tmp++) {
             int x = Integer.parseInt(xml.amount[tmp]);
             int y = Integer.parseInt(xml.amountNeeded[tmp]);
@@ -679,17 +681,17 @@ public class Gui{
                 diff = x - y;
                 String diffConv = String.valueOf(diff);
                 System.out.println(diff);
-                missing[0][tmp] = xml.id[tmp];
-                missing[1][tmp] = xml.name[tmp];
-                missing[2][tmp] = diffConv;
+                missing[tmp][0] = xml.id[tmp];
+                missing[tmp][1] = xml.name[tmp];
+                missing[tmp][2] = diffConv;
             }
         }
         try {
             String[][] data = new String[xml.length][3];
             for (int i = 2; i < (xml.length); i++) {
-                data[i][0] = missing[0][i];
-                data[i][1] = missing[1][i];
-                data[i][2] = missing[2][i];
+                data[i][0] = missing[i][0];
+                data[i][1] = missing[i][1];
+                data[i][2] = missing[i][2];
             }
             data[0][0]="ID";
             data[0][1]="Name";
@@ -735,7 +737,7 @@ public class Gui{
         f1.setContentPane(ContentPane1);
 
         f1.setLayout(null);
-        f1.setVisible(true);*/
-        System.out.println("Checkpoint 4: "+markX[1] + " "+ markY[1]);
+        f1.setVisible(true);
+        //System.out.println("Checkpoint 4: "+markX[1] + " "+ markY[1]);
     }
 }
