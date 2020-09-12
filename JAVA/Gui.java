@@ -36,6 +36,7 @@ public class Gui{
     JButton search = new JButton("Search");
     JButton printTable = new JButton("Print");
     JButton printMissing = new JButton("Missing Products");
+    JScrollPane scroll=new JScrollPane();
 
     boolean hookPressed = false;
     JFrame frame = new JFrame();
@@ -106,13 +107,16 @@ public class Gui{
 
             table.setBounds(40, 40, 400, 600);
             table.setPreferredSize(new Dimension(800,10000));
-            Layout.putConstraint(SpringLayout.EAST, table, -150, SpringLayout.EAST, ContentPane);
-            Layout.putConstraint(SpringLayout.NORTH, table, 100, SpringLayout.NORTH, ContentPane);
-            ContentPane.add(table);
+            Layout.putConstraint(SpringLayout.EAST, scroll, -150, SpringLayout.EAST, ContentPane);
+            Layout.putConstraint(SpringLayout.NORTH, scroll, 100, SpringLayout.NORTH, ContentPane);
+            scroll.setPreferredSize(new Dimension(800, 600));
+            scroll.setViewportView(table);
+            ContentPane.add(scroll);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+
 
     //GUI wird erstellt
     public void GuiInit() {
@@ -263,6 +267,7 @@ public class Gui{
         printMissing.setBackground(Color.YELLOW);
 
         //Alles wird zum Layout hinzugefügt
+        scroll.setBackground(Color.WHITE);
         ContentPane.setLayout(Layout);
         ContentPane.setBackground(Color.WHITE);
         xml.overWrite();
@@ -694,6 +699,7 @@ public class Gui{
             int diff;
             if (x < y) {
                 diff = x - y;
+                diff =diff-2*diff;
                 String diffConv = String.valueOf(diff);
                 System.out.println(diff);
                 missing[tmp-geloeschtCounter][0] = xml.id[tmp];
