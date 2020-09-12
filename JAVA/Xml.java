@@ -115,6 +115,23 @@ public class Xml { //temporary code - switch from arrays to lists planned
             System.out.println();
     }
 
+    private void debug() {
+        for (int i = 0; i<length; i++) {
+            System.out.println("------------------------------------");
+            System.out.println();
+            System.out.println("i = "+i);
+            System.out.println();
+            System.out.println("ID: " + id[i]);
+            System.out.println("Name: " + name[i]);
+            System.out.println("Amount: " + amount[i]);
+            System.out.println("AmountNeeded: " + amountNeeded[i]);
+            System.out.println("Category: " + category[i]);
+            System.out.println("BestBefore: " + bestbefore[i]);
+            System.out.println();
+            System.out.println("------------------------------------");
+        }
+    }
+
     private void forProduct(int tmp) {
         printWriter.println("\t<Product>");
         printWriter.println("\t\t<ID>" + id[tmp] + "</ID>");
@@ -132,6 +149,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             printWriter.println("<Database>");
             for(int tmp = 0; tmp<length; tmp++) {
                 forProduct(tmp);
+
             }
             printWriter.println("\t<Product>");
             printWriter.println("\t\t<ID>" + String.valueOf(length-1) + "</ID>");
@@ -148,22 +166,26 @@ public class Xml { //temporary code - switch from arrays to lists planned
         reset();
     }
 
-    public void changeProduct (String idNew, String nameNew, String amountNew, String amountNeededNew, String bestbeforeNew) {
+    public void changeProduct (String idNew, String nameNew, String amountNew, String amountNeededNew, String bestbeforeNew, String categoryNew) {
         testPrintOut(Integer.parseInt(idNew)+1);
         name[Integer.parseInt(idNew)+1] = nameNew;
         amount[Integer.parseInt(idNew)+1] = amountNew;
         amountNeeded[Integer.parseInt(idNew)+1] = amountNeededNew;
         bestbefore[Integer.parseInt(idNew)+1] = bestbeforeNew;
-        testPrintOut(Integer.parseInt(idNew));
+        category[Integer.parseInt(idNew)+1] = categoryNew;
+        //testPrintOut(Integer.parseInt(idNew));
+        overWrite();
     }
+
     public void removeProduct(String i) {
+        int e = Integer.parseInt(i)+1;
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
-            for(int tmp = 0; tmp<(Integer.parseInt(i)-1); tmp++) {
+            for(int tmp = 0; tmp<e; tmp++) {
                 forProduct(tmp);
             }
-            for(int tmp = Integer.parseInt(i); tmp<length; tmp++) {
+            for(int tmp = Integer.parseInt(i)+2; tmp<length; tmp++) {
                 printWriter.println("\t<Product>");
                 printWriter.println("\t\t<ID>" + String.valueOf(Integer.parseInt(id[tmp])-1) + "</ID>");
                 printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
@@ -175,7 +197,9 @@ public class Xml { //temporary code - switch from arrays to lists planned
             }
             printWriter.println("</Database>");
             printWriter.close();
-        } catch(Exception exception) {}
+        } catch(Exception exception) {
+            System.out.println(exception);
+        }
         overWrite();
         reset();
     }
@@ -189,6 +213,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             }
             printWriter.println("</Database>");
             printWriter.close();
-        } catch(Exception exception) {}
+        } catch(Exception exception) {
+        }
     }
 }
