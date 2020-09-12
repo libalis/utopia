@@ -3,7 +3,7 @@ TODO Liste
 Bugfixes:                                                       
 - ID beginnt bei 5???                                                                                                         Fixed
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)                        Fixed
-- Löschbutton funktioniert nicht                                                                                              -
+- Löschbutton funktioniert nicht                                                                                              Fixed
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 In Bearbeitung (mehrmals angepasst)
@@ -16,9 +16,13 @@ Neues:
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
-- Löschbutton für Produkt implementieren                                                                                      Umgesetzt - ohne Funktion
-  - Button funktion einfügen                                                                                                  -
+- Löschbutton für Produkt implementieren                                                                                      Umgesetzt
+  - Button funktion einfügen                                                                                                  Umgesetzt
 - Searchbar einfügen                                                                                                          Umgesetzt - ohne Funktion
   - Button funktion einfügen                                                                                                  -
+- Print Button einfügen                                                                                                       Umgesetzt - ohne Funktion
+  - Button funktion einfügen                                                                                                  -
+- Missing Products Button einfügen                                                                                            Umgesetzt - ohne Funktion
+  - Button funktion einfügen                                                                                                  -
 
-letzter Patch 17.08.2020 ~ JF
+letzter Patch 12.09.2020 ~ JF
