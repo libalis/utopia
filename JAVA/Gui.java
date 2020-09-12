@@ -186,15 +186,20 @@ public class Gui{
 
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Xml xml=new Xml();
-
                 String deleteRowNr;
                 deleteRowNr = JOptionPane.showInputDialog("Select - Type in Nr to delete:");
 
-                xml.removeProduct(deleteRowNr);
+                if (JOptionPane.showConfirmDialog(null, "Sicher, dass du die Reihe "+deleteRowNr+" löschen möchtest?", "WARNING",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    Xml xml=new Xml();
 
-                xml.overWrite();
-                restartProgram();
+                    xml.removeProduct(deleteRowNr);
+
+                    xml.overWrite();
+                    restartProgram();
+                } else {
+                    // no option
+                }
             }
         });
 
