@@ -22,7 +22,7 @@ Neues:
   - Button funktion einfügen                                                                                                  In Bearbeitung
 - Print Button einfügen                                                                                                       Umgesetzt - ohne Funktion
   - Button funktion einfügen                                                                                                  In Bearbeitung
-- Missing Products Button einfügen                                                                                            Umgesetzt - ohne Funktion
-  - Button funktion einfügen                                                                                                  In Bearbeitung
+- Missing Products Button einfügen                                                                                            Umgesetzt
+  - Button funktion einfügen                                                                                                  Umgesetzt
 
 letzter Patch 12.09.2020 ~ JF
