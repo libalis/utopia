@@ -31,7 +31,10 @@ public class Gui{
     JFrame f = new JFrame();
     SpringLayout Layout = new SpringLayout();
     GridLayout grid=new GridLayout(1,4,0,20);
+    GridLayout links=new GridLayout(5,1,0,0);
     JPanel rechteSeite=new JPanel();
+    JPanel linkeSeite=new JPanel();
+    JPanel Zeilenplatzhalter=new JPanel();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JTextField searchbar = new JTextField();
@@ -275,25 +278,24 @@ public class Gui{
         Headerlabel.setBackground(Color.red);
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
-        ContentPane.add(searchbar);
-        ContentPane.add(search);
-        ContentPane.add(printTable);
-        ContentPane.add(printMissing);
         ContentPane.add(bild);
         ContentPane.add(Headerlabel);
 
         f.setSize(1150, 720);
 
         Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, searchbar, 30, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, searchbar, 100, SpringLayout.NORTH, ContentPane);
+        linkeSeite.add(searchbar);
         searchbar.setPreferredSize(new Dimension(130, 20));
-        Layout.putConstraint(SpringLayout.WEST, search, 84, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, search, 120, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, printTable, 30, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, printTable, 160, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.WEST, printMissing, 30, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, printMissing, 185, SpringLayout.NORTH, ContentPane);
+        linkeSeite.add(search);
+        Zeilenplatzhalter.setSize(new Dimension(130,10));
+        linkeSeite.add(Zeilenplatzhalter);
+        Zeilenplatzhalter.setBackground(Color.white);
+        linkeSeite.add(printTable);
+        linkeSeite.add(printMissing);
+        ContentPane.add(linkeSeite);
+        linkeSeite.setLayout(links);
+        Layout.putConstraint(SpringLayout.WEST, linkeSeite, 30, SpringLayout.WEST, ContentPane);
+        Layout.putConstraint(SpringLayout.NORTH, linkeSeite, 100, SpringLayout.NORTH, ContentPane);
         Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
         Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
 
