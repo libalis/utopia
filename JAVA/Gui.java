@@ -30,6 +30,8 @@ public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
     JFrame f = new JFrame();
     SpringLayout Layout = new SpringLayout();
+    GridLayout grid=new GridLayout(1,4,0,20);
+    JPanel rechteSeite=new JPanel();
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JTextField searchbar = new JTextField();
@@ -120,6 +122,7 @@ public class Gui{
 
     //GUI wird erstellt
     public void GuiInit() {
+
         //Auswahl der Kategorien - wird per Hand bearbeitet
         choices[0] = "Verbandsmaterial";
         choices[1] = "Sauerstoff";
@@ -136,9 +139,7 @@ public class Gui{
         ImageIcon pls = new ImageIcon("plus.png");
         JButton plus = new JButton(pls);
         plus.setBackground(Color.green);
-        ContentPane.add(plus);
-        Layout.putConstraint(SpringLayout.EAST, plus, -80, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, plus, 100, SpringLayout.NORTH, ContentPane);
+        rechteSeite.add(plus);
         plus.setPreferredSize(new Dimension(20,20));
         plus.setToolTipText("Click this button to add a new product");
 
@@ -151,9 +152,7 @@ public class Gui{
         ImageIcon rew = new ImageIcon("renew.png");
         JButton renew = new JButton(rew);
         renew.setBackground(Color.green);
-        ContentPane.add(renew);
-        Layout.putConstraint(SpringLayout.EAST, renew, -55, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, renew, 100, SpringLayout.NORTH, ContentPane);
+        rechteSeite.add(renew);
         renew.setPreferredSize(new Dimension(20,20));
         renew.setToolTipText("Click this button renew the table and data");
 
@@ -167,9 +166,7 @@ public class Gui{
         ImageIcon repair= new ImageIcon("change.png");
         JButton change = new JButton(repair);
         change.setBackground(Color.orange);
-        ContentPane.add(change);
-        Layout.putConstraint(SpringLayout.EAST, change, -30, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, change, 100, SpringLayout.NORTH, ContentPane);
+        rechteSeite.add(change);
         change.setPreferredSize(new Dimension(20,20));
         change.setToolTipText("Click this button to change the data of a product");
 
@@ -182,11 +179,14 @@ public class Gui{
         ImageIcon trash = new ImageIcon("trash.png");
         JButton delete = new JButton(trash);
         delete.setBackground(Color.red);
-        ContentPane.add(delete);
-        Layout.putConstraint(SpringLayout.EAST, delete, -5, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, delete, 100, SpringLayout.NORTH, ContentPane);
+        rechteSeite.add(delete);
         delete.setPreferredSize(new Dimension(20,20));
         delete.setToolTipText("Click this button to delete a product");
+
+        rechteSeite.setBackground(Color.white);
+        Layout.putConstraint(SpringLayout.NORTH, rechteSeite,100,SpringLayout.NORTH,ContentPane);
+        Layout.putConstraint(SpringLayout.EAST,rechteSeite,-20,SpringLayout.EAST,ContentPane);
+        ContentPane.add(rechteSeite);
 
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
