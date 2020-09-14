@@ -210,7 +210,6 @@ public class Gui{
             }
         });
 
-
         //Buttons links werden erstellt
         searchbar.setText(" ");
         search.addActionListener(new ActionListener() {
