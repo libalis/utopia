@@ -25,4 +25,4 @@ Neues:
 - Missing Products Button einfügen                                                                                            Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
 
-letzter Patch 12.09.2020 ~ JF
+letzter Patch 15.09.2020 ~ JF
