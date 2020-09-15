@@ -26,5 +26,6 @@ Neues:
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Missing Products Button einfügen                                                                                            Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
+- Hotkeys einfügen (Enter im Menü, doppelklick auf Zelle)                                                                     -
 
 letzter Patch 15.09.2020 ~ JF
