@@ -4,6 +4,7 @@ Bugfixes:
 - ID beginnt bei 5???                                                                                                         Fixed
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)                        Fixed
 - Löschbutton funktioniert nicht                                                                                              Fixed
+- XML Clear Bug                                                                                                               In Bearbeitung
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 Erledigt
@@ -26,6 +27,6 @@ Neues:
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Missing Products Button einfügen                                                                                            Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
-- Hotkeys einfügen (Enter im Menü, doppelklick auf Zelle)                                                                     -
+- Hotkeys einfügen (Enter im Menü, doppelklick auf Zelle)                                                                     In Planung
 
 letzter Patch 15.09.2020 ~ JF
