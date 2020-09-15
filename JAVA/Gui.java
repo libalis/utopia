@@ -47,7 +47,6 @@ public class Gui{
     JButton printTable = new JButton("Print");
     JButton printMissing = new JButton("Missing Products");
     JScrollPane scroll=new JScrollPane();
-    JButton b=new JButton("West");
     JTable tablee=new JTable();
 
     boolean hookPressed = false;
@@ -716,11 +715,12 @@ public class Gui{
     //Extra Stuff - in Bearbeitung
     public void missingProducts () {
         JFrame f1 = new JFrame();
-        SpringLayout Layout1 = new SpringLayout();
-        JPanel ContentPane1 = new JPanel();
+        JPanel links=new JPanel(new BorderLayout());
+        JPanel ContentPane1 = new JPanel(new BorderLayout());
         JLabel Headerlabel1 = new JLabel("Benötigtes Material");
         JButton print = new JButton("Print");
-
+        JScrollPane p=new JScrollPane();
+        JPanel head=new JPanel();
 
         int AnzahlZuwenig=0;
         for (int tmp = 2; tmp < xml.length; tmp++) {
@@ -776,9 +776,10 @@ public class Gui{
                 JTable table1 = new JTable(tableModel);
                 table1.setBounds(40, 40, 400, 600);
                 table1.setPreferredSize(new Dimension(800, 10000));
-                Layout1.putConstraint(SpringLayout.EAST, table1, 150, SpringLayout.EAST, ContentPane1);
-                Layout1.putConstraint(SpringLayout.NORTH, table1, 150, SpringLayout.NORTH, ContentPane1);
-                ContentPane1.add(table1);
+
+                p.setViewportView(table1);
+                p.setPreferredSize(new Dimension(800,10000));
+
                 print.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         try{
@@ -794,18 +795,27 @@ public class Gui{
                 System.out.println(e);
             }
 
+        print.setBackground(Color.YELLOW);
+
+            head.add(Headerlabel1, BorderLayout.CENTER);
+        print.setSize(new Dimension(130,25));
+        links.add(print, BorderLayout.NORTH);
+        links.setSize(130,25);
+        links.setBackground(Color.WHITE);
+        head.setBackground(Color.WHITE);
+        ContentPane1.add(links, BorderLayout.WEST);
+        ContentPane1.add(p, BorderLayout.CENTER);
+        ContentPane1.add(head, BorderLayout.NORTH);
+        ContentPane1.setBackground(Color.WHITE);
+
+
         Headerlabel1.setBackground(Color.red);
         Headerlabel1.setFont(new Font("Sans", Font.BOLD, 30));
 
-        ContentPane1.add(Headerlabel1);
-        ContentPane1.add(print);
 
         f1.setSize(1150, 720);
         f1.setBackground(Color.white);
 
-        Layout1.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel1, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane1);
-        Layout1.putConstraint(SpringLayout.WEST, print, 0, SpringLayout.WEST, ContentPane1);
-        Layout1.putConstraint(SpringLayout.NORTH, print, 150, SpringLayout.NORTH, ContentPane1);
 
         f1.add(ContentPane1);
         f1.setVisible(true);
