@@ -23,18 +23,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JTable;
 import javax.swing.table.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
 
 public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
     JFrame f = new JFrame();
-    SpringLayout Layout = new SpringLayout();
+    BorderLayout Layout = new BorderLayout();
     GridLayout grid=new GridLayout(1,4,0,20);
     GridLayout links=new GridLayout(5,1,0,0);
     JPanel rechteSeite=new JPanel();
     JPanel linkeSeite=new JPanel();
+    JPanel linerContent=new JPanel(new BorderLayout());
+    JPanel rehterContent=new JPanel(new BorderLayout());
     JPanel Zeilenplatzhalter=new JPanel();
+    JPanel North=new JPanel(new BorderLayout());
+    JPanel NorthStream=new JPanel(new BorderLayout());
     JPanel ContentPane = new JPanel();
     JLabel Headerlabel = new JLabel("Schulsanitätsdienst Materialmanagement");
     JTextField searchbar = new JTextField();
@@ -42,6 +44,7 @@ public class Gui{
     JButton printTable = new JButton("Print");
     JButton printMissing = new JButton("Missing Products");
     JScrollPane scroll=new JScrollPane();
+    JButton b=new JButton("West");
 
     boolean hookPressed = false;
     JFrame frame = new JFrame();
@@ -112,11 +115,8 @@ public class Gui{
 
             table.setBounds(40, 40, 400, 600);
             table.setPreferredSize(new Dimension(800,10000));
-            Layout.putConstraint(SpringLayout.EAST, scroll, -150, SpringLayout.EAST, ContentPane);
-            Layout.putConstraint(SpringLayout.NORTH, scroll, 100, SpringLayout.NORTH, ContentPane);
             scroll.setPreferredSize(new Dimension(800, 600));
             scroll.setViewportView(table);
-            ContentPane.add(scroll);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -187,9 +187,8 @@ public class Gui{
         delete.setToolTipText("Click this button to delete a product");
 
         rechteSeite.setBackground(Color.white);
-        Layout.putConstraint(SpringLayout.NORTH, rechteSeite,100,SpringLayout.NORTH,ContentPane);
-        Layout.putConstraint(SpringLayout.EAST,rechteSeite,-20,SpringLayout.EAST,ContentPane);
-        ContentPane.add(rechteSeite);
+        rechteSeite.setLayout(grid);
+
 
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -209,6 +208,7 @@ public class Gui{
                 }
             }
         });
+
 
         //Buttons links werden erstellt
         searchbar.setText(" ");
@@ -270,19 +270,21 @@ public class Gui{
 
         //Alles wird zum Layout hinzugefügt
         scroll.setBackground(Color.WHITE);
-        ContentPane.setLayout(Layout);
+        ContentPane.setLayout(new BorderLayout());
         ContentPane.setBackground(Color.WHITE);
         xml.overWrite();
 
         Headerlabel.setBackground(Color.red);
         Headerlabel.setFont(new Font("Sans", Font.BOLD, 30));
 
-        ContentPane.add(bild);
-        ContentPane.add(Headerlabel);
+        NorthStream.add(Headerlabel, BorderLayout.CENTER);
+        North.add(bild, BorderLayout.EAST);
+        NorthStream.setBackground(Color.white);
+        North.add(NorthStream, BorderLayout.CENTER);
+        ContentPane.add(North, BorderLayout.NORTH);
 
         f.setSize(1150, 720);
 
-        Layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, Headerlabel, 0, SpringLayout.HORIZONTAL_CENTER, ContentPane);
         linkeSeite.add(searchbar);
         searchbar.setPreferredSize(new Dimension(130, 20));
         linkeSeite.add(search);
@@ -291,12 +293,16 @@ public class Gui{
         Zeilenplatzhalter.setBackground(Color.white);
         linkeSeite.add(printTable);
         linkeSeite.add(printMissing);
-        ContentPane.add(linkeSeite);
+        linerContent.setBackground(Color.WHITE);
+        linerContent.setSize(new Dimension(170,50));
+        linerContent.add(linkeSeite, BorderLayout.NORTH);
+        rehterContent.setBackground(Color.WHITE);
+        rehterContent.setSize(new Dimension(120, 20));
+        rehterContent.add(rechteSeite, BorderLayout.NORTH);
+        ContentPane.add(linerContent, BorderLayout.WEST);
+        ContentPane.add(rehterContent, BorderLayout.EAST);
+        ContentPane.add(scroll, BorderLayout.CENTER);
         linkeSeite.setLayout(links);
-        Layout.putConstraint(SpringLayout.WEST, linkeSeite, 30, SpringLayout.WEST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, linkeSeite, 100, SpringLayout.NORTH, ContentPane);
-        Layout.putConstraint(SpringLayout.EAST, bild, 0, SpringLayout.EAST, ContentPane);
-        Layout.putConstraint(SpringLayout.NORTH, bild, 0, SpringLayout.NORTH, ContentPane);
 
         f.add(ContentPane);
         f.setVisible(true);
@@ -311,8 +317,7 @@ public class Gui{
                 System.exit(0);
             }
         });
-
-        f.setLayout(null);
+        //f.pack();
         f.setVisible(true);
     }
 
