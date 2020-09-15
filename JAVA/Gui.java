@@ -18,9 +18,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import javax.print.attribute.*;
+import javax.print.attribute.standard.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.print.PrinterException;
 import javax.swing.JTable;
 import javax.swing.table.*;
 
@@ -45,6 +48,7 @@ public class Gui{
     JButton printMissing = new JButton("Missing Products");
     JScrollPane scroll=new JScrollPane();
     JButton b=new JButton("West");
+    JTable tablee=new JTable();
 
     boolean hookPressed = false;
     JFrame frame = new JFrame();
@@ -59,10 +63,36 @@ public class Gui{
     JLabel bild = new JLabel (image);
 
     Xml xml = new Xml();
+    private PrintRequestAttributeSet attr;
 
+    private void print(JTable table) {
+        if (attr == null) {
+            attr = new HashPrintRequestAttributeSet();
+            float leftMargin = 10;
+            float rightMargin = 10;
+            float topMargin = 10;
+            float bottomMargin = 10;
+            attr.add(OrientationRequested.PORTRAIT);
+            attr.add(MediaSizeName.ISO_A4);
+            MediaSize mediaSize = MediaSize.ISO.A4;
+            float mediaWidth = mediaSize.getX(Size2DSyntax.MM);
+            float mediaHeight = mediaSize.getY(Size2DSyntax.MM);
+            attr.add(new MediaPrintableArea(
+                    leftMargin, topMargin,
+                    (mediaWidth - leftMargin - rightMargin),
+                    (mediaHeight - topMargin - bottomMargin), Size2DSyntax.MM));
+        }
+        try {
+            table.print(JTable.PrintMode.FIT_WIDTH, null, null, true, attr, true);
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        } catch (HeadlessException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     //Tabelle wird erstellt
-    public void TableExample() {
+    public JTable TableExample() {
         try {
             String[][] data = new String[xml.length][6];
             for (int i = 0; i < (xml.length); i++) {
@@ -117,8 +147,10 @@ public class Gui{
             table.setPreferredSize(new Dimension(800,10000));
             scroll.setPreferredSize(new Dimension(800, 600));
             scroll.setViewportView(table);
+            return table;
         } catch (Exception e) {
             System.out.println(e);
+            return null;
         }
     }
 
@@ -245,14 +277,16 @@ public class Gui{
             }
         });
 
-        TableExample();
+        tablee=TableExample();
 
         printTable.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Tabelle ausdrucken
-                //f.print();
+                try{
+                print(tablee);}
+                catch (Exception v){
                 JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
-            }
+            }}
         });
 
         printMissing.addActionListener(new ActionListener() {
