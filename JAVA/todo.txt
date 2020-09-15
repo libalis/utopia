@@ -8,11 +8,11 @@ Bugfixes:
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 Erledigt
-- Produkte nach Kategorien sortieren                                                                                          Abgebrochen - Nicht umsetzbar
+- Produkte nach Kategorien sortieren                                                                                          Nicht umsetzbar
 
 Neues:
-- Add-Button für Kategorien implementieren                                                                                    Erledigt - auskommentiert
-  - Button funktion einfügen - neue xml-datei???                                                                              Abgebrochen - Nicht umsetzbar
+- Add-Button für Kategorien implementieren                                                                                    Umgesetzt - auskommentiert
+  - Button funktion einfügen - neue xml-datei???                                                                              Nicht umsetzbar
 - Add-Button für Anzahl eines Produktes implementieren                                                                        Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          Umgesetzt
