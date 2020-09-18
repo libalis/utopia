@@ -122,19 +122,19 @@ public class Gui{
 
                     if (! table.isRowSelected(row))
                     {
-                        if (markX[1]!=0&&markY[1]!=0&&markX[1]!=1&&markY[1]!=1) {
+
                             if (row == markY[1] && column == markX[1])
                                 c.setBackground(Color.yellow);
                             else
                                 c.setBackground(Color.white);
-                        }
+
                     }
                     return c;
                 }
 
             }
-
             JTable table = new JTable(tableModel);
+            table.setSelectionBackground(Color.YELLOW);
             MyRenderer myRenderer = new MyRenderer();
             table.setDefaultRenderer(Object.class, myRenderer);
 
@@ -155,6 +155,9 @@ public class Gui{
 
     //GUI wird erstellt
     public void GuiInit() {
+
+        markX[1]=-1;
+        markY[1]=-1;
 
         //Auswahl der Kategorien - wird per Hand bearbeitet
         choices[0] = "Verbandsmaterial";
@@ -249,28 +252,37 @@ public class Gui{
                 if (searched == "" || searched == null || searched == " ") {
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
+                    tablee.clearSelection();
                     System.out.println("Checkpoint 1: "+markX + " "+ markY);
                     //JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
                     for (int i = 2; i < (xml.length); i++) {
-                        int tmp1 = Integer.parseInt(xml.id[i].trim());
-                        int tmp2 = Integer.parseInt(searched.trim());
-                        if (tmp1==tmp2) {
-                            System.out.println("Ja");
-                            markX[1]=3;
-                            markY[1]=3;
-
-                        } else {
-                            System.out.println("Nö");
+                        String tmp2 = xml.id[i].trim();
+                        String tmp3=xml.name[i].trim();
+                        String tmp4=xml.amount[i].trim();
+                        String tmp5=xml.amountNeeded[i].trim();
+                        String tmp6=xml.category[i].trim();
+                        String tmp7=xml.bestbefore[i].trim();
+                        String tmp1=searched.trim();
+                        if (tmp2.contains(tmp1)) {
+                            tablee.addRowSelectionInterval(i, i);
                         }
-                        System.out.println(tmp1);
-                        System.out.println(tmp2);
-                        System.out.println("Checkpoint 2: "+markX + " "+ markY);
-                        //||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched
-                        //System.out.println(rowToMark);
+                        else if(tmp3.contains(tmp1)) {
+                            tablee.addRowSelectionInterval(i,i);
+                        }
+                        else if(tmp4.contains(tmp1)){
+                            tablee.addRowSelectionInterval(i,i);
+                        }
+                        else if(tmp5.contains(tmp1)){
+                            tablee.addRowSelectionInterval(i,i);
+                        }
+                        else if(tmp6.contains(tmp1)){
+                            tablee.addRowSelectionInterval(i,i);
+                        }
+                        else if(tmp7.contains(tmp1)){
+                            tablee.addRowSelectionInterval(i,i);
+                        }
                     }
-                    restartProgram();
-                    searchbar.setText(" ");
-                    System.out.println("Checkpoint 3: "+markX + " "+ markY);
+                    searchbar.setText("");
                 }
             }
         });
