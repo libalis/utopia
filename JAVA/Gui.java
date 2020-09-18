@@ -102,7 +102,7 @@ public class Gui{
                 data[i][5] = xml.bestbefore[i];
             }
 
-            String[] column = {"ID", "Name", "Amount", "AmountNeeded", "Category", "Bestbefore"};
+            String[] column = {"ID", "Name", "Amount", "AmountNeeded", "Category", "Bestbefore"};//-
 
             DefaultTableModel tableModel = new DefaultTableModel(data, column) {
 
