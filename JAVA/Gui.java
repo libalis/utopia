@@ -49,7 +49,6 @@ public class Gui{
     JScrollPane scroll=new JScrollPane();
     JTable tablee=new JTable();
 
-    boolean hookPressed = false;
     JFrame frame = new JFrame();
 
     String[] choices = new String[10];
@@ -103,7 +102,7 @@ public class Gui{
                 data[i][5] = xml.bestbefore[i];
             }
 
-            String[] column = {"ID", "Name", "Amount", "AmountNeeded", "Category", "Bestbefore"};
+            String[] column = {"ID", "Name", "Amount", "AmountNeeded", "Category", "Bestbefore"};//-
 
             DefaultTableModel tableModel = new DefaultTableModel(data, column) {
 
@@ -123,12 +122,12 @@ public class Gui{
 
                     if (! table.isRowSelected(row))
                     {
-
+                        if (markX[1]!=0&&markY[1]!=0&&markX[1]!=1&&markY[1]!=1) {
                             if (row == markY[1] && column == markX[1])
                                 c.setBackground(Color.yellow);
                             else
                                 c.setBackground(Color.white);
-
+                        }
                     }
                     return c;
                 }
@@ -169,10 +168,6 @@ public class Gui{
         choices[8] = "Kategorie 9";
         choices[9] = "Kategorie 10";
 
-        markX[1]=-1;
-        markY[1]=-1;
-
-        scroll.setBackground(Color.white);
         //Buttons auf der rechten Seite werden erstellt
         ImageIcon pls = new ImageIcon("plus.png");
         JButton plus = new JButton(pls);
@@ -254,26 +249,28 @@ public class Gui{
                 if (searched == "" || searched == null || searched == " ") {
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
+                    System.out.println("Checkpoint 1: "+markX + " "+ markY);
                     //JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
                     for (int i = 2; i < (xml.length); i++) {
                         int tmp1 = Integer.parseInt(xml.id[i].trim());
                         int tmp2 = Integer.parseInt(searched.trim());
                         if (tmp1==tmp2) {
                             System.out.println("Ja");
-                            markX[1]=0;
-                            markY[1]=i;
-                            break;
+                            markX[1]=3;
+                            markY[1]=3;
+
                         } else {
                             System.out.println("Nö");
                         }
                         System.out.println(tmp1);
                         System.out.println(tmp2);
+                        System.out.println("Checkpoint 2: "+markX + " "+ markY);
                         //||xml.name[i]==searched||xml.amount[i]==searched||xml.category[i]==searched||xml.bestbefore[i]==searched
                         //System.out.println(rowToMark);
                     }
-                    JTable t=TableExample();
-                    scroll.setViewportView(t);
-                    searchbar.setText("");
+                    restartProgram();
+                    searchbar.setText(" ");
+                    System.out.println("Checkpoint 3: "+markX + " "+ markY);
                 }
             }
         });
@@ -536,8 +533,6 @@ public class Gui{
 
         JButton b1 = new JButton("Change");
         JButton b2 = new JButton("Cancel");
-        ImageIcon hook = new ImageIcon("hook.png");
-        JButton b3 = new JButton(hook);
 
         //Layout wird kreiert
         p1.setLayout(new GridBagLayout());
@@ -611,9 +606,6 @@ public class Gui{
         c.gridy = 8;
         p1.add(b2, c);
 
-        c.gridx = 2;
-        c.gridy = 2;
-        p1.add(b3, c);
 
         f1.setPreferredSize(new Dimension(130, 20));
         f1.setSelectedItem(xml.id[2]);
@@ -633,8 +625,6 @@ public class Gui{
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
         b2.setPreferredSize(new Dimension(130, 25));
-        b3.setBackground(Color.white);
-        b3.setPreferredSize(new Dimension(20, 20));
 
         j.add(p1);
         p1.setVisible(true);
@@ -644,7 +634,6 @@ public class Gui{
         //Button funktionen werden eingefügt
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (hookPressed==true) {
                     Xml xml = new Xml();
 
                     xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
@@ -655,9 +644,6 @@ public class Gui{
                     j.setVisible(false);
 
                     restartProgram();
-                } else {
-                    JOptionPane.showMessageDialog(frame , "You have to press the hook button first","Error",JOptionPane.ERROR_MESSAGE);
-                }
             }
 
         });
@@ -672,7 +658,7 @@ public class Gui{
             }
         });
 
-        b3.addActionListener(new ActionListener() {
+        f1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int guiID = Integer.parseInt(""+f1.getSelectedItem())+1;
@@ -682,7 +668,6 @@ public class Gui{
                     f21.setText(xml.amountNeeded[guiID]);
                     f4.setText(xml.category[guiID]);
                     f5.setText(xml.bestbefore[guiID]);
-                    hookPressed = true;
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
                 }
