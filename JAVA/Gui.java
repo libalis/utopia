@@ -49,7 +49,6 @@ public class Gui{
     JScrollPane scroll=new JScrollPane();
     JTable tablee=new JTable();
 
-    boolean hookPressed = false;
     JFrame frame = new JFrame();
 
     String[] choices = new String[10];
@@ -282,10 +281,10 @@ public class Gui{
             public void actionPerformed(ActionEvent e) {
                 //Tabelle ausdrucken
                 try{
-                print(tablee);}
+                    print(tablee);}
                 catch (Exception v){
-                JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
-            }}
+                    JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
+                }}
         });
 
         printMissing.addActionListener(new ActionListener() {
@@ -534,8 +533,6 @@ public class Gui{
 
         JButton b1 = new JButton("Change");
         JButton b2 = new JButton("Cancel");
-        ImageIcon hook = new ImageIcon("hook.png");
-        JButton b3 = new JButton(hook);
 
         //Layout wird kreiert
         p1.setLayout(new GridBagLayout());
@@ -609,9 +606,6 @@ public class Gui{
         c.gridy = 8;
         p1.add(b2, c);
 
-        c.gridx = 2;
-        c.gridy = 2;
-        p1.add(b3, c);
 
         f1.setPreferredSize(new Dimension(130, 20));
         f1.setSelectedItem(xml.id[2]);
@@ -631,8 +625,6 @@ public class Gui{
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
         b2.setPreferredSize(new Dimension(130, 25));
-        b3.setBackground(Color.white);
-        b3.setPreferredSize(new Dimension(20, 20));
 
         j.add(p1);
         p1.setVisible(true);
@@ -642,7 +634,6 @@ public class Gui{
         //Button funktionen werden eingefügt
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (hookPressed==true) {
                     Xml xml = new Xml();
 
                     xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
@@ -653,9 +644,6 @@ public class Gui{
                     j.setVisible(false);
 
                     restartProgram();
-                } else {
-                    JOptionPane.showMessageDialog(frame , "You have to press the hook button first","Error",JOptionPane.ERROR_MESSAGE);
-                }
             }
 
         });
@@ -670,20 +658,19 @@ public class Gui{
             }
         });
 
-        b3.addActionListener(new ActionListener() {
+        f1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            try {
-                int guiID = Integer.parseInt(""+f1.getSelectedItem())+1;
-                System.out.println(guiID);
-                f2.setText(xml.name[guiID]);
-                f3.setText(xml.amount[guiID]);
-                f21.setText(xml.amountNeeded[guiID]);
-                f4.setText(xml.category[guiID]);
-                f5.setText(xml.bestbefore[guiID]);
-                hookPressed = true;
-            } catch (Exception exception) {
-                JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
-            }
+                try {
+                    int guiID = Integer.parseInt(""+f1.getSelectedItem())+1;
+                    System.out.println(guiID);
+                    f2.setText(xml.name[guiID]);
+                    f3.setText(xml.amount[guiID]);
+                    f21.setText(xml.amountNeeded[guiID]);
+                    f4.setText(xml.category[guiID]);
+                    f5.setText(xml.bestbefore[guiID]);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -751,53 +738,53 @@ public class Gui{
                 geloeschtCounter++;
             }
         }
-            try {
-                String[][] data = new String[xml.length-AnzahlZuwenig][3];
-                for (int i = 2; i < (xml.length-AnzahlZuwenig); i++) {
-                    data[i][0] = missing[i][0];
-                    data[i][1] = missing[i][1];
-                    data[i][2] = missing[i][2];
-                }
-                data[0][0] = "ID";
-                data[0][1] = "Name";
-                data[0][2] = "Benötigte Anzahl";
-
-                String[] column = {"ID", "Name", "Differenz"};
-
-                DefaultTableModel tableModel = new DefaultTableModel(data, column) {
-
-                    @Override
-                    public boolean isCellEditable(int row, int column) {
-                        //all cells false
-                        return false;
-                    }
-                };
-
-                JTable table1 = new JTable(tableModel);
-                table1.setBounds(40, 40, 400, 600);
-                table1.setPreferredSize(new Dimension(800, 10000));
-
-                p.setViewportView(table1);
-                p.setPreferredSize(new Dimension(800,10000));
-
-                print.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        try{
-                            print(table1);
-                        }
-                        catch (Exception y){
-                            JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                });
-
-            } catch (Exception e) {
-                System.out.println(e);
+        try {
+            String[][] data = new String[xml.length-AnzahlZuwenig][3];
+            for (int i = 2; i < (xml.length-AnzahlZuwenig); i++) {
+                data[i][0] = missing[i][0];
+                data[i][1] = missing[i][1];
+                data[i][2] = missing[i][2];
             }
+            data[0][0] = "ID";
+            data[0][1] = "Name";
+            data[0][2] = "Benötigte Anzahl";
+
+            String[] column = {"ID", "Name", "Differenz"};
+
+            DefaultTableModel tableModel = new DefaultTableModel(data, column) {
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
+            JTable table1 = new JTable(tableModel);
+            table1.setBounds(40, 40, 400, 600);
+            table1.setPreferredSize(new Dimension(800, 10000));
+
+            p.setViewportView(table1);
+            p.setPreferredSize(new Dimension(800,10000));
+
+            print.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    try{
+                        print(table1);
+                    }
+                    catch (Exception y){
+                        JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         print.setBackground(Color.YELLOW);
 
-            head.add(Headerlabel1, BorderLayout.CENTER);
+        head.add(Headerlabel1, BorderLayout.CENTER);
         print.setSize(new Dimension(130,25));
         links.add(print, BorderLayout.NORTH);
         links.setSize(130,25);
