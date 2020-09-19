@@ -18,14 +18,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import org.w3c.dom.Document;
+
 import javax.print.attribute.*;
 import javax.print.attribute.standard.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.ArrayList;
 
 public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
@@ -48,6 +61,10 @@ public class Gui{
     JButton printMissing = new JButton("Missing Products");
     JScrollPane scroll=new JScrollPane();
     JTable tablee=new JTable();
+    JMenuBar bar=new JMenuBar();
+    JMenu file=new JMenu("File");
+    JMenuItem exportXml=new JMenuItem("export xml");
+    JMenuItem importXml=new JMenuItem("import xml");
 
     JFrame frame = new JFrame();
 
@@ -156,6 +173,10 @@ public class Gui{
     //GUI wird erstellt
     public void GuiInit() {
 
+        bar.add(file);
+        file.add(exportXml);
+        file.add(importXml);
+
         markX[1]=-1;
         markY[1]=-1;
 
@@ -196,6 +217,84 @@ public class Gui{
             public void actionPerformed(ActionEvent e) {
                 //resetColors();
                 restartProgram();
+            }
+        });
+
+        exportXml.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("export");
+                JFileChooser chooser = new JFileChooser();
+                // Dialog zum Oeffnen von Dateien anzeigen
+                int rueckgabeWert = chooser.showSaveDialog(f);
+
+                /* Abfrage, ob auf "Öffnen" geklickt wurde */
+                if(rueckgabeWert == JFileChooser.APPROVE_OPTION)
+                {
+
+
+                        ArrayList<String> allLines = new ArrayList<String>();
+                        try {
+                        allLines=(ArrayList) Files.readAllLines(Paths.get("Database.xml"));
+                    }
+                    catch(Exception q){}
+                        File filename;
+                        if(chooser.getSelectedFile().getName().endsWith(".xml"))
+                        {try(FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            for (int i = 0; i < allLines.size(); i++) {
+                                bw.write(allLines.get(i).toString());
+                            }
+                            bw.flush();
+                            bw.close();
+                        }
+                        catch(Exception ex){}}
+                        else{try(FileWriter fw = new FileWriter(chooser.getSelectedFile()+".xml")) {
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            for (int i = 0; i < allLines.size(); i++) {
+                                bw.write(allLines.get(i).toString());
+                            }
+                            bw.flush();
+                            bw.close();
+                        }
+                        catch(Exception ex){}}
+
+
+                }
+            }
+        });
+
+        importXml.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("import");
+                JFileChooser chooser = new JFileChooser();
+                // Dialog zum Oeffnen von Dateien anzeigen
+                int rueckgabeWert = chooser.showOpenDialog(f);
+
+                /* Abfrage, ob auf "Öffnen" geklickt wurde */
+                if(rueckgabeWert == JFileChooser.APPROVE_OPTION)
+                {
+
+
+                    ArrayList<String> allLines = new ArrayList<String>();
+                    try {
+                        allLines=(ArrayList) Files.readAllLines(Paths.get(chooser.getCurrentDirectory().getAbsolutePath()+"/"+chooser.getSelectedFile().getName()));
+                        System.out.println(Paths.get(chooser.getCurrentDirectory().getAbsolutePath()+"/"+chooser.getSelectedFile().getName()));
+                    }
+                    catch(Exception q){}
+                    {
+                        File file = new File("Database.xml");
+                        try {
+                            PrintWriter printWriter = new PrintWriter(file, "UTF-8");
+                            for(int i=0;i<allLines.size();i++) {
+                                printWriter.println(allLines.get(i));
+                            }
+                            printWriter.close();
+                            restartProgram();
+                        }
+                        catch(Exception ex){}
+
+                    }
+                }
             }
         });
 
@@ -348,6 +447,7 @@ public class Gui{
         ContentPane.add(scroll, BorderLayout.CENTER);
         linkeSeite.setLayout(links);
 
+        f.setJMenuBar(bar);
         f.add(ContentPane);
         f.setVisible(true);
         f.setContentPane(ContentPane);
