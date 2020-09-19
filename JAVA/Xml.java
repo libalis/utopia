@@ -60,13 +60,51 @@ public class Xml { //temporary code - switch from arrays to lists planned
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             document = documentBuilder.parse(file);
-        } catch(Exception exception) {}
-
-        try {
+            try {
+                printWriter = new PrintWriter(file, "UTF-8");
+            } catch(Exception h) {}
+        } catch(Exception exception) {
+            try {
             printWriter = new PrintWriter(file, "UTF-8");
-        } catch(Exception exception) {}
+        } catch(Exception h) {}
+            printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            printWriter.println("<Database>");
+            printWriter.println("<Product>");
+            printWriter.println("<ID>Nr</ID>");
+            printWriter.println("<Name>Name</Name>");
+            printWriter.println("<Amount>Anzahl</Amount>");
+            printWriter.println("<AmountNeeded>Benötigt</AmountNeeded>");
+            printWriter.println("<Category>Kategorie</Category>");
+            printWriter.println("<BestBefore>Ablauf</BestBefore>");
+            printWriter.println("</Product>");
+            printWriter.println("<Product>");
+            printWriter.println("<ID/>");
+            printWriter.println("<Name/>");
+            printWriter.println("<Amount/>");
+            printWriter.println("<AmountNeeded/>");
+            printWriter.println("<Category/>");
+            printWriter.println("<BestBefore/>");
+            printWriter.println("</Product>");
+            printWriter.println("</Database>");
+            printWriter.close();
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                document = documentBuilder.parse(file);
+                try {
+                    printWriter = new PrintWriter(file, "UTF-8");
+                } catch (Exception h) {
+                }
+            }
+            catch(Exception sdf){}
+        }
 
-        length = document.getElementsByTagName("ID").getLength();
+
+
+        try{
+        length = document.getElementsByTagName("ID").getLength();}
+        catch(Exception v){
+            printWriter.println();
+        }
         num = 0;
 
         id = new String[length];
