@@ -69,22 +69,6 @@ public class Xml { //temporary code - switch from arrays to lists planned
         } catch(Exception h) {}
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
-            printWriter.println("<Product>");
-            printWriter.println("<ID>Nr</ID>");
-            printWriter.println("<Name>Name</Name>");
-            printWriter.println("<Amount>Anzahl</Amount>");
-            printWriter.println("<AmountNeeded>Benötigt</AmountNeeded>");
-            printWriter.println("<Category>Kategorie</Category>");
-            printWriter.println("<BestBefore>Ablauf</BestBefore>");
-            printWriter.println("</Product>");
-            printWriter.println("<Product>");
-            printWriter.println("<ID/>");
-            printWriter.println("<Name/>");
-            printWriter.println("<Amount/>");
-            printWriter.println("<AmountNeeded/>");
-            printWriter.println("<Category/>");
-            printWriter.println("<BestBefore/>");
-            printWriter.println("</Product>");
             printWriter.println("</Database>");
             printWriter.close();
             try {

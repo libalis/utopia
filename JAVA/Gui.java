@@ -38,7 +38,7 @@ import javax.swing.JTable;
 import javax.swing.table.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.util.ArrayList;
+
 
 public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
@@ -156,7 +156,20 @@ public class Gui{
             table.setDefaultRenderer(Object.class, myRenderer);
 
             //Test1 - Ende
+            table.setAutoCreateRowSorter(true);
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+            table.setRowSorter(sorter);
+            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
+            int columnIndexToSort = 1;
+            sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+            int columnIndexForJob = 1;
+            sortKeys.add(new RowSorter.SortKey(columnIndexForJob, SortOrder.ASCENDING));
+
+            int columnIndexForName = 4;
+            sortKeys.add(new RowSorter.SortKey(columnIndexForName, SortOrder.ASCENDING));
+            sorter.setSortKeys(sortKeys);
+            sorter.sort();
 
             table.setBounds(40, 40, 400, 600);
             table.setPreferredSize(new Dimension(800,10000));
@@ -172,6 +185,8 @@ public class Gui{
 
     //GUI wird erstellt
     public void GuiInit() {
+
+
 
         bar.add(file);
         file.add(exportXml);
