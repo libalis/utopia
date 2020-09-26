@@ -140,10 +140,10 @@ public class Gui{
                     if (! table.isRowSelected(row))
                     {
 
-                            if (row == markY[1] && column == markX[1])
-                                c.setBackground(Color.yellow);
-                            else
-                                c.setBackground(Color.white);
+                        if (row == markY[1] && column == markX[1])
+                            c.setBackground(Color.yellow);
+                        else
+                            c.setBackground(Color.white);
 
                     }
                     return c;
@@ -247,31 +247,31 @@ public class Gui{
                 {
 
 
-                        ArrayList<String> allLines = new ArrayList<String>();
-                        try {
+                    ArrayList<String> allLines = new ArrayList<String>();
+                    try {
                         allLines=(ArrayList) Files.readAllLines(Paths.get("Database.xml"));
                     }
                     catch(Exception q){}
-                        File filename;
-                        if(chooser.getSelectedFile().getName().endsWith(".xml"))
-                        {try(FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            for (int i = 0; i < allLines.size(); i++) {
-                                bw.write(allLines.get(i).toString());
-                            }
-                            bw.flush();
-                            bw.close();
+                    File filename;
+                    if(chooser.getSelectedFile().getName().endsWith(".xml"))
+                    {try(FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        for (int i = 0; i < allLines.size(); i++) {
+                            bw.write(allLines.get(i).toString());
                         }
-                        catch(Exception ex){}}
-                        else{try(FileWriter fw = new FileWriter(chooser.getSelectedFile()+".xml")) {
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            for (int i = 0; i < allLines.size(); i++) {
-                                bw.write(allLines.get(i).toString());
-                            }
-                            bw.flush();
-                            bw.close();
+                        bw.flush();
+                        bw.close();
+                    }
+                    catch(Exception ex){}}
+                    else{try(FileWriter fw = new FileWriter(chooser.getSelectedFile()+".xml")) {
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        for (int i = 0; i < allLines.size(); i++) {
+                            bw.write(allLines.get(i).toString());
                         }
-                        catch(Exception ex){}}
+                        bw.flush();
+                        bw.close();
+                    }
+                    catch(Exception ex){}}
 
 
                 }
@@ -575,7 +575,7 @@ public class Gui{
         c.gridy = 8;
         p1.add(b2, c);
 
-        String s = String.valueOf(xml.length-1);
+        String s = String.valueOf(xml.length+1);
         f0.setText("Nr. "+s);
         f1.setPreferredSize(new Dimension(130, 20));
         f2.setPreferredSize(new Dimension(130, 20));
@@ -735,19 +735,19 @@ public class Gui{
 
 
         f1.setPreferredSize(new Dimension(130, 20));
-        f1.setSelectedItem(xml.id[2]);
+        f1.setSelectedItem(xml.id[0]);
         f2.setPreferredSize(new Dimension(130, 20));
-        f2.setText(xml.name[2]);
+        f2.setText(xml.name[0]);
         f3.setPreferredSize(new Dimension(130, 20));
-        f3.setText(xml.amount[2]);
+        f3.setText(xml.amount[0]);
         f21.setPreferredSize(new Dimension(130, 20));
-        f21.setText(xml.amountNeeded[2]);
+        f21.setText(xml.amountNeeded[0]);
         f4.setPreferredSize(new Dimension(130, 20));
         f4.setBackground(Color.white);
-        f4.setText(xml.category[2]);
+        f4.setText(xml.category[0]);
         f5.setPreferredSize(new Dimension(130, 20));
         f5.setBackground(Color.white);
-        f5.setText(xml.bestbefore[2]);
+        f5.setText(xml.bestbefore[0]);
         b1.setBackground(Color.green);
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
@@ -761,16 +761,16 @@ public class Gui{
         //Button funktionen werden eingefügt
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    Xml xml = new Xml();
+                Xml xml = new Xml();
 
-                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
-                    xml.overWrite();
+                xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
+                xml.overWrite();
 
-                    p1.setVisible(false);
-                    j.setSize(0, 0);
-                    j.setVisible(false);
+                p1.setVisible(false);
+                j.setSize(0, 0);
+                j.setVisible(false);
 
-                    restartProgram();
+                restartProgram();
             }
 
         });
