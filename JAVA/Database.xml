@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Database>
 	<Product>
-		<ID>Nr</ID>
-		<Name>Name</Name>
-		<Amount>Anzahl</Amount>
-		<AmountNeeded>Benötigt</AmountNeeded>
-		<Category>Kategorie</Category>
-		<BestBefore>Ablauf</BestBefore>
-	</Product>
-	<Product>
-		<ID></ID>
-		<Name></Name>
-		<Amount></Amount>
-		<AmountNeeded></AmountNeeded>
-		<Category></Category>
-		<BestBefore></BestBefore>
-	</Product>
-	<Product>
 		<ID>1</ID>
 		<Name>Verbandsmull 30cm</Name>
 		<Amount>69</Amount>
