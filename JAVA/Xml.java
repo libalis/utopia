@@ -1,6 +1,6 @@
 /*
 MIT License
-Copyright (c) 2020 Robert Kagan
+Copyright (c) 2020 definitiv nicht Robert Kagan
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -65,8 +65,8 @@ public class Xml { //temporary code - switch from arrays to lists planned
             } catch(Exception h) {}
         } catch(Exception exception) {
             try {
-            printWriter = new PrintWriter(file, "UTF-8");
-        } catch(Exception h) {}
+                printWriter = new PrintWriter(file, "UTF-8");
+            } catch(Exception h) {}
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
             printWriter.println("</Database>");
@@ -85,7 +85,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
 
 
         try{
-        length = document.getElementsByTagName("ID").getLength();}
+            length = document.getElementsByTagName("ID").getLength();}
         catch(Exception v){
             printWriter.println();
         }
@@ -128,13 +128,13 @@ public class Xml { //temporary code - switch from arrays to lists planned
     }
 
     public void testPrintOut(int tmp) {
-            System.out.println("ID: " + id[tmp]);
-            System.out.println("Name: " + name[tmp]);
-            System.out.println("Amount: " + amount[tmp]);
-            System.out.println("AmountNeeded: " + amountNeeded[tmp]);
-            System.out.println("Category: " + category[tmp]);
-            System.out.println("BestBefore: " + bestbefore[tmp]);
-            System.out.println();
+        System.out.println("ID: " + id[tmp]);
+        System.out.println("Name: " + name[tmp]);
+        System.out.println("Amount: " + amount[tmp]);
+        System.out.println("AmountNeeded: " + amountNeeded[tmp]);
+        System.out.println("Category: " + category[tmp]);
+        System.out.println("BestBefore: " + bestbefore[tmp]);
+        System.out.println();
     }
 
     private void debug() {
@@ -174,7 +174,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
 
             }
             printWriter.println("\t<Product>");
-            printWriter.println("\t\t<ID>" + String.valueOf(length-1) + "</ID>");
+            printWriter.println("\t\t<ID>" + String.valueOf(length+1) + "</ID>");
             printWriter.println("\t\t<Name>" + n + "</Name>");
             printWriter.println("\t\t<Amount>" + a + "</Amount>");
             printWriter.println("\t\t<AmountNeeded>" + a2 + "</AmountNeeded>");
