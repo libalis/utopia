@@ -38,6 +38,11 @@ import javax.swing.JTable;
 import javax.swing.table.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class Gui{
@@ -80,32 +85,6 @@ public class Gui{
     Xml xml = new Xml();
     private PrintRequestAttributeSet attr;
 
-    private void print(JTable table) {
-        if (attr == null) {
-            attr = new HashPrintRequestAttributeSet();
-            float leftMargin = 10;
-            float rightMargin = 10;
-            float topMargin = 10;
-            float bottomMargin = 10;
-            attr.add(OrientationRequested.PORTRAIT);
-            attr.add(MediaSizeName.ISO_A4);
-            MediaSize mediaSize = MediaSize.ISO.A4;
-            float mediaWidth = mediaSize.getX(Size2DSyntax.MM);
-            float mediaHeight = mediaSize.getY(Size2DSyntax.MM);
-            attr.add(new MediaPrintableArea(
-                    leftMargin, topMargin,
-                    (mediaWidth - leftMargin - rightMargin),
-                    (mediaHeight - topMargin - bottomMargin), Size2DSyntax.MM));
-        }
-        try {
-            table.print(JTable.PrintMode.FIT_WIDTH, null, null, true, attr, true);
-        } catch (PrinterException ex) {
-            ex.printStackTrace();
-        } catch (HeadlessException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     //Tabelle wird erstellt
     public JTable TableExample() {
         try {
@@ -130,7 +109,6 @@ public class Gui{
                 }
             };
 
-            //Test1
             class MyRenderer extends DefaultTableCellRenderer
             {
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column)
@@ -150,20 +128,47 @@ public class Gui{
                 }
 
             }
+
             JTable table = new JTable(tableModel);
-            table.setSelectionBackground(Color.YELLOW);
+            table.setSelectionBackground(Color.yellow);
             MyRenderer myRenderer = new MyRenderer();
             table.setDefaultRenderer(Object.class, myRenderer);
 
-            //Test1 - Ende
+            ListSelectionModel cellSelectionModel = table.getSelectionModel();
+            cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+            cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+
+                    public void valueChanged(ListSelectionEvent e) {
+                        String selectedData = null;
+
+
+                        int[] selectedRow = table.getSelectedRows();
+                        int[] selectedColumns = table.getSelectedColumns();
+                        int dataRow = 0;
+
+                        for (int i = 0; i < selectedRow.length; i++) {
+                            for (int j = 0; j < selectedColumns.length; j++) {
+                                selectedData = (String) table.getValueAt(selectedRow[i], selectedColumns[j]);
+                                dataRow = Integer.valueOf(xml.id[selectedRow[i]].trim());
+                                System.out.println("ID " + xml.id[selectedRow[i]]);
+                            }
+                        }
+                        System.out.println("Selected: " + selectedData);
+                        //changeProduct(dataRow);
+                    }
+            });
+
+
+
             table.setAutoCreateRowSorter(true);
             TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
             table.setRowSorter(sorter);
             ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
-            int columnIndexToSort = 1;
+            int columnIndexToSort = 0;
             sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-            int columnIndexForJob = 1;
+            int columnIndexForJob = 0;
             sortKeys.add(new RowSorter.SortKey(columnIndexForJob, SortOrder.ASCENDING));
 
             int columnIndexForName = 4;
@@ -322,7 +327,7 @@ public class Gui{
 
         change.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                changeProduct();
+                changeProduct(1);
             }
         });
 
@@ -639,7 +644,7 @@ public class Gui{
     }
 
     //Funktion für die GUI zum ändern von Produkten wird erstellt
-    public void changeProduct() {
+    public void changeProduct(int Nr) {
         //Bestandteile werden initialisiert
         JFrame j = new JFrame("Produkt ändern");
         JPanel p1 = new JPanel();
@@ -735,23 +740,41 @@ public class Gui{
 
 
         f1.setPreferredSize(new Dimension(130, 20));
-        f1.setSelectedItem(xml.id[0]);
+        f1.setSelectedItem(xml.id[Nr-1]);
         f2.setPreferredSize(new Dimension(130, 20));
-        f2.setText(xml.name[0]);
+        f2.setText(xml.name[Nr-1]);
         f3.setPreferredSize(new Dimension(130, 20));
-        f3.setText(xml.amount[0]);
+        f3.setText(xml.amount[Nr-1]);
         f21.setPreferredSize(new Dimension(130, 20));
-        f21.setText(xml.amountNeeded[0]);
+        f21.setText(xml.amountNeeded[Nr-1]);
         f4.setPreferredSize(new Dimension(130, 20));
         f4.setBackground(Color.white);
-        f4.setText(xml.category[0]);
+        f4.setText(xml.category[Nr-1]);
         f5.setPreferredSize(new Dimension(130, 20));
         f5.setBackground(Color.white);
-        f5.setText(xml.bestbefore[0]);
+        f5.setText(xml.bestbefore[Nr-1]);
         b1.setBackground(Color.green);
         b1.setPreferredSize(new Dimension(130, 25));
         b2.setBackground(Color.red);
         b2.setPreferredSize(new Dimension(130, 25));
+
+        j.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("1");
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println("1");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("1");
+            }
+        });
 
         j.add(p1);
         p1.setVisible(true);
@@ -775,21 +798,19 @@ public class Gui{
 
         });
 
-
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 p1.setVisible(false);
                 j.setSize(0, 0);
                 j.setVisible(false);
-                restartProgram();
             }
         });
 
         f1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int guiID = Integer.parseInt(""+f1.getSelectedItem())+1;
-                    System.out.println(guiID);
+                    int guiID = Nr;
+                    //System.out.println(guiID);
                     f2.setText(xml.name[guiID]);
                     f3.setText(xml.amount[guiID]);
                     f21.setText(xml.amountNeeded[guiID]);
@@ -940,4 +961,32 @@ public class Gui{
         //System.out.println("Checkpoint 4: "+markX[1] + " "+ markY[1]);
 
     }
+
+
+    private void print(JTable table) {
+        if (attr == null) {
+            attr = new HashPrintRequestAttributeSet();
+            float leftMargin = 10;
+            float rightMargin = 10;
+            float topMargin = 10;
+            float bottomMargin = 10;
+            attr.add(OrientationRequested.PORTRAIT);
+            attr.add(MediaSizeName.ISO_A4);
+            MediaSize mediaSize = MediaSize.ISO.A4;
+            float mediaWidth = mediaSize.getX(Size2DSyntax.MM);
+            float mediaHeight = mediaSize.getY(Size2DSyntax.MM);
+            attr.add(new MediaPrintableArea(
+                    leftMargin, topMargin,
+                    (mediaWidth - leftMargin - rightMargin),
+                    (mediaHeight - topMargin - bottomMargin), Size2DSyntax.MM));
+        }
+        try {
+            table.print(JTable.PrintMode.FIT_WIDTH, null, null, true, attr, true);
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+        } catch (HeadlessException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
