@@ -192,6 +192,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
     }
 
     public void changeProduct (String idNew, String nameNew, String amountNew, String amountNeededNew, String bestbeforeNew, String categoryNew) {
+        debug();
         testPrintOut(Integer.parseInt(idNew)+1);
         name[Integer.parseInt(idNew)+1] = nameNew;
         amount[Integer.parseInt(idNew)+1] = amountNew;

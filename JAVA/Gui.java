@@ -603,17 +603,24 @@ public class Gui{
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Xml xml=new Xml();
+                if(f3.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&f2.getText().matches("\\d+")&&f21.getText().matches("\\d+")&&(f1.getText() != null && f1.getText().length()!=0)) {
+                    xml.addProduct(f1.getText(), f2.getText(), f21.getText(), f3.getText(), "" + f4.getSelectedItem());
 
-                xml.addProduct(f1.getText(),f2.getText(),f21.getText(), f3.getText(),"" + f4.getSelectedItem());
-                xml.overWrite();
 
-                System.out.println(f4.getSelectedItem());
+                    System.out.println(f4.getSelectedItem());
+                    p1.setVisible(false);
+                    j.setSize(0, 0);
+                    j.setVisible(false);
+                    xml.overWrite();
 
-                p1.setVisible(false);
-                j.setSize(0, 0);
-                j.setVisible(false);
+                    restartProgram();
+                }
+                else{
+                    JOptionPane.showMessageDialog(j,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                    xml.overWrite();
+                }
 
-                restartProgram();
+
             }
 
         });
