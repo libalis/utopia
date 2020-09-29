@@ -858,7 +858,7 @@ public class Gui{
         JPanel head=new JPanel();
 
         int AnzahlZuwenig=0;
-        for (int tmp = 2; tmp < xml.length; tmp++) {
+        for (int tmp = 0; tmp < xml.length; tmp++) {
             int x = Integer.parseInt(xml.amount[tmp]);
             int y = Integer.parseInt(xml.amountNeeded[tmp]);
             if (x > y) {
@@ -868,13 +868,13 @@ public class Gui{
 
         String[][] missing = new String[xml.length-AnzahlZuwenig][3];
         int geloeschtCounter=0;
-        for (int tmp = 2; tmp < xml.length; tmp++) {
+        for (int tmp = 0; tmp < xml.length; tmp++) {
             int x = Integer.parseInt(xml.amount[tmp]);
             int y = Integer.parseInt(xml.amountNeeded[tmp]);
             int diff;
             if (x < y) {
                 diff = x - y;
-                diff =diff-2*diff;
+                //diff =diff-2*diff;
                 String diffConv = String.valueOf(diff);
                 System.out.println(diff);
                 missing[tmp-geloeschtCounter][0] = xml.id[tmp];
@@ -888,14 +888,11 @@ public class Gui{
         }
         try {
             String[][] data = new String[xml.length-AnzahlZuwenig][3];
-            for (int i = 2; i < (xml.length-AnzahlZuwenig); i++) {
+            for (int i = 0; i < (xml.length-AnzahlZuwenig); i++) {
                 data[i][0] = missing[i][0];
                 data[i][1] = missing[i][1];
                 data[i][2] = missing[i][2];
             }
-            data[0][0] = "ID";
-            data[0][1] = "Name";
-            data[0][2] = "Benötigte Anzahl";
 
             String[] column = {"ID", "Name", "Differenz"};
 

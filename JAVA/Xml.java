@@ -54,7 +54,10 @@ public class Xml { //temporary code - switch from arrays to lists planned
     }
 
     private void reset() {
-        file = new File("Database.xml");
+        try{
+            file = new File("Database.xml");
+        }
+        catch(Exception h){}
         documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
         try {
