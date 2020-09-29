@@ -203,7 +203,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
     }
 
     public void removeProduct(String i) {
-        int e = Integer.parseInt(i)+1;
+        int e = Integer.parseInt(i)-1;
         try {
             printWriter.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             printWriter.println("<Database>");
