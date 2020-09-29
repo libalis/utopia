@@ -135,7 +135,7 @@ public class Gui{
             table.setDefaultRenderer(Object.class, myRenderer);
 
             ListSelectionModel cellSelectionModel = table.getSelectionModel();
-            cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            cellSelectionModel.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
             cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
@@ -374,7 +374,7 @@ public class Gui{
                     tablee.clearSelection();
                     System.out.println("Checkpoint 1: "+markX + " "+ markY);
                     //JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
-                    for (int i = 2; i < (xml.length); i++) {
+                    for (int i = 1; i < (xml.length); i++) {
                         String tmp2 = xml.id[i].trim();
                         String tmp3=xml.name[i].trim();
                         String tmp4=xml.amount[i].trim();
@@ -385,19 +385,19 @@ public class Gui{
                         if (tmp2.contains(tmp1)) {
                             tablee.addRowSelectionInterval(i, i);
                         }
-                        else if(tmp3.contains(tmp1)) {
+                        if(tmp3.contains(tmp1)) {
                             tablee.addRowSelectionInterval(i,i);
                         }
-                        else if(tmp4.contains(tmp1)){
+                        if(tmp4.contains(tmp1)){
                             tablee.addRowSelectionInterval(i,i);
                         }
-                        else if(tmp5.contains(tmp1)){
+                        if(tmp5.contains(tmp1)){
                             tablee.addRowSelectionInterval(i,i);
                         }
-                        else if(tmp6.contains(tmp1)){
+                        if(tmp6.contains(tmp1)){
                             tablee.addRowSelectionInterval(i,i);
                         }
-                        else if(tmp7.contains(tmp1)){
+                        if(tmp7.contains(tmp1)){
                             tablee.addRowSelectionInterval(i,i);
                         }
                     }
