@@ -816,7 +816,7 @@ public class Gui{
         f1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int guiID = Nr;
+                    int guiID = f1.getSelectedIndex();
                     //System.out.println(guiID);
                     f2.setText(xml.name[guiID]);
                     f3.setText(xml.amount[guiID]);
