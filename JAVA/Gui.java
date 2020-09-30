@@ -791,16 +791,22 @@ public class Gui{
         //Button funktionen werden eingefügt
         b1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 Xml xml = new Xml();
+                if(f5.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&f21.getText().matches("\\d+")&&f3.getText().matches("\\d+")&&(f2.getText() != null && f2.getText().length()!=0)) {
+                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
+                    xml.overWrite();
 
-                xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
-                xml.overWrite();
+                    p1.setVisible(false);
+                    j.setSize(0, 0);
+                    j.setVisible(false);
 
-                p1.setVisible(false);
-                j.setSize(0, 0);
-                j.setVisible(false);
-
-                restartProgram();
+                    restartProgram();
+                }
+                else{
+                    xml.overWrite();
+                    JOptionPane.showMessageDialog(j,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         });
