@@ -42,7 +42,7 @@ public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
     JFrame f = new JFrame();
     GridLayout grid=new GridLayout(1,4,0,20);
-    GridLayout links=new GridLayout(5,1,0,0);
+    GridLayout links=new GridLayout(6,1,0,0);
     JPanel rechteSeite=new JPanel();
     JPanel linkeSeite=new JPanel();
     JPanel linerContent=new JPanel(new BorderLayout());
@@ -422,10 +422,11 @@ public class Gui{
 
         linkeSeite.add(searchbar);
         searchbar.setPreferredSize(new Dimension(130, 20));
+
         linkeSeite.add(search);
-        /*Zeilenplatzhalter.setSize(new Dimension(130,10));
+        Zeilenplatzhalter.setSize(new Dimension(130,10));
         linkeSeite.add(Zeilenplatzhalter);
-        Zeilenplatzhalter.setBackground(Color.white);*/
+        Zeilenplatzhalter.setBackground(Color.white);
         linkeSeite.add(printTable);
         linkeSeite.add(printMissing);
         linkeSeite.add(lastChange);

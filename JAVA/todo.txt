@@ -36,6 +36,8 @@ Neues:
 - Dropdown-Box (Stck, Pck, usw) einfügen                                                                                      Umgesetzt
 - Links oder Firmenname einfügen                                                                                              In bearbeitung
 - Abgelaufene werden rot markiert, dafür formatrestiktionen                                                                   In bearbeitung
-- Automatische E-Mail                                                                                                         In bearbeitung
+- Automatische E-Mail
+-wenn sortiert wird muss suche funktionieren
+In bearbeitung
 
 letzter Patch 01.10.2020 ~ JF
