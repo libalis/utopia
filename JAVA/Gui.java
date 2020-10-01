@@ -24,10 +24,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -36,6 +33,9 @@ import javax.swing.table.*;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.io.FileWriter;
 
 
 public class Gui{
@@ -56,6 +56,8 @@ public class Gui{
     JButton search = new JButton("Search");
     JButton printTable = new JButton("Print");
     JButton printMissing = new JButton("Missing Products");
+    String lastDate ="-";
+    JLabel lastChange = new JLabel("<html>Letzte Änderung:<br/>"+lastDate+"</html>");
     JScrollPane scroll=new JScrollPane();
     JTable tablee=new JTable();
     JMenuBar bar=new JMenuBar();
@@ -156,6 +158,15 @@ public class Gui{
 
     //GUI wird erstellt
     public void GuiInit() {
+        try {
+            File file = new File("date.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            lastDate = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        lastChange.setText("<html>Letzte Änderung:<br/>"+lastDate+"</html>");
+
         bar.add(file);
         file.add(exportXml);
         file.add(importXml);
@@ -389,6 +400,8 @@ public class Gui{
         search.setToolTipText("Search for Product Name");
         printTable.setBackground(Color.YELLOW);
         printMissing.setBackground(Color.YELLOW);
+        lastChange.setBackground(Color.white);
+        lastChange.setFont(new Font("Sans",Font.PLAIN,12));
 
         //Alles wird zum Layout hinzugefügt
         scroll.setBackground(Color.WHITE);
@@ -410,13 +423,14 @@ public class Gui{
         linkeSeite.add(searchbar);
         searchbar.setPreferredSize(new Dimension(130, 20));
         linkeSeite.add(search);
-        Zeilenplatzhalter.setSize(new Dimension(130,10));
+        /*Zeilenplatzhalter.setSize(new Dimension(130,10));
         linkeSeite.add(Zeilenplatzhalter);
-        Zeilenplatzhalter.setBackground(Color.white);
+        Zeilenplatzhalter.setBackground(Color.white);*/
         linkeSeite.add(printTable);
         linkeSeite.add(printMissing);
+        linkeSeite.add(lastChange);
         linerContent.setBackground(Color.WHITE);
-        linerContent.setSize(new Dimension(170,50));
+        linerContent.setSize(new Dimension(170,1000));
         linerContent.add(linkeSeite, BorderLayout.NORTH);
         rehterContent.setBackground(Color.WHITE);
         rehterContent.setSize(new Dimension(120, 20));
@@ -435,6 +449,7 @@ public class Gui{
 
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                renewTextFile();
                 xml.overWrite();
                 f.dispose();
                 System.exit(0);
@@ -779,6 +794,7 @@ public class Gui{
 
     //Restart-Funktion
     public void restartProgram() {
+        renewTextFile();
         xml.overWrite();
 
         f.setSize(0,0);
@@ -925,4 +941,23 @@ public class Gui{
         }
     }
 
+    public String printTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat(
+                "dd.MM.yyyy - HH:mm ");
+        Date currentTime = new Date();
+        return formatter.format(currentTime)+"Uhr";
+    }
+
+    public void renewTextFile() {
+        try {
+            File textFile = new File("date.txt");
+            textFile.delete();
+            FileWriter writer = new FileWriter(textFile, true);
+            writer.write(printTime());
+            writer.write("\r\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
