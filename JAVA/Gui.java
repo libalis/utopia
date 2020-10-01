@@ -917,7 +917,7 @@ public class Gui{
             }
         }
         try {
-            String[][] data = new String[xml.length-AnzahlZuwenig][3];
+            String[][] data = new String[AnzahlZuwenig][3];
             for (int i = 0; i < (AnzahlZuwenig); i++) {
                 data[i][0] = missing[i][0];
                 data[i][1] = missing[i][1];
