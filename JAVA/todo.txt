@@ -4,11 +4,12 @@ Bugfixes:
 - ID beginnt bei 5???                                                                                                         Fixed
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)                        Fixed
 - Löschbutton funktioniert nicht                                                                                              Fixed
-- XML Clear Bug                                                                                                               In Bearbeitung
+- XML Clear Bug                                                                                                               Fixed
+- Sortier und Überschreibbug                                                                                                  In Bearbeitung
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 Erledigt
-- Produkte nach Kategorien sortieren                                                                                          Nicht umsetzbar
+- Produkte nach Kategorien sortieren                                                                                          Erledigt
 
 Neues:
 - Add-Button für Kategorien implementieren                                                                                    Umgesetzt - auskommentiert
@@ -19,14 +20,17 @@ Neues:
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Löschbutton für Produkt implementieren                                                                                      Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
-- Searchbar einfügen                                                                                                          Umgesetzt - ohne Funktion
-  - Button funktion einfügen                                                                                                  In Bearbeitung
+- Searchbar einfügen                                                                                                          Umgesetzt
+  - Button funktion einfügen                                                                                                  Umgesetzt
 - Print Button einfügen                                                                                                       Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
-- Missing Table Print Button einfügen                                                                                         Umgesetzt - nicht angezeigt
+- Missing Table Print Button einfügen                                                                                         Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Missing Products Button einfügen                                                                                            Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
-- Hotkeys einfügen (Enter im Menü, doppelklick auf Zelle)                                                                     In Planung
+- Hotkeys einfügen (Enter im Menü, doppelklick auf Zelle)                                                                     Nicht Umgesetzt
+- Label letzte Änderung & Label Patch einfügen                                                                                In bearbeitung
+- Dropdown-Box (Stck, Pck, usw) einfügen                                                                                      In bearbeitung
+- Links oder Firmenname einfügen                                                                                              In bearbeitung
 
-letzter Patch 15.09.2020 ~ JF
+letzter Patch 01.10.2020 ~ JF
