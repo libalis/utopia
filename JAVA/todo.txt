@@ -32,5 +32,7 @@ Neues:
 - Label letzte Änderung & Label Patch einfügen                                                                                In bearbeitung ~Jul
 - Dropdown-Box (Stck, Pck, usw) einfügen                                                                                      In bearbeitung ~Jul
 - Links oder Firmenname einfügen                                                                                              In bearbeitung
+- Abgelaufene werden rot markiert, dafür formatrestiktionen                                                                   In bearbeitung
+- Automatische E-Mail                                                                                                         In bearbeitung
 
 letzter Patch 01.10.2020 ~ JF
