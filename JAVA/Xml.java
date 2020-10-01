@@ -211,7 +211,7 @@ public class Xml { //temporary code - switch from arrays to lists planned
             for(int tmp = 0; tmp<e; tmp++) {
                 forProduct(tmp);
             }
-            for(int tmp = Integer.parseInt(i)+2; tmp<length; tmp++) {
+            for(int tmp = Integer.parseInt(i); tmp<length; tmp++) {
                 printWriter.println("\t<Product>");
                 printWriter.println("\t\t<ID>" + String.valueOf(Integer.parseInt(id[tmp])-1) + "</ID>");
                 printWriter.println("\t\t<Name>" + name[tmp] + "</Name>");
