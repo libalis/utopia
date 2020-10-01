@@ -5,6 +5,7 @@
 		<Name>Verbandsmull 30cm</Name>
 		<Amount>69</Amount>
 		<AmountNeeded>0</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Verbandsmaterial</Category>
 		<BestBefore>20.01.2002</BestBefore>
 	</Product>
@@ -13,6 +14,7 @@
 		<Name>Verbandspäckchen rot</Name>
 		<Amount>2</Amount>
 		<AmountNeeded>0</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Verbandsmaterial</Category>
 		<BestBefore>20.01.2020</BestBefore>
 	</Product>
@@ -21,6 +23,7 @@
 		<Name>Larynxtubus, Größe S</Name>
 		<Amount>-2</Amount>
 		<AmountNeeded>0</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Sauerstoff</Category>
 		<BestBefore>Sauerstoff</BestBefore>
 	</Product>
@@ -29,6 +32,7 @@
 		<Name>Whiteboard</Name>
 		<Amount>2</Amount>
 		<AmountNeeded>0</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Sonstiges</Category>
 		<BestBefore>nie</BestBefore>
 	</Product>
@@ -37,6 +41,7 @@
 		<Name>Einmalhandschuhe M</Name>
 		<Amount>99</Amount>
 		<AmountNeeded>0</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Hygiene</Category>
 		<BestBefore>01.01.2000</BestBefore>
 	</Product>
@@ -45,6 +50,7 @@
 		<Name>Ameisenfallen</Name>
 		<Amount>0</Amount>
 		<AmountNeeded>2</AmountNeeded>
+		<Unit>Stck</Unit>
 		<Category>Hygiene</Category>
 		<BestBefore>nein</BestBefore>
 	</Product>
