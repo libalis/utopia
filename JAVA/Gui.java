@@ -18,13 +18,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import org.w3c.dom.Document;
-
 import javax.print.attribute.*;
 import javax.print.attribute.standard.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.io.BufferedWriter;
@@ -36,19 +33,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
 public class Gui{
     //erste Variablen werden initialisiert und der Frame erstellt
     JFrame f = new JFrame();
-    BorderLayout Layout = new BorderLayout();
     GridLayout grid=new GridLayout(1,4,0,20);
     GridLayout links=new GridLayout(5,1,0,0);
     JPanel rechteSeite=new JPanel();
@@ -73,12 +65,9 @@ public class Gui{
 
     JFrame frame = new JFrame();
 
-    String[] choices = new String[10];
-
     String searched;
-    int[] markX = new int[2];
-    int[] markY = new int[2];
-
+    String[] categories = new String[7];
+    String[] units = new String[5];
     ImageIcon image = new ImageIcon("image.png");
     JLabel bild = new JLabel (image);
 
@@ -88,17 +77,18 @@ public class Gui{
     //Tabelle wird erstellt
     public JTable TableExample() {
         try {
-            String[][] data = new String[xml.length][6];
+            String[][] data = new String[xml.length][7];
             for (int i = 0; i < (xml.length); i++) {
                 data[i][0] = xml.id[i];
                 data[i][1] = xml.name[i];
                 data[i][2] = xml.amount[i];
                 data[i][3] = xml.amountNeeded[i];
-                data[i][4] = xml.category[i];
-                data[i][5] = xml.bestbefore[i];
+                data[i][4] = xml.unit[i];
+                data[i][5] = xml.category[i];
+                data[i][6] = xml.bestbefore[i];
             }
 
-            String[] column = {"ID", "Name", "Amount", "AmountNeeded", "Category", "Bestbefore"};//-
+            String[] column = {"ID", "Name", "Anzahl", "Benötigt","Einheit", "Kategorie", "Ablaufdatum"};//-
 
             DefaultTableModel tableModel = new DefaultTableModel(data, column) {
 
@@ -109,54 +99,30 @@ public class Gui{
                 }
             };
 
-            class MyRenderer extends DefaultTableCellRenderer
-            {
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column)
-                {
-                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                    if (! table.isRowSelected(row))
-                    {
-
-                        if (row == markY[1] && column == markX[1])
-                            c.setBackground(Color.yellow);
-                        else
-                            c.setBackground(Color.white);
-
-                    }
-                    return c;
-                }
-
-            }
-
             JTable table = new JTable(tableModel);
             table.setSelectionBackground(Color.yellow);
-            MyRenderer myRenderer = new MyRenderer();
-            table.setDefaultRenderer(Object.class, myRenderer);
 
             ListSelectionModel cellSelectionModel = table.getSelectionModel();
             cellSelectionModel.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
             cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
-                    public void valueChanged(ListSelectionEvent e) {
-                        String selectedData = null;
+                public void valueChanged(ListSelectionEvent e) {
+                    String selectedData = null;
 
 
-                        int[] selectedRow = table.getSelectedRows();
-                        int[] selectedColumns = table.getSelectedColumns();
-                        int dataRow = 0;
+                    int[] selectedRow = table.getSelectedRows();
+                    int[] selectedColumns = table.getSelectedColumns();
+                    int dataRow = 0;
 
-                        for (int i = 0; i < selectedRow.length; i++) {
-                            for (int j = 0; j < selectedColumns.length; j++) {
-                                selectedData = (String) table.getValueAt(selectedRow[i], selectedColumns[j]);
-                                dataRow = Integer.valueOf(xml.id[selectedRow[i]].trim());
-                                System.out.println("ID " + xml.id[selectedRow[i]]);
-                            }
+                    for (int i = 0; i < selectedRow.length; i++) {
+                        for (int j = 0; j < selectedColumns.length; j++) {
+                            selectedData = (String) table.getValueAt(selectedRow[i], selectedColumns[j]);
+                            dataRow = Integer.valueOf(xml.id[selectedRow[i]].trim());
                         }
-                        System.out.println("Selected: " + selectedData);
-                        //changeProduct(dataRow);
                     }
+                    //changeProduct(dataRow);
+                }
             });
 
 
@@ -190,27 +156,23 @@ public class Gui{
 
     //GUI wird erstellt
     public void GuiInit() {
-
-
-
         bar.add(file);
         file.add(exportXml);
         file.add(importXml);
 
-        markX[1]=-1;
-        markY[1]=-1;
-
         //Auswahl der Kategorien - wird per Hand bearbeitet
-        choices[0] = "Verbandsmaterial";
-        choices[1] = "Sauerstoff";
-        choices[2] = "Injektion";
-        choices[3] = "Hygiene";
-        choices[4] = "Sonstiges";
-        choices[5] = "Kategorie 6";
-        choices[6] = "Kategorie 7";
-        choices[7] = "Kategorie 8";
-        choices[8] = "Kategorie 9";
-        choices[9] = "Kategorie 10";
+        categories[0] = "Verbandsmaterial";
+        categories[1] = "Sauerstoff";
+        categories[2] = "Injektion";
+        categories[3] = "Hygiene";
+        categories[4] = "Sonstiges";
+        categories[5] = "Kategorie 6";
+        categories[6] = "Kategorie 7";
+
+        units[0] = "Stck";
+        units[1] = "Pck";
+        units[2] = "Kst";
+        units[3] = "Sonstiges";
 
         //Buttons auf der rechten Seite werden erstellt
         ImageIcon pls = new ImageIcon("plus.png");
@@ -366,14 +328,12 @@ public class Gui{
         searchbar.setText(" ");
         search.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //try {
                 searched = searchbar.getText();
                 if (searched == "" || searched == null || searched == " ") {
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
                     tablee.clearSelection();
-                    System.out.println("Checkpoint 1: "+markX + " "+ markY);
-                    //JOptionPane.showMessageDialog(frame, "Das hätte Marcel programmieren sollen, hat er aber nicht. Du hast folgendes gesucht: " + searched,"Info", JOptionPane.INFORMATION_MESSAGE);
+
                     for (int i = 1; i < (xml.length); i++) {
                         String tmp2 = xml.id[i].trim();
                         String tmp3=xml.name[i].trim();
@@ -422,7 +382,6 @@ public class Gui{
             public void actionPerformed(ActionEvent e) {
                 //Fehlendes Material ausdrucken
                 missingProducts();
-                //JOptionPane.showMessageDialog(frame, "Dieser Button hat keine oder eine fehlerhafte Funktion","Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -488,347 +447,329 @@ public class Gui{
     //Funktion für die GUI fürs hinzufügen eines neuen Produktes wird erstellt
     public void addProduct() {
         //Bestandteile werden initialisiert
-        JFrame j = new JFrame("Produkt hinzufügen");
-        JPanel p1 = new JPanel();
+        JFrame frameAdd = new JFrame("Produkt hinzufügen");
+        JPanel panelAdd = new JPanel();
         JLabel header = new JLabel("Add Product");
-        JLabel sth = new JLabel("                     ");
-        JLabel l0 = new JLabel("ID");
-        JLabel l1 = new JLabel("Name");
-        JLabel l2 = new JLabel("Amount");
-        JLabel l21 = new JLabel("AmountNeeded");
-        JLabel l4 = new JLabel("Category");
-        JLabel l3 = new JLabel("Bestbefore");
-        JLabel f0 = new JLabel("");
-        JTextField f1 = new JTextField();
-        JTextField f2 = new JTextField();
-        JTextField f21 = new JTextField();
-        JTextField f3 = new JTextField();
-        JComboBox f4 = new JComboBox(choices);
+        JLabel spacer = new JLabel("                     ");
+        JLabel labelID = new JLabel("ID");
+        JLabel labelName = new JLabel("Name");
+        JLabel labelAmount = new JLabel("Amount");
+        JLabel labelAmountNeeded = new JLabel("AmountNeeded");
+        JLabel labelUnit = new JLabel("Unit");
+        JLabel labelCategory = new JLabel("Category");
+        JLabel labelBestBefore = new JLabel("Bestbefore");
+        JLabel labelStaticID = new JLabel("");
+        JTextField fieldName = new JTextField();
+        JTextField fieldAmount = new JTextField();
+        JTextField fieldAmountNeeded = new JTextField();
+        JTextField fieldBestBefore = new JTextField();
+        JComboBox boxCategories = new JComboBox(categories);
+        JComboBox boxUnits = new JComboBox(units);
 
-        JButton b1 = new JButton("Add");
-        JButton b2 = new JButton("Abbrechen");
+        JButton buttonAdd = new JButton("Hinzufügen");
+        JButton buttonCancel = new JButton("Abbrechen");
 
         //Layout wird festgelegt
-        p1.setLayout(new GridBagLayout());
+        panelAdd.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.VERTICAL;
 
         c.gridx = 1;
         c.gridy = 0;
-        p1.add(header, c);
+        panelAdd.add(header, c);
 
         c.gridx = 1;
         c.gridy = 1;
-        p1.add(sth, c);
+        panelAdd.add(spacer, c);
 
         c.gridx = 0;
         c.gridy = 2;
-        p1.add(l0, c);
+        panelAdd.add(labelID, c);
 
         c.gridx = 1;
         c.gridy = 2;
-        p1.add(f0, c);
+        panelAdd.add(labelStaticID, c);
 
         c.gridx = 0;
         c.gridy = 3;
-        p1.add(l1, c);
+        panelAdd.add(labelName, c);
 
         c.gridx = 1;
         c.gridy = 3;
-        p1.add(f1, c);
+        panelAdd.add(fieldName, c);
 
         c.gridx = 0;
         c.gridy = 4;
-        p1.add(l2, c);
+        panelAdd.add(labelAmount, c);
 
         c.gridx = 1;
         c.gridy = 4;
-        p1.add(f2, c);
+        panelAdd.add(fieldAmount, c);
 
         c.gridx = 0;
         c.gridy = 5;
-        p1.add(l21, c);
+        panelAdd.add(labelAmountNeeded, c);
 
         c.gridx = 1;
         c.gridy = 5;
-        p1.add(f21, c);
-
+        panelAdd.add(fieldAmountNeeded, c);
 
         c.gridx = 0;
         c.gridy = 6;
-        p1.add(l4, c);
+        panelAdd.add(labelUnit, c);
 
         c.gridx = 1;
         c.gridy = 6;
-        p1.add(f4, c);
+        panelAdd.add(boxUnits, c);
 
         c.gridx = 0;
         c.gridy = 7;
-        p1.add(l3, c);
-
+        panelAdd.add(labelCategory, c);
 
         c.gridx = 1;
         c.gridy = 7;
-        p1.add(f3, c);
+        panelAdd.add(boxCategories, c);
 
         c.gridx = 0;
         c.gridy = 8;
-        p1.add(b1, c);
+        panelAdd.add(labelBestBefore, c);
+
 
         c.gridx = 1;
         c.gridy = 8;
-        p1.add(b2, c);
+        panelAdd.add(fieldBestBefore, c);
+
+        c.gridx = 0;
+        c.gridy = 9;
+        panelAdd.add(buttonAdd, c);
+
+        c.gridx = 1;
+        c.gridy = 9;
+        panelAdd.add(buttonCancel, c);
 
         String s = String.valueOf(xml.length+1);
-        f0.setText("Nr. "+s);
-        f1.setPreferredSize(new Dimension(130, 20));
-        f2.setPreferredSize(new Dimension(130, 20));
-        f21.setPreferredSize(new Dimension(130, 20));
-        f3.setPreferredSize(new Dimension(130, 20));
-        f4.setPreferredSize(new Dimension(130, 20));
-        f4.setBackground(Color.white);
-        b1.setBackground(Color.green);
-        b1.setPreferredSize(new Dimension(130, 25));
-        b2.setBackground(Color.red);
-        b2.setPreferredSize(new Dimension(130, 25));
+        labelStaticID.setText("Nr. "+s);
+        fieldName.setPreferredSize(new Dimension(130, 20));
+        fieldAmount.setPreferredSize(new Dimension(130, 20));
+        fieldAmountNeeded.setPreferredSize(new Dimension(130, 20));
+        boxUnits.setPreferredSize(new Dimension(130, 20));
+        boxUnits.setBackground(Color.white);
+        fieldBestBefore.setPreferredSize(new Dimension(130, 20));
+        boxCategories.setPreferredSize(new Dimension(130, 20));
+        boxCategories.setBackground(Color.white);
+        buttonAdd.setBackground(Color.green);
+        buttonAdd.setPreferredSize(new Dimension(130, 25));
+        buttonCancel.setBackground(Color.red);
+        buttonCancel.setPreferredSize(new Dimension(130, 25));
 
-        j.add(p1);
-        p1.setVisible(true);
-        j.setSize(500, 500);
-        j.setVisible(true);
+        frameAdd.add(panelAdd);
+        panelAdd.setVisible(true);
+        frameAdd.setSize(500, 500);
+        frameAdd.setVisible(true);
 
         //Button funktionen werden eingefügt
-
-        b1.addActionListener(new ActionListener() {
+        buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Xml xml=new Xml();
-                if(f3.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&f2.getText().matches("\\d+")&&f21.getText().matches("\\d+")&&(f1.getText() != null && f1.getText().length()!=0)) {
-                    xml.addProduct(f1.getText(), f2.getText(), f21.getText(), f3.getText(), "" + f4.getSelectedItem());
+                //if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldName.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
+                    xml.addProduct(fieldName.getText(),fieldAmount.getText(),fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(), fieldBestBefore.getText(),""+boxCategories.getSelectedItem());
 
-
-                    System.out.println(f4.getSelectedItem());
-                    p1.setVisible(false);
-                    j.setSize(0, 0);
-                    j.setVisible(false);
+                    panelAdd.setVisible(false);
+                    frameAdd.setSize(0, 0);
+                    frameAdd.setVisible(false);
                     xml.overWrite();
 
                     restartProgram();
-                }
-                else{
-                    JOptionPane.showMessageDialog(j,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
-                    xml.overWrite();
-                }
-
-
-            }
-
-        });
-
-
-        b2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //System.out.println("Abbrechen");
-                p1.setVisible(false);
-                j.setSize(0, 0);
-                j.setVisible(false);
+                //}
+                //else{
+                    //JOptionPane.showMessageDialog(frameAdd,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                    //xml.overWrite();
+                //}
             }
         });
 
-
-        /*b3.addActionListener(new ActionListener() {
+        buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String newCategory;
-                newCategory = JOptionPane.showInputDialog("Please input new Category: ");
-                System.out.println(newCategory);
-                for (int i = 1; i < 10; i++) {
-                    if (choices[i] == "" || choices[i] == null) {
-                        choices[i] = newCategory;
-                    }
-                }
+                panelAdd.setVisible(false);
+                frameAdd.setSize(0, 0);
+                frameAdd.setVisible(false);
             }
-        });*/
+        });
     }
 
     //Funktion für die GUI zum ändern von Produkten wird erstellt
     public void changeProduct(int Nr) {
         //Bestandteile werden initialisiert
-        JFrame j = new JFrame("Produkt ändern");
-        JPanel p1 = new JPanel();
+        JFrame changeFrame = new JFrame("Produkt ändern");
+        JPanel changePanel = new JPanel();
         JLabel header = new JLabel("Change Product");
-        JLabel sth = new JLabel("                     ");
-        JLabel l0 = new JLabel("ID");
-        JLabel l1 = new JLabel("Name");
-        JLabel l2 = new JLabel("Amount");
-        JLabel l21 = new JLabel("AmountNeeded");
-        JLabel l3 = new JLabel("Category");
-        JLabel l4 = new JLabel("Bestbefore");
-        JComboBox f1 = new JComboBox(xml.id);
-        JTextField f2 = new JTextField();
-        JTextField f21 = new JTextField();
-        JTextField f3 = new JTextField();
-        JLabel f4 = new JLabel("");
-        JTextField f5 = new JTextField();
+        JLabel spacer = new JLabel("                     ");
+        JLabel labelID = new JLabel("ID");
+        JLabel labelName = new JLabel("Name");
+        JLabel labelAmount = new JLabel("Amount");
+        JLabel labelAmountNeeded = new JLabel("AmountNeeded");
+        JLabel labelUnit = new JLabel("Unit");
+        JLabel labelCategory = new JLabel("Category");
+        JLabel labelBestbefore = new JLabel("Bestbefore");
+        JComboBox boxID = new JComboBox(xml.id);
+        JTextField fieldName = new JTextField();
+        JTextField fieldAmount = new JTextField();
+        JTextField fieldAmountNeeded = new JTextField();
+        JLabel labelFieldCategory = new JLabel("");
+        JTextField fieldBestBefore = new JTextField();
+        JComboBox boxUnits = new JComboBox(units);
 
-        JButton b1 = new JButton("Change");
-        JButton b2 = new JButton("Cancel");
+        JButton buttonChange = new JButton("Change");
+        JButton buttonCancel = new JButton("Cancel");
 
         //Layout wird kreiert
-        p1.setLayout(new GridBagLayout());
+        changePanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         c.fill = GridBagConstraints.VERTICAL;
 
         c.gridx = 1;
         c.gridy = 0;
-        p1.add(header, c);
+        changePanel.add(header, c);
 
         c.gridx = 1;
         c.gridy = 1;
-        p1.add(sth, c);
+        changePanel.add(spacer, c);
 
         c.gridx = 0;
         c.gridy = 2;
-        p1.add(l0, c);
+        changePanel.add(labelID, c);
 
         c.gridx = 1;
         c.gridy = 2;
-        p1.add(f1, c);
+        changePanel.add(boxID, c);
 
         c.gridx = 0;
         c.gridy = 3;
-        p1.add(l1, c);
+        changePanel.add(labelName, c);
 
         c.gridx = 1;
         c.gridy = 3;
-        p1.add(f2, c);
+        changePanel.add(fieldName, c);
 
         c.gridx = 0;
         c.gridy = 4;
-        p1.add(l2, c);
+        changePanel.add(labelAmount, c);
 
         c.gridx = 1;
         c.gridy = 4;
-        p1.add(f3, c);
+        changePanel.add(fieldAmount, c);
 
         c.gridx = 0;
         c.gridy = 5;
-        p1.add(l21, c);
+        changePanel.add(labelAmountNeeded, c);
 
         c.gridx = 1;
         c.gridy = 5;
-        p1.add(f21, c);
+        changePanel.add(fieldAmountNeeded, c);
 
         c.gridx = 0;
         c.gridy = 6;
-        p1.add(l3, c);
-
+        changePanel.add(labelUnit, c);
 
         c.gridx = 1;
         c.gridy = 6;
-        p1.add(f4, c);
+        changePanel.add(boxUnits, c);
 
         c.gridx = 0;
         c.gridy = 7;
-        p1.add(l4, c);
+        changePanel.add(labelCategory, c);
 
 
         c.gridx = 1;
         c.gridy = 7;
-        p1.add(f5, c);
+        changePanel.add(labelFieldCategory, c);
 
         c.gridx = 0;
         c.gridy = 8;
-        p1.add(b1, c);
+        changePanel.add(labelBestbefore, c);
+
 
         c.gridx = 1;
         c.gridy = 8;
-        p1.add(b2, c);
+        changePanel.add(fieldBestBefore, c);
+
+        c.gridx = 0;
+        c.gridy = 9;
+        changePanel.add(buttonChange, c);
+
+        c.gridx = 1;
+        c.gridy = 9;
+        changePanel.add(buttonCancel, c);
 
 
-        f1.setPreferredSize(new Dimension(130, 20));
-        f1.setSelectedItem(xml.id[Nr-1]);
-        f2.setPreferredSize(new Dimension(130, 20));
-        f2.setText(xml.name[Nr-1]);
-        f3.setPreferredSize(new Dimension(130, 20));
-        f3.setText(xml.amount[Nr-1]);
-        f21.setPreferredSize(new Dimension(130, 20));
-        f21.setText(xml.amountNeeded[Nr-1]);
-        f4.setPreferredSize(new Dimension(130, 20));
-        f4.setBackground(Color.white);
-        f4.setText(xml.category[Nr-1]);
-        f5.setPreferredSize(new Dimension(130, 20));
-        f5.setBackground(Color.white);
-        f5.setText(xml.bestbefore[Nr-1]);
-        b1.setBackground(Color.green);
-        b1.setPreferredSize(new Dimension(130, 25));
-        b2.setBackground(Color.red);
-        b2.setPreferredSize(new Dimension(130, 25));
+        boxID.setPreferredSize(new Dimension(130, 20));
+        boxID.setSelectedItem(xml.id[Nr-1]);
+        fieldName.setPreferredSize(new Dimension(130, 20));
+        fieldName.setText(xml.name[Nr-1]);
+        fieldAmount.setPreferredSize(new Dimension(130, 20));
+        fieldAmount.setText(xml.amount[Nr-1]);
+        fieldAmountNeeded.setPreferredSize(new Dimension(130, 20));
+        fieldAmountNeeded.setText(xml.amountNeeded[Nr-1]);
+        boxUnits.setPreferredSize(new Dimension(130, 20));
+        boxUnits.setSelectedItem(xml.unit[Nr-1]);
+        labelFieldCategory.setPreferredSize(new Dimension(130, 20));
+        labelFieldCategory.setBackground(Color.white);
+        labelFieldCategory.setText(xml.category[Nr-1]);
+        fieldBestBefore.setPreferredSize(new Dimension(130, 20));
+        fieldBestBefore.setBackground(Color.white);
+        fieldBestBefore.setText(xml.bestbefore[Nr-1]);
+        buttonChange.setBackground(Color.green);
+        buttonChange.setPreferredSize(new Dimension(130, 25));
+        buttonCancel.setBackground(Color.red);
+        buttonCancel.setPreferredSize(new Dimension(130, 25));
 
-        j.addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                System.out.println("1");
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                System.out.println("1");
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                System.out.println("1");
-            }
-        });
-
-        j.add(p1);
-        p1.setVisible(true);
-        j.setSize(500, 500);
-        j.setVisible(true);
+        changeFrame.add(changePanel);
+        changePanel.setVisible(true);
+        changeFrame.setSize(500, 500);
+        changeFrame.setVisible(true);
 
         //Button funktionen werden eingefügt
-        b1.addActionListener(new ActionListener() {
+        buttonChange.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 Xml xml = new Xml();
-                if(f5.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&f21.getText().matches("\\d+")&&f3.getText().matches("\\d+")&&(f2.getText() != null && f2.getText().length()!=0)) {
-                    xml.changeProduct("" + f1.getSelectedItem(), f2.getText(), f3.getText(), f21.getText(), f5.getText(), f4.getText());
+                //if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldAmountNeeded.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
+                    xml.changeProduct("" + boxID.getSelectedItem(), fieldName.getText(), fieldAmount.getText(), fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(), fieldBestBefore.getText(), labelFieldCategory.getText());
                     xml.overWrite();
 
-                    p1.setVisible(false);
-                    j.setSize(0, 0);
-                    j.setVisible(false);
+                    changePanel.setVisible(false);
+                    changeFrame.setSize(0, 0);
+                    changeFrame.setVisible(false);
 
                     restartProgram();
-                }
-                else{
-                    xml.overWrite();
-                    JOptionPane.showMessageDialog(j,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
-                }
+                //}
+                //else{
+                    //xml.overWrite();
+                    //JOptionPane.showMessageDialog(changeFrame,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                //}
             }
 
         });
 
-        b2.addActionListener(new ActionListener() {
+        buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                p1.setVisible(false);
-                j.setSize(0, 0);
-                j.setVisible(false);
+                changePanel.setVisible(false);
+                changeFrame.setSize(0, 0);
+                changeFrame.setVisible(false);
             }
         });
 
-        f1.addActionListener(new ActionListener() {
+        boxID.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int guiID = f1.getSelectedIndex();
-                    //System.out.println(guiID);
-                    f2.setText(xml.name[guiID]);
-                    f3.setText(xml.amount[guiID]);
-                    f21.setText(xml.amountNeeded[guiID]);
-                    f4.setText(xml.category[guiID]);
-                    f5.setText(xml.bestbefore[guiID]);
+                    int guiID = boxID.getSelectedIndex();
+                    fieldName.setText(xml.name[guiID]);
+                    fieldAmount.setText(xml.amount[guiID]);
+                    fieldAmountNeeded.setText(xml.amountNeeded[guiID]);
+                    labelFieldCategory.setText(xml.category[guiID]);
+                    fieldBestBefore.setText(xml.bestbefore[guiID]);
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(frame , "Du musst eine gültige Id auswählen!","Error",JOptionPane.ERROR_MESSAGE);
                 }
@@ -847,60 +788,30 @@ public class Gui{
         g1.GuiInit();
     }
 
-    public void resetColors() {
-        xml.overWrite();
-
-        f.setSize(0,0);
-        f.setVisible(false);
-
-        markY[1] = 1;
-        markX[1] = 1;
-
-        Gui g1 = new Gui();
-        g1.GuiInit();
-    }
-
     //Extra Stuff - in Bearbeitung
     public void missingProducts () {
-        JFrame f1 = new JFrame();
-        JPanel links=new JPanel(new BorderLayout());
+        JFrame frameMissing = new JFrame();
+        JPanel links = new JPanel(new BorderLayout());
         JPanel ContentPane1 = new JPanel(new BorderLayout());
         JLabel Headerlabel1 = new JLabel("Benötigtes Material");
         JButton print = new JButton("Print");
-        JScrollPane p=new JScrollPane();
-        JPanel head=new JPanel();
+        JScrollPane p = new JScrollPane();
+        JPanel head = new JPanel();
 
         int AnzahlZuwenig=0;
         for (int tmp = 0; tmp < xml.length; tmp++) {
-            int x=0;
-            int y=0;
-            try {
-                x = Integer.parseInt(xml.amount[tmp]);
+            int x = Integer.parseInt(xml.amount[tmp]);
+            int y = Integer.parseInt(xml.amountNeeded[tmp]);
+            if (x > y) {
+                AnzahlZuwenig++;
             }
-            catch (Exception e){}
-            try {
-                y = Integer.parseInt(xml.amountNeeded[tmp]);
-            }
-            catch (Exception d){}
-                if (x < y) {
-                    AnzahlZuwenig++;
-                }
         }
 
-        String[][] missing = new String[AnzahlZuwenig][3];
-        System.out.println(AnzahlZuwenig);
+        String[][] missing = new String[xml.length-AnzahlZuwenig][3];
         int geloeschtCounter=0;
         for (int tmp = 0; tmp < xml.length; tmp++) {
-            int x=0;
-            int y=0;
-            try {
-                x = Integer.parseInt(xml.amount[tmp]);
-            }
-            catch (Exception e){}
-            try {
-                y = Integer.parseInt(xml.amountNeeded[tmp]);
-            }
-            catch (Exception d){}
+            int x = Integer.parseInt(xml.amount[tmp]);
+            int y = Integer.parseInt(xml.amountNeeded[tmp]);
             int diff;
             if (x < y) {
                 diff = x - y;
@@ -917,8 +828,8 @@ public class Gui{
             }
         }
         try {
-            String[][] data = new String[AnzahlZuwenig][3];
-            for (int i = 0; i < (AnzahlZuwenig); i++) {
+            String[][] data = new String[xml.length-AnzahlZuwenig][3];
+            for (int i = 0; i < (xml.length-AnzahlZuwenig); i++) {
                 data[i][0] = missing[i][0];
                 data[i][1] = missing[i][1];
                 data[i][2] = missing[i][2];
@@ -975,18 +886,16 @@ public class Gui{
         Headerlabel1.setFont(new Font("Sans", Font.BOLD, 30));
 
 
-        f1.setSize(1150, 720);
-        f1.setBackground(Color.white);
+        frameMissing.setSize(1150, 720);
+        frameMissing.setBackground(Color.white);
 
 
-        f1.add(ContentPane1);
-        f1.setVisible(true);
-        f1.setContentPane(ContentPane1);
+        frameMissing.add(ContentPane1);
+        frameMissing.setVisible(true);
+        frameMissing.setContentPane(ContentPane1);
 
-        f1.setLayout(null);
-        f1.setVisible(true);
-        //System.out.println("Checkpoint 4: "+markX[1] + " "+ markY[1]);
-
+        frameMissing.setLayout(null);
+        frameMissing.setVisible(true);
     }
 
 
