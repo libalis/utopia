@@ -872,18 +872,35 @@ public class Gui{
 
         int AnzahlZuwenig=0;
         for (int tmp = 0; tmp < xml.length; tmp++) {
-            int x = Integer.parseInt(xml.amount[tmp]);
-            int y = Integer.parseInt(xml.amountNeeded[tmp]);
-            if (x > y) {
-                AnzahlZuwenig++;
+            int x=0;
+            int y=0;
+            try {
+                x = Integer.parseInt(xml.amount[tmp]);
             }
+            catch (Exception e){}
+            try {
+                y = Integer.parseInt(xml.amountNeeded[tmp]);
+            }
+            catch (Exception d){}
+                if (x < y) {
+                    AnzahlZuwenig++;
+                }
         }
 
-        String[][] missing = new String[xml.length-AnzahlZuwenig][3];
+        String[][] missing = new String[AnzahlZuwenig][3];
+        System.out.println(AnzahlZuwenig);
         int geloeschtCounter=0;
         for (int tmp = 0; tmp < xml.length; tmp++) {
-            int x = Integer.parseInt(xml.amount[tmp]);
-            int y = Integer.parseInt(xml.amountNeeded[tmp]);
+            int x=0;
+            int y=0;
+            try {
+                x = Integer.parseInt(xml.amount[tmp]);
+            }
+            catch (Exception e){}
+            try {
+                y = Integer.parseInt(xml.amountNeeded[tmp]);
+            }
+            catch (Exception d){}
             int diff;
             if (x < y) {
                 diff = x - y;
@@ -901,7 +918,7 @@ public class Gui{
         }
         try {
             String[][] data = new String[xml.length-AnzahlZuwenig][3];
-            for (int i = 0; i < (xml.length-AnzahlZuwenig); i++) {
+            for (int i = 0; i < (AnzahlZuwenig); i++) {
                 data[i][0] = missing[i][0];
                 data[i][1] = missing[i][1];
                 data[i][2] = missing[i][2];
