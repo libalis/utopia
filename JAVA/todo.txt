@@ -7,7 +7,7 @@ Bugfixes:
 - XML Clear Bug                                                                                                               Fixed
 - Sortier und Überschreibbug                                                                                                  Fixed
 - Eingabe-Kontrolle funzt nicht (z.B. Überprüfung ob ein Datum im Feld Datum drinsteht)                                       Fixed
-- wenn sortiert wird muss suche funktionieren                                                                                 In bearbeitung
+- wenn sortiert wird muss suche funktionieren                                                                                 Fixed
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 Erledigt
