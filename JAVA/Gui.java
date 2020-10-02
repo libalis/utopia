@@ -344,6 +344,7 @@ public class Gui{
                     JOptionPane.showMessageDialog(frame, "Du hast nichts eingegeben!","Error", JOptionPane.ERROR_MESSAGE); //Doesn't work
                 } else {
                     tablee.clearSelection();
+                    SortJTableBeforeSearch();
 
                     for (int i = 0; i < (xml.length); i++) {
                         String tmp2 = xml.id[i].trim();
@@ -962,7 +963,20 @@ public class Gui{
             writer.write("\r\n");
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
+
+    public void SortJTableBeforeSearch(){
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tablee.getModel());
+        tablee.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> s = new ArrayList<>();
+
+        int columnIndexToSort = 0;
+        s.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+
+        sorter.setSortKeys(s);
+        sorter.sort();
+    }
+
 }
+
