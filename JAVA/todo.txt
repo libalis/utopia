@@ -5,17 +5,18 @@ Bugfixes:
 - Wenn man neue Produkte einfügt ist die Sortierung falsch (Ablaufdatum und Kategorie sind vertauscht)                        Fixed
 - Löschbutton funktioniert nicht                                                                                              Fixed
 - XML Clear Bug                                                                                                               Fixed
-- Sortier und Überschreibbug                                                                                                  In Bearbeitung ~alle
-- Eingabe-Kontrolle funzt nicht (z.B. Überprüfung ob ein Datum im Feld Datum drinsteht)                                       In Bearbeitung
+- Sortier und Überschreibbug                                                                                                  Fixed
+- Eingabe-Kontrolle funzt nicht (z.B. Überprüfung ob ein Datum im Feld Datum drinsteht)                                       Fixed
+- wenn sortiert wird muss suche funktionieren                                                                                 In bearbeitung
 
 Änderungen:
 - Proportionen in der GUI anpassen (Tabelle insgesamt größer)                                                                 Erledigt
 - Produkte nach Kategorien sortieren                                                                                          Erledigt
-- Design der linken Spalte optisch anpassen                                                                                   In Bearbeitung
+- Design der linken Spalte optisch anpassen                                                                                   Erledigt
 
 Neues:
 - Add-Button für Kategorien implementieren                                                                                    Umgesetzt - auskommentiert
-  - Button funktion einfügen - neue xml-datei???                                                                              Nicht umsetzbar
+  - Button funktion einfügen - neue xml-datei???                                                                              Nicht Umgesetzt
 - Add-Button für Anzahl eines Produktes implementieren                                                                        Umgesetzt
   - Button funktion einfügen                                                                                                  Umgesetzt
 - Bearbeitungs-Button für Ablaufdatum eines Produktes implementieren                                                          Umgesetzt
@@ -36,8 +37,6 @@ Neues:
 - Dropdown-Box (Stck, Pck, usw) einfügen                                                                                      Umgesetzt
 - Links oder Firmenname einfügen                                                                                              In bearbeitung
 - Abgelaufene werden rot markiert, dafür formatrestiktionen                                                                   In bearbeitung
-- Automatische E-Mail
--wenn sortiert wird muss suche funktionieren
-In bearbeitung
+- Automatische E-Mail                                                                                                         In Bearbeitung
 
 letzter Patch 01.10.2020 ~ JF
