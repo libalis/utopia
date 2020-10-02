@@ -180,9 +180,9 @@ public class Gui{
         categories[5] = "Kategorie 6";
         categories[6] = "Kategorie 7";
 
-        units[0] = "Stck";
-        units[1] = "Pck";
-        units[2] = "Kst";
+        units[0] = "Stück/e";
+        units[1] = "Packung/en";
+        units[2] = "Kiste/n";
         units[3] = "Sonstiges";
 
         //Buttons auf der rechten Seite werden erstellt
@@ -345,13 +345,14 @@ public class Gui{
                 } else {
                     tablee.clearSelection();
 
-                    for (int i = 1; i < (xml.length); i++) {
+                    for (int i = 0; i < (xml.length); i++) {
                         String tmp2 = xml.id[i].trim();
                         String tmp3=xml.name[i].trim();
                         String tmp4=xml.amount[i].trim();
                         String tmp5=xml.amountNeeded[i].trim();
                         String tmp6=xml.category[i].trim();
                         String tmp7=xml.bestbefore[i].trim();
+                        String tmp8=xml.unit[i].trim();
                         String tmp1=searched.trim();
                         if (tmp2.contains(tmp1)) {
                             tablee.addRowSelectionInterval(i, i);
@@ -370,6 +371,9 @@ public class Gui{
                         }
                         if(tmp7.contains(tmp1)){
                             tablee.addRowSelectionInterval(i,i);
+                        }
+                        if(tmp8.contains(tmp1)){
+                            tablee.addRowSelectionInterval(i, i);
                         }
                     }
                     searchbar.setText("");
@@ -588,20 +592,20 @@ public class Gui{
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Xml xml=new Xml();
-                //if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldName.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
-                    xml.addProduct(fieldName.getText(),fieldAmount.getText(),fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(), fieldBestBefore.getText(),""+boxCategories.getSelectedItem());
+                if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldAmountNeeded.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
+                xml.addProduct(fieldName.getText(),fieldAmount.getText(),fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(),""+boxCategories.getSelectedItem(), fieldBestBefore.getText());
 
-                    panelAdd.setVisible(false);
-                    frameAdd.setSize(0, 0);
-                    frameAdd.setVisible(false);
-                    xml.overWrite();
+                panelAdd.setVisible(false);
+                frameAdd.setSize(0, 0);
+                frameAdd.setVisible(false);
+                xml.overWrite();
 
-                    restartProgram();
-                //}
-                //else{
-                    //JOptionPane.showMessageDialog(frameAdd,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
-                    //xml.overWrite();
-                //}
+                restartProgram();
+                }
+                else{
+                JOptionPane.showMessageDialog(frameAdd,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                xml.overWrite();
+                }
             }
         });
 
@@ -751,20 +755,20 @@ public class Gui{
             public void actionPerformed(ActionEvent e) {
 
                 Xml xml = new Xml();
-                //if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldAmountNeeded.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
-                    xml.changeProduct("" + boxID.getSelectedItem(), fieldName.getText(), fieldAmount.getText(), fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(), fieldBestBefore.getText(), labelFieldCategory.getText());
-                    xml.overWrite();
+                if(fieldBestBefore.getText().matches("\\d{2}.\\d{2}.\\d{4}")&&fieldAmountNeeded.getText().matches("\\d+")&&fieldAmount.getText().matches("\\d+")&&(fieldName.getText() != null && fieldName.getText().length()!=0)) {
+                xml.changeProduct("" + boxID.getSelectedItem(), fieldName.getText(), fieldAmount.getText(), fieldAmountNeeded.getText(),""+boxUnits.getSelectedItem(), fieldBestBefore.getText(), labelFieldCategory.getText());
+                xml.overWrite();
 
-                    changePanel.setVisible(false);
-                    changeFrame.setSize(0, 0);
-                    changeFrame.setVisible(false);
+                changePanel.setVisible(false);
+                changeFrame.setSize(0, 0);
+                changeFrame.setVisible(false);
 
-                    restartProgram();
-                //}
-                //else{
-                    //xml.overWrite();
-                    //JOptionPane.showMessageDialog(changeFrame,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
-                //}
+                restartProgram();
+                }
+                else{
+                xml.overWrite();
+                JOptionPane.showMessageDialog(changeFrame,"Bitte geben sie das Datum im Format DD.MM.JJJJ ein und in die Felder Amount und Amount Needed jeweils eine Zahl, sowie in das Feld Name einen Wert.","Aaaalaaarm", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         });
