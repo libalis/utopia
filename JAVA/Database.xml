@@ -5,7 +5,7 @@
 		<Name>Verbandsmull 30cm</Name>
 		<Amount>69</Amount>
 		<AmountNeeded>0</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Verbandsmaterial</Category>
 		<BestBefore>20.01.2002</BestBefore>
 	</Product>
@@ -14,34 +14,34 @@
 		<Name>Verbandspäckchen rot</Name>
 		<Amount>2</Amount>
 		<AmountNeeded>0</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Verbandsmaterial</Category>
 		<BestBefore>20.01.2020</BestBefore>
 	</Product>
 	<Product>
 		<ID>3</ID>
 		<Name>Larynxtubus, Größe S</Name>
-		<Amount>-2</Amount>
+		<Amount>2</Amount>
 		<AmountNeeded>0</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Sauerstoff</Category>
-		<BestBefore>Sauerstoff</BestBefore>
+		<BestBefore>13.01.2153</BestBefore>
 	</Product>
 	<Product>
 		<ID>4</ID>
 		<Name>Whiteboard</Name>
 		<Amount>2</Amount>
 		<AmountNeeded>0</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Sonstiges</Category>
-		<BestBefore>nie</BestBefore>
+		<BestBefore>24.12.1245</BestBefore>
 	</Product>
 	<Product>
 		<ID>5</ID>
 		<Name>Einmalhandschuhe M</Name>
 		<Amount>99</Amount>
 		<AmountNeeded>0</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Hygiene</Category>
 		<BestBefore>01.01.2000</BestBefore>
 	</Product>
@@ -50,8 +50,8 @@
 		<Name>Ameisenfallen</Name>
 		<Amount>0</Amount>
 		<AmountNeeded>2</AmountNeeded>
-		<Unit>Stck</Unit>
+		<Unit>Stück/e</Unit>
 		<Category>Hygiene</Category>
-		<BestBefore>nein</BestBefore>
+		<BestBefore>12.12.1212</BestBefore>
 	</Product>
 </Database>
