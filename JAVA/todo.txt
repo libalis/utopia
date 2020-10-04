@@ -36,7 +36,7 @@ Neues:
 - Label letzter Patch einfügen                                                                                                Nicht Umgesetzt
 - Dropdown-Box (Stck, Pck, usw) einfügen                                                                                      Umgesetzt
 - Links oder Firmenname einfügen                                                                                              In bearbeitung
-- Abgelaufene werden rot markiert, dafür formatrestiktionen                                                                   In bearbeitung
+- Abgelaufene werden rot markiert                                                                                             Umgesetzt
 - Automatische E-Mail                                                                                                         In Bearbeitung
 
 letzter Patch 01.10.2020 ~ JF
