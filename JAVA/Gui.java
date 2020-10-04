@@ -27,12 +27,15 @@ import java.awt.print.PrinterException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.*;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.DateFormatter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.FileWriter;
@@ -92,16 +95,37 @@ public class Gui{
 
             String[] column = {"ID", "Name", "Anzahl", "Benötigt","Einheit", "Kategorie", "Ablaufdatum"};//-
 
-            DefaultTableModel tableModel = new DefaultTableModel(data, column) {
 
+
+
+
+            JTable table = new JTable(data,column){
+                @Override
+                public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                    Component comp = super.prepareRenderer(renderer, row, column);
+                    Object value = getModel().getValueAt(row, column);
+                    if (column==6) {
+                        try {
+                            if(istabgelaufen(value.toString())){
+                                comp.setBackground(Color.red);
+                            }
+                            else{
+                                comp.setBackground(Color.white);
+                            }
+                        } catch (ParseException e) {
+                            comp.setBackground(Color.white);
+                        }
+                    } else {
+                        comp.setBackground(Color.white);
+                    }
+                    return comp;
+                }
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     //all cells false
                     return false;
                 }
             };
-
-            JTable table = new JTable(tableModel);
             table.setSelectionBackground(Color.yellow);
 
             ListSelectionModel cellSelectionModel = table.getSelectionModel();
@@ -976,6 +1000,22 @@ public class Gui{
 
         sorter.setSortKeys(s);
         sorter.sort();
+    }
+    public boolean istabgelaufen(String date) throws ParseException {
+        Date d;
+        DateFormat format;
+        format= new SimpleDateFormat("dd.MM.yyyy");
+        Date current=new Date(System.currentTimeMillis());
+        Date c=format.parse(format.format(current));
+        d=(Date)format.parse(date);
+        if(d.compareTo(c)<=0){
+            return true;
+        }
+        else{
+            return false;
+
+        }
+
     }
 
 }
