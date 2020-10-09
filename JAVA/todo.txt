@@ -38,5 +38,3 @@ Neues:
 - Links oder Firmenname einfügen                                                                                              In bearbeitung
 - Abgelaufene werden rot markiert                                                                                             Umgesetzt
 - Automatische E-Mail                                                                                                         In Bearbeitung
-
-letzter Patch 01.10.2020 ~ JF
